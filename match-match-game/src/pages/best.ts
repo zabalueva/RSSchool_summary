@@ -6,7 +6,7 @@ export class Best {
 import { Page } from '../models/page';
 
 export const best: Page = {
-  render: `<section>
+  render: /* () => {} */`<section>
         <p>Best</p>
       </section> `,
 };
