@@ -1,5 +1,5 @@
 * {
-  /* background-color: red; */
+  background-color: aqua;
   margin: 0;
   padding: 0;
 }
@@ -14,15 +14,15 @@ body {
 }
 
 .playingField {
-  width: 80%;
-  min-height: 100%;
+  width: 1200px;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   flex-wrap: row;
   perspective: 120px;
-    perspective-origin: center;
+  perspective-origin: center;
 
   &__wrap{
     flex: 1 0 20%;
@@ -30,30 +30,7 @@ body {
     align-items: center;
     justify-content: space-around;
     margin: 2%;
-
-  }
-
-  &__card {
-    width: 160px;
-    height: 180px;
-    cursor: pointer;
-    /* transform: rotateY(2deg); */
-    /* transform: translateZ(50px); */
-  }
-
-  &__card_front {
-    width: 100%;
-    height: 100%;
-    background-color: #e44848;
-  }
-
-  &__card_back {
-    width: 100%;
-    height: 100%;
-background-color: #000000;
-background-image: url(../../assets/back.png);
-background-position: center;
-background-size: cover;
+    perspective: 25rem;
   }
 
 }

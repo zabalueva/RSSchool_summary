@@ -5,7 +5,7 @@ import { settings } from './pages/settings';
 import { App } from './app';
 import { Page } from './models/page';
 import './style.scss';
-import { playingField } from './components/playingField/playingField';
+import { PlayingField } from './components/playingField/playingField';
 /* import { Router } from './router/router'; */
 
 /* const content = about;
@@ -25,11 +25,17 @@ const selectProtected: SelectProtected = {
   inputElement: document.createElement('input'),
 }; */
 
-const appRoot = document.getElementById('root');
-if (!appRoot) throw new Error('Root element not found');
-const newApp = new App(appRoot);
+window.onload = () => {
+  const appRoot = document.getElementById('root');
+  console.log(document.getElementById('root'));
+  if (!appRoot) throw new Error('Root element not found');
+  new App(appRoot).start();
+};
+/*
+
+const newApp = new App(appRoot); */
 /* const component = findCompByPath(path, routesy) || about; */
 
-document.body.appendChild(title);
-document.body.appendChild(about);
-document.body.appendChild(playingField);
+/* document.body.appendChild(title);
+document.body.appendChild(about); */
+/* document.body.appendChild(PlayingField); */

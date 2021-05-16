@@ -1,0 +1,22 @@
+
+.playingField__card {
+  width: 160px;
+  height: 180px;
+  cursor: pointer;
+
+}
+
+.playingField__card_front {
+  background-color: #e44848;
+}
+
+.playingField__card_back {
+  width: 100%;
+  height: 100%;
+background-color: #000000;
+background-image: url(../../assets/back.png);
+background-position: center;
+background-size: cover;
+/* transform: rotateY(180deg); */
+  /* transform: translateZ(50px); */
+}
