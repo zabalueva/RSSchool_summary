@@ -1,22 +1,49 @@
+.playingField__card-wrap {
+  margin: 1%;
+  display: flex;
+  flex: 1 0 23%;
+  align-items: center;
+  justify-content: space-around;
+  perspective: 15rem;
+}
+.playingField__card-wrap:hover > .playingField__card{
+  transform: rotateY(180deg) translateX(-100%);
+  transform-origin: left;
+}
 
 .playingField__card {
-  width: 160px;
-  height: 180px;
+  position: relative;
+  width: 4rem;
+  height: 4rem;
   cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all 0.7s;
 
+}
+
+.playingField__card:hover {
+
+  /* transform: translateZ(10px); */
+}
+
+.playingField__card_front, .playingField__card_back {
+  position: absolute;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
 }
 
 .playingField__card_front {
-  background-color: #e44848;
+
 }
 
 .playingField__card_back {
-  width: 100%;
-  height: 100%;
-background-color: #000000;
-background-image: url(../../assets/back.png);
-background-position: center;
-background-size: cover;
-/* transform: rotateY(180deg); */
-  /* transform: translateZ(50px); */
+  background-color: #4d3b3b;
+  background-image: url(../../assets/back.png);
+  background-position: center;
+  background-size: cover;
+  transform: rotateY(180deg);
 }

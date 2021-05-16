@@ -3,7 +3,7 @@ import { BaseComponent } from '../base/base';
 import { Card } from '../card/card';
 import { delay } from '../../shared/delay';
 
-const turnDelay = 1000;
+const turnDelay = 10;
 export class Game extends BaseComponent {
   private readonly playingField: PlayingField;
 
@@ -18,7 +18,7 @@ export class Game extends BaseComponent {
   }
 
   startGame(images: string[]/* , complexity: number */) {
-    /* this.playingField.clear(); */
+    this.playingField.clear();
     /* this.playingField.complete(complexity); */
     console.log('dkfj');
     const cards = images.concat(images).map((url) => new Card(url)).sort(() => Math.random() - 0.5);
@@ -27,18 +27,24 @@ export class Game extends BaseComponent {
   }
 
   private async cardTurn(card: Card) {
-    await card.getFront;
+    console.log('turn');
+    if (this.isAnimation) {
+      return;
+    }
+    this.isAnimation = true;
+    await card.getFront();
 
     if (!this.activeCard) {
       this.activeCard = card;
+      this.isAnimation = false;
       return;
     }
 
     if (this.activeCard.image !== card.image) {
       await delay(turnDelay);
-      this.activeCard.getBack();
-      await card.getBack();
+      await Promise.all([this.activeCard.getBack(), card.getBack()]);
     }
     this.activeCard = undefined;
+    this.isAnimation = false;
   }
 }
