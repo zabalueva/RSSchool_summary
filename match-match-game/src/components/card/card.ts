@@ -3,7 +3,7 @@ import './card.scss';
 
 const TURN_CLASS = 'turned';
 export class Card extends BaseComponent {
-  isFlipped = false;
+  isTurned = false;
 
   constructor(readonly image: string) {
     super('div', ['playingField__card-wrap']);
@@ -13,28 +13,22 @@ export class Card extends BaseComponent {
       </div>`;
   }
 
-  getFront() {
-    this.isFlipped = false;
-    console.log(this.image);
-    return this.sight(false);
-    /* this.element.classList.add('card_front'); */
+  getFront(): Promise<void> {
+    this.isTurned = false;
+    return this.sight();
   }
 
-  getBack() {
-    this.isFlipped = true;
+  getBack(): Promise<void> {
+    this.isTurned = true;
     return this.sight(true);
-    /* this.element.classList.remove('card_front'); */
   }
 
   private sight(isFront = false): Promise<void> {
     return new Promise((resolve) => {
       this.element.classList.toggle(TURN_CLASS, isFront);
-      this.element.addEventListener('transitioned', () => resolve(), {
+      this.element.addEventListener('transitionend', () => resolve(), {
         once: true,
       });
     });
   }
 }
-
-/* export const card: Card = document.createElement('div');
-document.body.appendChild(card); */

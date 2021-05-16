@@ -11,5 +11,18 @@
       "peacock.jpg",
       "peacock.jpg"
       ]
+  },
+  {
+    "category": "nature",
+    "images": [
+      "dog.jpg",
+      "chicken.jpg",
+      "peacock.jpg",
+      "peacock.jpg",
+      "dog.jpg",
+      "chicken.jpg",
+      "peacock.jpg",
+      "peacock.jpg"
+      ]
   }
 ]

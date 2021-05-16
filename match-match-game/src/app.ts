@@ -10,7 +10,6 @@ export class App {
   }
 
   async start() {
-    console.log('start');
     const response = await fetch('./images.json');
     const categories: ImageCategory[] = await response.json();
     const animal = categories[0];

@@ -2,11 +2,12 @@ import { BaseComponent } from '../base/base';
 import { Card } from '../card/card';
 import './playingField.scss';
 
-const SHOW_TIME = 30;
+const SHOW_TIME = 3;
+const BASE_COMPLEXITY = 16;
 export class PlayingField extends BaseComponent {
   private cards: Card[] = [];
 
-  private complexity = 16;
+  private complexity: number = BASE_COMPLEXITY;
 
   constructor() {
     super('div', ['playingField']);
@@ -29,7 +30,3 @@ export class PlayingField extends BaseComponent {
     }, SHOW_TIME * 1000);
   }
 }
-/*
-export const playingField: HTMLDivElement | PlayingField = document.createElement('div');
-document.body.appendChild(playingField);
-playingField.innerHTML = '<div class="playingField"><div class="playingField__wrap wrapper"> </div></div>'; */
