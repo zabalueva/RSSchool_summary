@@ -4,10 +4,27 @@
 Настройка сложности игры (4х4, 6х6, 8х8)
 Настройка типов карточек для сравнений (можно использовать любые типы. Пример: Животные, автомобили и т.п.)
  */
-import { Page } from '../models/page';
+import { BaseComponent } from '../components/base/base';
 
-export const settings: Page = {
-  render: `<section>
-        <p>Settings</p>
-      </section> `,
-};
+const BASE_COMPLEXITY = 16;
+
+export class Settings extends BaseComponent {
+  private readonly settings: HTMLDivElement;
+
+  private complexity: number = BASE_COMPLEXITY;
+
+  constructor() {
+    super('div', ['about']);
+    this.settings = document.createElement('div');
+    this.element.append(this.settings);
+    this.settings.innerHTML = `<ul>
+                            <li>Register</li>
+    <li>Configure your game settings</li>
+    <li> Start your new game! Remember card positions and match it before times up </li>
+    </ul >`;
+  }
+
+  getComplexity() {
+    
+  }
+}

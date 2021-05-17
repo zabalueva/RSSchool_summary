@@ -1,7 +1,7 @@
-import { title } from './components/header/header';
-import { about } from './pages/about';
+/* import { title } from './components/header/header'; */
+import { About } from './pages/about';
 import { bestScore } from './pages/bestScore';
-import { settings } from './pages/settings';
+import { Settings } from './pages/settings';
 import { App } from './app';
 import { Page } from './models/page';
 import './style.scss';
