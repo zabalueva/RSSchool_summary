@@ -1,0 +1,44 @@
+.playingField__card-wrap {
+  margin: 1%;
+  display: flex;
+  flex: 1 0 23%;
+  align-items: center;
+  justify-content: space-around;
+  perspective: 15rem;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all 0.7s;
+
+  &.turned {
+    transform: rotateY(180deg) translateX(-100%);
+    transform-origin: left;
+  }
+}
+
+.playingField__card {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+}
+
+.playingField__card_front, .playingField__card_back {
+  position: absolute;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.playingField__card_front {
+  background-color: #4b4b4b;
+}
+
+.playingField__card_back {
+  background-color: #4d3b3b;
+  background-image: url(../../assets/back.png);
+  transform: rotateY(180deg);
+}

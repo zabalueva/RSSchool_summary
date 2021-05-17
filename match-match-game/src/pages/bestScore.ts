@@ -5,7 +5,7 @@ export class Best {
  */
 import { Page } from '../models/page';
 
-export const best: Page = {
+export const bestScore: Page = {
   render: `<section>
         <p>Best</p>
       </section> `,
