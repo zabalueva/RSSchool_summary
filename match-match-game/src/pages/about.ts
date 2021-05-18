@@ -7,10 +7,15 @@ export class About extends BaseComponent {
     super('div', ['about']);
     this.about = document.createElement('div');
     this.element.append(this.about);
-    this.about.innerHTML = `<ul>
-                            <li>Register</li>
-    <li>Configure your game settings</li>
-    <li> Start your new game! Remember card positions and match it before times up </li>
-    </ul >`;
   }
+
+  getView = {
+    render: () => `
+    <ul>
+    <li>Register</li>
+<li>Configure your game settings</li>
+<li> Start your new game! Remember card positions and match it before times up </li>
+</ul >
+      `,
+  };
 }

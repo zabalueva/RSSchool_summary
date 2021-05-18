@@ -9,27 +9,30 @@ export class App {
 
   private readonly game: Game;
 
-  private readonly about: About;
+  private readonly content: HTMLDivElement;
 
   private readonly settings: Settings;
 
   constructor(private readonly rootElement: HTMLElement) {
     this.game = new Game();
     this.header = new Header();
-    this.about = new About();
     this.settings = new Settings();
+    this.content = document.createElement('div');
+    this.content.classList.add('main');
     this.rootElement.appendChild(this.header.element);
     this.rootElement.appendChild(this.game.element);
-    this.rootElement.appendChild(this.about.element);
-    this.rootElement.appendChild(this.settings.element);
+    this.rootElement.appendChild(this.content);
   }
 
   async start() {
     const response = await fetch('./images.json');
     const categories: ImageCategory[] = await response.json();
     const animal = categories[0];
-    console.log('start1');
     const images = animal.images.map((item) => `${animal.category}/${item}`);
     this.game.startGame(images);
+  }
+
+  navigate() {
+    return this.header.router();
   }
 }

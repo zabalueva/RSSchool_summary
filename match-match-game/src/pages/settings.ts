@@ -14,17 +14,17 @@ export class Settings extends BaseComponent {
   private complexity: number = BASE_COMPLEXITY;
 
   constructor() {
-    super('div', ['about']);
+    super('div', ['settings']);
     this.settings = document.createElement('div');
     this.element.append(this.settings);
-    this.settings.innerHTML = `<ul>
-                            <li>Register</li>
-    <li>Configure your game settings</li>
-    <li> Start your new game! Remember card positions and match it before times up </li>
-    </ul >`;
   }
 
-  getComplexity() {
-    
-  }
+  getView = {
+    render: () => `
+    <div>Settings for game </div>
+      `,
+  };
+  /* getComplexity() {
+    return this.complexity;
+  } */
 }

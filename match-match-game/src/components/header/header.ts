@@ -1,6 +1,9 @@
 import { BaseComponent } from '../base/base';
 import { Route } from '../../models/route';
 import './header.scss';
+import { About } from '../../pages/about';
+import { Settings } from '../../pages/settings';
+import { BestScore } from '../../pages/bestScore';
 
 export class Header extends BaseComponent {
   private readonly menuAbout: HTMLAnchorElement;
@@ -9,59 +12,61 @@ export class Header extends BaseComponent {
 
   private readonly menuBestScore: HTMLAnchorElement;
 
-  private readonly bestScore: HTMLDivElement;
+  private readonly bestScore: BestScore;
 
-  private readonly about: HTMLDivElement;
+  private readonly about: About;
 
-  private readonly settings: HTMLDivElement;
+  private readonly settings: Settings;
 
   constructor() {
     super('div', ['header']);
     this.menuAbout = document.createElement('a');
-
     this.menuSettings = document.createElement('a');
-
-    this.menuSettings.innerHTML = '<div><a href=`/best`>Settings</a> ';
     this.menuBestScore = document.createElement('a');
+
     this.element.append(this.menuBestScore);
-    this.menuBestScore.innerHTML = '<div><a href=`/best`>Best Score</a> ';
     this.element.append(this.menuAbout);
     this.element.append(this.menuSettings);
-    this.menuAbout.innerHTML = '<div><a href=`/best`>About</a> ';
 
-    this.bestScore = document.createElement('div');
-    this.about = document.createElement('div');
-    this.settings = document.createElement('div');
+    this.menuSettings.innerHTML = '<a href="#/settings">Settings</a>';
+    this.menuBestScore.innerHTML = '<a href="#/bestScore">BestScore</a>';
+    this.menuAbout.innerHTML = '<a href="/">About</a> ';
+
+    this.about = new About();
+    this.settings = new Settings();
+    this.bestScore = new BestScore();
   }
 
-/*
+  getRoutes() {
+    const routes: Route[] = [{
+      path: 'bestScore',
+      component: this.bestScore,
+    },
+    {
+      path: 'settings',
+      component: this.settings,
+    },
+    {
+      path: '/',
+      component: this.about,
+    },
+    ];
 
-  const routes: Route[] = [{
-    name: 'best',
-    component: this.bestScore,
-  },
-  {
-    name: 'setting',
-    component: settings,
-  },
-  {
-    name: '/',
-    component: about,
-  },
+    return routes;
+  }
 
-  ];
+  parseLocation = () => window.location.hash.slice(1).toLowerCase() || '/';
 
-  const parseLocation = () => window.location.hash.slice(1).toLowerCase() || '/';
-  const findComponentByPath = (path: string) => routes.find(
-    (r: Route) => r.name.match(new RegExp(`^\\${path}$`, 'gmi')),
+  findComponentByPath = (path: string, routes: Route[]) => routes.find(
+    (r: Route) => r.path.match(new RegExp(`^\\${path}$`, 'gm')),
   ) || undefined;
 
-  const router = () => {
+  router() {
     const path = this.parseLocation();
-    console.log('/'.match(new RegExp(`^\\${path}$`)));
-    const component = this.findComponentByPath(path) || {};
-  };
+    /*  console.log('/'.match(new RegExp(`^\\${path}$`))); */
+    console.log(this.findComponentByPath(path, this.getRoutes()));
 
-  window.addEventListener('hashchange', router);
-  window.addEventListener('load', router); */
+    const comp = this.findComponentByPath(path, this.getRoutes())?.component || {};
+    console.log(comp);
+  }
 }

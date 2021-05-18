@@ -1,4 +1,6 @@
+import { BaseComponent } from '../components/base/base';
+
 export interface Route {
-  name: string;
-  component: HTMLDivElement;
+  component: BaseComponent;
+  path: string;
 }
