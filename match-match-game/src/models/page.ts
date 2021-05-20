@@ -1,3 +1,3 @@
 export interface Page {
-  render: string,
+  getView: string,
 }

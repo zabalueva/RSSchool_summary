@@ -21,7 +21,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
+
+
+.main {
+  width: 1200px;
+  height: 60vh;
+}
+
+
 
 footer{
   height: 3rem;

@@ -1,6 +1,21 @@
-/* На странице About Game должна быть представлена краткая инструкция по началу игры */
-import { Page } from '../models/page';
+import { BaseComponent } from '../components/base/base';
 
-export const about: HTMLDivElement = document.createElement('div');
-document.body.appendChild(about);
-about.innerHTML = '<div>Instruction</div> ';
+export class About extends BaseComponent {
+  private readonly about: HTMLDivElement;
+
+  constructor() {
+    super('div', ['about']);
+    this.about = document.createElement('div');
+    this.element.append(this.about);
+  }
+
+  getView = {
+    render: () => `
+    <ul>
+    <li>Register</li>
+<li>Configure your game settings</li>
+<li> Start your new game! Remember card positions and match it before times up </li>
+</ul >
+      `,
+  };
+}
