@@ -33,6 +33,7 @@ export class App {
   }
 
   navigate() {
+    this.start();
     return this.header.router();
   }
 }

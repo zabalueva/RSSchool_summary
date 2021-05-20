@@ -1,5 +1,4 @@
 import { App } from './app';
-import { About } from './pages/about';
 import { router } from './router/router';
 import './style.scss';
 
