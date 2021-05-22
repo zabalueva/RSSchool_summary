@@ -43,11 +43,11 @@ export class RegistrationForm extends BaseComponent {
     let stopSubmit: boolean;
     if (submitButton) {
       submitButton.addEventListener('click', (e) => {
-        // Пройдёмся по всем полям
         for (let i = 0; i < inputs.length; i++) {
           const input = inputs[i];
+          console.log(input.checkValidity())
           // Проверим валидность поля, используя встроенную в JavaScript функцию checkValidity()
-          if (input.checkValidity() === true) {
+          if (input.checkValidity() === false) {
             const inputCustomValidation = new CustomValidation(); // Создадим объект CustomValidation
             inputCustomValidation.checkValidity(input); // Выявим ошибки
             const customValidityMessage = inputCustomValidation.getInvalidities(); // Получим все сообщения об ошибках

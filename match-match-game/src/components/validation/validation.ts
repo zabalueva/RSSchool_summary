@@ -8,8 +8,16 @@ export class CustomValidation {
       this.addInvalidity('The field cannot be empty');
     }
 
-    if (validity.patternMismatch) {
-      this.addInvalidity('This is the wrong pattern for this field');
+    if (!input.value.match(/\d/g)) {
+      this.addInvalidity('The field cannot be digits.');
+    }
+
+    if (!input.value.match(/~/g)) {
+      this.addInvalidity('The field cannot contain service characters.');
+    }
+
+    if (!input.value.match(/' '/g)) {
+      this.addInvalidity('The field cannot contain more than one word.');
     }
   }
 
