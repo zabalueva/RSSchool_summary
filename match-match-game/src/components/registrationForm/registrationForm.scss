@@ -17,21 +17,40 @@
 
 .btn_active{
   cursor: pointer;
-  color: greenyellow;
+  color: rgb(92, 47, 255);
 }
 
+
+
 input:valid {
-  border-color: green;
+  border: green 4px solid;
 }
 
 input:invalid {
-  border-color: red;
+  border: red 4px solid;
+}
+
+input {
+  border: grey 4px solid;
 }
 
 .error-message {
   width: 400px;
+  height: 4em;
   background-color: grey;
   font-size: 0.5em;
   font-family: Arial, Helvetica, sans-serif;
   color: white;
+}
+
+.formButton{
+  width: 5rem;
+  height: 2rem;
+  background-color: rebeccapurple;
+}
+
+.form__submit{
+  width: 5rem;
+  height: 2rem;
+  background-color: rgb(158, 157, 158);
 }

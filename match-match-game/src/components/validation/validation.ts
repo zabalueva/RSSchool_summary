@@ -4,19 +4,19 @@ export class CustomValidation {
   checkValidity(input: HTMLInputElement) {
     const { validity } = input;
 
-    if (!validity.valueMissing) {
+    if (validity.valueMissing) {
       this.addInvalidity('The field cannot be empty');
     }
 
-    if (!input.value.match(/\d/g)) {
+    if (!input.value.match(/\D/g)) {
       this.addInvalidity('The field cannot be digits.');
     }
 
-    if (!input.value.match(/~/g)) {
+    if (input.value.match(/\W/g)) {
       this.addInvalidity('The field cannot contain service characters.');
     }
 
-    if (!input.value.match(/' '/g)) {
+    if (input.value.match(/ /g)) {
       this.addInvalidity('The field cannot contain more than one word.');
     }
   }

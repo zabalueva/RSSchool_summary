@@ -20,7 +20,7 @@ export class App {
     this.game = new Game();
     this.header = new Header();
     this.startButton = document.createElement('button');
-    this.startButton.innerHTML = 'START!';
+    this.startButton.innerHTML = 'START GAME';
     this.registrationForm = new RegistrationForm();
     this.content = document.createElement('div');
     this.content.classList.add('main');
