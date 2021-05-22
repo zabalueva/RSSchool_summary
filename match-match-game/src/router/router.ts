@@ -5,19 +5,19 @@ import { BestScore } from '../pages/bestScore';
 type Path = { path: string, component: Page };
 type Page = { render: () => string };
 
-const ErrorComponent = {
+const BestScoreLayout = {
   render: () => `
       <section>
-        <h1>Error</h1>
-        <p>This is just a test</p>
+        <p>Top 10 players</p>
       </section>
     `,
 };
 
 const routes = [
   { path: '/', component: new About().getView },
+  { path: '/about', component: new About().getView },
   { path: '/settings', component: new Settings().getView },
-  { path: '/page2', component: new BestScore().getView },
+  { path: '/bestScore', component: new BestScore().getView },
 ];
 const parseLocation = () => window.location.hash.slice(1).toLowerCase() || '/';
 
@@ -28,8 +28,11 @@ const findComponentByPath = (
 
 export const router = () => {
   const path = parseLocation();
-  const { component = ErrorComponent } = findComponentByPath(path, routes) || {};
+  const { component = BestScoreLayout } = findComponentByPath(path, routes) || {};
   document.getElementsByClassName('main')[0].innerHTML = `
   <section>${component.render()}</section>
   `;
+  const menuItems = document.getElementsByClassName('menu__item');
+  Array.from(menuItems).filter((el) => console.log(el.innerHTML))
+  console.log(menuItems);
 };

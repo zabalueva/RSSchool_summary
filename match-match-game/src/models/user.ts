@@ -1,4 +1,5 @@
 export interface User {
   name: string;
-  isRegistered: boolean;
+  surname: string;
+  email: string;
 }

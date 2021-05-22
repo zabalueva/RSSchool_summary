@@ -6,3 +6,13 @@
   justify-content: space-between;
   flex-direction: row;
 }
+
+.menu__item {
+  text-decoration: none;
+}
+
+.menu__item_active {
+  text-shadow: 1px 1px 2px black, 0 0 1em;
+  color: white; /* Белый цвет текста */
+  font-size: 1em; /* Размер надписи */
+}

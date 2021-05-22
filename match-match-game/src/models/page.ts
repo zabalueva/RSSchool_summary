@@ -1,3 +1,5 @@
+import { BaseComponent } from '../components/base/base';
+
 export interface Page {
-  getView: string,
+  render: () => string;
 }

@@ -24,7 +24,7 @@ export class Settings extends BaseComponent {
     <div>Settings for game </div>
       `,
   };
-  /* getComplexity() {
+  getComplexity() {
     return this.complexity;
-  } */
+  }
 }
