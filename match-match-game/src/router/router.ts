@@ -33,6 +33,7 @@ export const router = () => {
   <section>${component.render()}</section>
   `;
   const menuItems = document.getElementsByClassName('menu__item');
-  Array.from(menuItems).filter((el) => console.log(el.innerHTML))
-  console.log(menuItems);
+  Array.from(menuItems)
+    .find((el) => el.innerHTML.toLowerCase() === path.slice(1).toLowerCase())
+    ?.classList.add('menu__item_active');
 };
