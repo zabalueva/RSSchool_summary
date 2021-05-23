@@ -1,4 +1,4 @@
-import { Game } from './components/game/game';
+import { Game } from './services/game';
 import { ImageCategory } from './models/imageCategory';
 import { About } from './pages/about';
 import { Settings } from './pages/settings';

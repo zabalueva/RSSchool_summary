@@ -1,7 +1,7 @@
-import { PlayingField } from '../playingField/playingField';
-import { BaseComponent } from '../base/base';
-import { Card } from '../card/card';
-import { delay } from '../../shared/delay';
+import { PlayingField } from '../components/playingField/playingField';
+import { BaseComponent } from '../components/base/base';
+import { Card } from '../components/card/card';
+import { delay } from '../shared/delay';
 
 const turnDelay = 0;
 export class Game extends BaseComponent {

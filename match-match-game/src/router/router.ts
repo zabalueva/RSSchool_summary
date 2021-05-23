@@ -1,9 +1,9 @@
 import { About } from '../pages/about';
 import { Settings } from '../pages/settings';
 import { BestScore } from '../pages/bestScore';
+import { Page } from '../models/page';
 
 type Path = { path: string, component: Page };
-type Page = { render: () => string };
 
 const BestScoreLayout = {
   render: () => `

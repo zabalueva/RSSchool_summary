@@ -2,6 +2,8 @@
   width: 500px;
   height: 300px;
   background-color: #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12), 0px 12px 12px rgba(0, 0, 0, 0.24);
+  border-radius: 14px;
 }
 
 
@@ -11,15 +13,15 @@
   justify-content: space-evenly;
   flex-direction: column;
   width: 500px;
-  height: 300px;
+  min-height: 300px;
+  height: auto;
   background-color: #fff;
 }
 
-.btn_active{
-  cursor: pointer;
-  color: rgb(92, 47, 255);
+.registration__wrap_hidden {
+  display: none;
+  position: absolute;
 }
-
 
 
 input:valid {
@@ -36,21 +38,22 @@ input {
 
 .error-message {
   width: 400px;
-  height: 4em;
-  background-color: grey;
+  min-height: 1em;
+  height: auto;
+  background-color: white;
   font-size: 0.5em;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: red;
 }
 
 .formButton{
   width: 5rem;
   height: 2rem;
-  background-color: rebeccapurple;
+  background-color: #2196F3;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
 }
 
-.form__submit{
-  width: 5rem;
-  height: 2rem;
-  background-color: rgb(158, 157, 158);
+.btn_inactive{
+  background-color: rgb(138, 138, 139);
 }
