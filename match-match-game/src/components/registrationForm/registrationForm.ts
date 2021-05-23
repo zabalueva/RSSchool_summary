@@ -1,6 +1,7 @@
 import { BaseComponent } from '../base/base';
 import './registrationForm.scss';
 import { CustomValidation } from '../../services/validation';
+import { Header } from '../header/header';
 
 export class RegistrationForm extends BaseComponent {
   private registrationButton?: HTMLButtonElement;
@@ -66,7 +67,8 @@ export class RegistrationForm extends BaseComponent {
         }
 
         if (!this.stopSubmit) {
-          this.element.classList.add('registration__wrap_hidden');
+          e.preventDefault();
+          this.element.classList.add('registrationForm_hidden');
         }
       });
     }

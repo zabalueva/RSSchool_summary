@@ -2,6 +2,7 @@ import { About } from '../pages/about';
 import { Settings } from '../pages/settings';
 import { BestScore } from '../pages/bestScore';
 import { Page } from '../models/page';
+import { RegistrationForm } from '../components/registrationForm/registrationForm';
 
 type Path = { path: string, component: Page };
 
@@ -27,6 +28,7 @@ const findComponentByPath = (
   .find((r) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
 export const router = () => {
+  document.querySelector('registration__wrap')?.classList.add('registration__wrap_hidden');
   const path = parseLocation();
   const { component = BestScoreLayout } = findComponentByPath(path, routes) || {};
   document.getElementsByClassName('main')[0].innerHTML = `

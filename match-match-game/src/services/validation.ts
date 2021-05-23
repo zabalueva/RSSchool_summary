@@ -10,7 +10,7 @@ export class CustomValidation {
       const regPart1 = /^(([^<>()[]\.,;:\s@"]+(.[^<>()[]\.,;:\s@"]+))|(".+"))/;
       const regPart2 = /@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
       const regex = new RegExp(`${regPart1.source}${regPart2.source}`);
-      if (!input.value.match(/regex/g)) {
+      if (input.value.match(/regex/g)) {
         this.addInvalidity('Must comply with the standard email generation rule [RFC]');
       }
     }

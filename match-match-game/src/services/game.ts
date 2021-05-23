@@ -2,6 +2,7 @@ import { PlayingField } from '../components/playingField/playingField';
 import { BaseComponent } from '../components/base/base';
 import { Card } from '../components/card/card';
 import { delay } from '../shared/delay';
+import { ImageCategory } from '../models/imageCategory';
 
 const turnDelay = 0;
 export class Game extends BaseComponent {
@@ -15,6 +16,14 @@ export class Game extends BaseComponent {
     super('div');
     this.playingField = new PlayingField();
     this.element.appendChild(this.playingField.element);
+  }
+
+  async startSettings() {
+    const response = await fetch('./images.json');
+    const categories: ImageCategory[] = await response.json();
+    const animal = categories[0];
+    const images = animal.images.map((item) => `${animal.category}/${item}`);
+    this.startGame(images);
   }
 
   startGame(images: string[]/* , complexity: number */) {
@@ -34,7 +43,6 @@ export class Game extends BaseComponent {
     }
     this.isAnimation = true;
     await card.getFront();
-    console.log('turn3');
 
     if (!this.activeCard) {
       this.activeCard = card;

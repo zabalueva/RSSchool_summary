@@ -12,15 +12,11 @@ export class App {
 
   private readonly content: HTMLDivElement;
 
-  private readonly startButton: HTMLButtonElement;
-
   private readonly registrationForm: RegistrationForm;
 
   constructor(private readonly rootElement: HTMLElement) {
     this.game = new Game();
     this.header = new Header();
-    this.startButton = document.createElement('button');
-    this.startButton.innerHTML = 'START GAME';
     this.registrationForm = new RegistrationForm();
     this.content = document.createElement('div');
     this.content.classList.add('main');
@@ -30,16 +26,6 @@ export class App {
 
   navigate() {
     this.rootElement.appendChild(this.content);
-    this.rootElement.appendChild(this.startButton);
-    this.startButton.classList.add('startButton');
-    this.startButton.addEventListener('click', async () => {
-      this.rootElement.appendChild(this.game.element);
-      const response = await fetch('./images.json');
-      const categories: ImageCategory[] = await response.json();
-      const animal = categories[0];
-      const images = animal.images.map((item) => `${animal.category}/${item}`);
-      this.game.startGame(images);
-    });
     this.registrationForm.validateForm();
   }
 }
