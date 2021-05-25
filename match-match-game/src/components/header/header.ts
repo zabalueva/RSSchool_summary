@@ -14,7 +14,7 @@ export class Header extends BaseComponent {
 
   private readonly menuBestScore: HTMLAnchorElement;
 
-  private readonly startButton: HTMLButtonElement;
+  private startButton: HTMLButtonElement;
 
   private readonly game: Game;
 
@@ -41,8 +41,16 @@ export class Header extends BaseComponent {
 
     this.startButton.addEventListener('click', async () => {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
-      this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
-      this.game.startSettings();
+
+      if (!this.game.isGame) {
+        this.startButton.innerHTML='STOP GAME';
+        this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
+        this.game.startSettings();
+      } else {
+        this.game.stopGame();
+        this.startButton.innerHTML='START GAME';
+
+      }
     });
   }
 }

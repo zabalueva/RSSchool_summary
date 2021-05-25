@@ -59,6 +59,16 @@ export class RegistrationForm extends BaseComponent {
             input.insertAdjacentHTML('afterend', `<p class="error-message">${customValidityMessageForHTML}</p>`);
             this.stopSubmit = true;
           }
+
+          if (cancelButton) {
+            cancelButton.addEventListener('click', (e) => {
+              e.preventDefault();
+              inputCustomValidation.clearInvalidities();
+              for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+              }
+            });
+          }
         }
 
         if (this.stopSubmit) {
@@ -73,13 +83,6 @@ export class RegistrationForm extends BaseComponent {
       });
     }
 
-    if (cancelButton) {
-      cancelButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        for (let i = 0; i < inputs.length; i++) {
-          inputs[i].value = '';
-        }
-      });
-    }
+
   }
 }

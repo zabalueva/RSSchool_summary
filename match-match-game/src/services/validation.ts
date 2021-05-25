@@ -1,5 +1,5 @@
 export class CustomValidation {
-  private readonly invalidities: string[] = [];
+  private invalidities: string[] = [];
 
   checkValidity(input: HTMLInputElement) {
     if (input.value === '') {
@@ -20,12 +20,16 @@ export class CustomValidation {
         this.addInvalidity('The field cannot be digits.');
       }
 
-      if (input.value.match(/\W/g)) {
+      if (input.value.match(/[^\p{L}\p{Nd}]/gu)) {
         this.addInvalidity('The field cannot contain service characters.');
       }
 
-      if (input.value.match(/ /g)) {
+      /* if (input.value.match(/ /g)) {
         this.addInvalidity('The field cannot contain more than one word.');
+      } */
+
+      if (input.value.length > 30) {
+        this.addInvalidity('The field cannot contain more than 30 symbols.');
       }
     }
 
@@ -44,5 +48,9 @@ export class CustomValidation {
 
   getInvaliditiesForHTML() {
     return this.invalidities.join('. <br>');
+  }
+
+  clearInvalidities() {
+    this.invalidities = [];
   }
 }

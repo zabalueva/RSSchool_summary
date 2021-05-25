@@ -3,6 +3,7 @@ import './card.scss';
 
 const TURN_CLASS = 'turned';
 export class Card extends BaseComponent {
+
   isTurned = false;
 
   constructor(readonly image: string) {
@@ -15,15 +16,15 @@ export class Card extends BaseComponent {
 
   getFront(): Promise<void> {
     this.isTurned = false;
-    return this.sight();
+    return this.getSight();
   }
 
   getBack(): Promise<void> {
     this.isTurned = true;
-    return this.sight(true);
+    return this.getSight(true);
   }
 
-  private sight(isFront = false): Promise<void> {
+  private getSight(isFront = false): Promise<void> {
     return new Promise((resolve) => {
       this.element.classList.toggle(TURN_CLASS, isFront);
       this.element.addEventListener('transitionend', () => resolve(), {

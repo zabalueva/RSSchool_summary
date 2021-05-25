@@ -10,7 +10,15 @@ export class Game extends BaseComponent {
 
   private activeCard?: Card;
 
-  private isAnimation = false;
+  private isAnimation=false;
+
+  public isGame=false;
+
+  public score=0;
+
+  public numberComparisons: number=0;
+
+  public numberIncorrectComparisons: number=0;
 
   constructor() {
     super('div');
@@ -19,6 +27,7 @@ export class Game extends BaseComponent {
   }
 
   async startSettings() {
+    this.isGame=true;
     const response = await fetch('./images.json');
     const categories: ImageCategory[] = await response.json();
     const animal = categories[0];
@@ -34,6 +43,21 @@ export class Game extends BaseComponent {
     this.playingField.addCards(cards);
   }
 
+  stopGame() {
+    this.isGame=false;
+    this.playingField.stop();
+    this.scoring();
+  }
+
+  scoring() {
+    this.score=(this.numberComparisons-this.numberIncorrectComparisons)*100-this.playingField.stop()*10*this.playingField.complete();
+    console.log(this.numberComparisons);
+    console.log(this.numberIncorrectComparisons);
+    console.log(this.playingField.stop());
+    console.log(this.score);
+    return this.score > 0 ? this.score : 0 ;
+  }
+
   private async cardTurn(card: Card) {
     if (this.isAnimation) {
       return;
@@ -43,6 +67,7 @@ export class Game extends BaseComponent {
     }
     this.isAnimation = true;
     await card.getFront();
+    this.numberComparisons = this.numberComparisons + 0.5;
 
     if (!this.activeCard) {
       this.activeCard = card;
@@ -54,7 +79,8 @@ export class Game extends BaseComponent {
       console.log('green');
     }
 
-    if (this.activeCard.image !== card.image) {
+    if (this.activeCard.image!==card.image) {
+      this.numberIncorrectComparisons=this.numberIncorrectComparisons+1;
       await delay(turnDelay);
       console.log('must back');
       await Promise.all([this.activeCard.getBack(), card.getBack()]);

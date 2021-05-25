@@ -1,7 +1,7 @@
 import { BaseComponent } from '../base/base';
 import { Card } from '../card/card';
 import './playingField.scss';
-import { Timer } from '../../shared/timer';
+import { Timer } from '../timer/timer';
 
 const SHOW_TIME = 3;
 
@@ -10,12 +10,10 @@ export class PlayingField extends BaseComponent {
 
   private timer: Timer;
 
-  private timerDisplay: HTMLDivElement;
-
   constructor() {
     super('div', ['playingField']);
-    this.timer = new Timer();
-    this.timerDisplay = document.createElement('div');
+    this.timer=new Timer();
+
   }
 
   clear() {
@@ -23,16 +21,23 @@ export class PlayingField extends BaseComponent {
     this.element.innerHTML = '';
   }
 
-  complete(complexity: number) {
-    this.cards.length = complexity;
+  complete(complexity: number = 4) {
+    this.cards.length=complexity;
+    return complexity;
   }
 
   addCards(cards: Card[]) {
-    this.cards = cards;
-    this.element.append(this.timer.startTimer());
+    this.cards=cards;
+    this.element.parentNode?.append(this.timer.element);
+
     this.cards.forEach((item) => this.element.appendChild(item.element));
     setTimeout(() => {
       this.cards.forEach((card) => card.getBack());
+      this.timer.startTimer();
     }, SHOW_TIME * 1000);
+  }
+
+  stop() {
+    return this.timer.stopTimer();
   }
 }
