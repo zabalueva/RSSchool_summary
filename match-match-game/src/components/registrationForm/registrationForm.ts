@@ -1,10 +1,10 @@
 import { BaseComponent } from '../base/base';
 import './registrationForm.scss';
 import { CustomValidation } from '../../services/validation';
-import { Header } from '../header/header';
+import { DataBase } from '../../controllers/dbConnect/dbConnect';
 
 export class RegistrationForm extends BaseComponent {
-  private registrationButton?: HTMLButtonElement;
+  private dataBase?: DataBase;
 
   private submitButton?: HTMLButtonElement;
 
@@ -14,6 +14,7 @@ export class RegistrationForm extends BaseComponent {
 
   constructor() {
     super('div', ['registrationForm']);
+    this.dataBase = new DataBase();
     this.element.innerHTML = `<div class="registration__wrap">
       <form class="registration__form form" action='POST' autocomplete="off" onsubmit="return validFunction()">
       <input class="form__input form__input_name" type="text" placeholder="Name" required>
@@ -33,7 +34,6 @@ export class RegistrationForm extends BaseComponent {
   }
 
   validateForm() {
-    /* this.element.append(this.registrationButton as Node); */
     const nameInput = document.querySelector('.form__input_name') as HTMLInputElement;
     const surnameInput = document.querySelector('.form__input_surname') as HTMLInputElement;
     const emailInput = document.querySelector('.form__input_email') as HTMLInputElement;
@@ -79,10 +79,10 @@ export class RegistrationForm extends BaseComponent {
         if (!this.stopSubmit) {
           e.preventDefault();
           this.element.classList.add('registrationForm_hidden');
+          this.dataBase?.openInitDB();
+          this.dataBase?.addUser(nameInput.value, surnameInput.value, emailInput.value);
         }
       });
     }
-
-
   }
 }

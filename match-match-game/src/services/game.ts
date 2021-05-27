@@ -10,15 +10,15 @@ export class Game extends BaseComponent {
 
   private activeCard?: Card;
 
-  private isAnimation=false;
+  private isAnimation = false;
 
-  public isGame=false;
+  public isGame = false;
 
-  public score=0;
+  public score = 0;
 
-  public numberComparisons: number=0;
+  public numberComparisons = 0;
 
-  public numberIncorrectComparisons: number=0;
+  public numberIncorrectComparisons = 0;
 
   constructor() {
     super('div');
@@ -27,7 +27,7 @@ export class Game extends BaseComponent {
   }
 
   async startSettings() {
-    this.isGame=true;
+    this.isGame = true;
     const response = await fetch('./images.json');
     const categories: ImageCategory[] = await response.json();
     const animal = categories[0];
@@ -44,18 +44,15 @@ export class Game extends BaseComponent {
   }
 
   stopGame() {
-    this.isGame=false;
+    this.isGame = false;
     this.playingField.stop();
-    this.scoring();
+    this.playingField.congrats();
+    this.calculateScore();
   }
 
-  scoring() {
-    this.score=(this.numberComparisons-this.numberIncorrectComparisons)*100-this.playingField.stop()*10*this.playingField.complete();
-    console.log(this.numberComparisons);
-    console.log(this.numberIncorrectComparisons);
-    console.log(this.playingField.stop());
-    console.log(this.score);
-    return this.score > 0 ? this.score : 0 ;
+  calculateScore() {
+    this.score = (this.numberComparisons - this.numberIncorrectComparisons) * 100 - this.playingField.stop() * 10 * this.playingField.complete();
+    return this.score > 0 ? this.score : 0;
   }
 
   private async cardTurn(card: Card) {
@@ -67,27 +64,34 @@ export class Game extends BaseComponent {
     }
     this.isAnimation = true;
     await card.getFront();
-    this.numberComparisons = this.numberComparisons + 0.5;
+    this.numberComparisons += 0.5;
 
     if (!this.activeCard) {
       this.activeCard = card;
       this.isAnimation = false;
       return;
     }
-    const activeCardElement=this.activeCard.element.childNodes[0] as Element;
-    const cardElement=card.element.childNodes[0] as Element
+    const activeCardElement = this.activeCard.element.childNodes[0] as Element;
+    const cardElement = card.element.childNodes[0] as Element;
 
-    if (this.activeCard.image===card.image) {
+    if (this.activeCard.image === card.image) {
       activeCardElement.classList.add('playingField__correctPairs');
       cardElement.classList.add('playingField__correctPairs');
     }
 
-    if (this.activeCard.image!==card.image) {
-      this.numberIncorrectComparisons=this.numberIncorrectComparisons+1;
+    if ((this.numberComparisons - this.numberIncorrectComparisons) === this.playingField.complete()) {
+      this.stopGame();
+    }
+
+    if (this.activeCard.image !== card.image) {
+      this.numberIncorrectComparisons += 1;
+
       activeCardElement.classList.add('playingField__incorrectPairs');
       cardElement.classList.add('playingField__incorrectPairs');
+
       await delay(turnDelay);
       await Promise.all([this.activeCard.getBack(), card.getBack()]);
+
       activeCardElement.classList.remove('playingField__incorrectPairs');
       cardElement.classList.remove('playingField__incorrectPairs');
     }

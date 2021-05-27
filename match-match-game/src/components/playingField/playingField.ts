@@ -12,8 +12,7 @@ export class PlayingField extends BaseComponent {
 
   constructor() {
     super('div', ['playingField']);
-    this.timer=new Timer();
-
+    this.timer = new Timer();
   }
 
   clear() {
@@ -21,13 +20,13 @@ export class PlayingField extends BaseComponent {
     this.element.innerHTML = '';
   }
 
-  complete(complexity: number = 4) {
-    this.cards.length=complexity;
+  complete(complexity = 8) {
+    this.cards.length = complexity;
     return complexity;
   }
 
   addCards(cards: Card[]) {
-    this.cards=cards;
+    this.cards = cards;
     this.element.parentNode?.append(this.timer.element);
 
     this.cards.forEach((item) => this.element.appendChild(item.element));
@@ -35,6 +34,10 @@ export class PlayingField extends BaseComponent {
       this.cards.forEach((card) => card.getBack());
       this.timer.startTimer();
     }, SHOW_TIME * 1000);
+  }
+
+  congrats() {
+    console.log('congrats');
   }
 
   stop() {
