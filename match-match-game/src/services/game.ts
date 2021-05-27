@@ -74,16 +74,22 @@ export class Game extends BaseComponent {
       this.isAnimation = false;
       return;
     }
+    const activeCardElement=this.activeCard.element.childNodes[0] as Element;
+    const cardElement=card.element.childNodes[0] as Element
 
-    if (this.activeCard.image === card.image) {
-      console.log('green');
+    if (this.activeCard.image===card.image) {
+      activeCardElement.classList.add('playingField__correctPairs');
+      cardElement.classList.add('playingField__correctPairs');
     }
 
     if (this.activeCard.image!==card.image) {
       this.numberIncorrectComparisons=this.numberIncorrectComparisons+1;
+      activeCardElement.classList.add('playingField__incorrectPairs');
+      cardElement.classList.add('playingField__incorrectPairs');
       await delay(turnDelay);
-      console.log('must back');
       await Promise.all([this.activeCard.getBack(), card.getBack()]);
+      activeCardElement.classList.remove('playingField__incorrectPairs');
+      cardElement.classList.remove('playingField__incorrectPairs');
     }
     this.activeCard = undefined;
     this.isAnimation = false;

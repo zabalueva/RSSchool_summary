@@ -26,3 +26,13 @@ body {
 .timer{
   align-self: center;
 }
+
+.playingField__correctPairs {
+  box-shadow: 8px 8px 8px 8px rgba(90, 202, 90, 0.82), 8px 8px 8px 8px rgba(90, 202, 90, 0.74);
+  border-radius: 10px;
+}
+
+.playingField__incorrectPairs {
+  box-shadow: 8px 8px 8px 8px rgba(221, 46, 46, 0.82), 8px 8px 8px 8px rgba(221, 46, 46, 0.82);
+  border-radius: 10px;
+}
