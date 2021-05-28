@@ -44,10 +44,10 @@ export class Game extends BaseComponent {
   }
 
   stopGame() {
-    this.isGame = false;
+    this.isGame=false;
+    this.calculateScore();
     this.playingField.stop();
     this.playingField.congrats();
-    this.calculateScore();
   }
 
   calculateScore() {

@@ -2,17 +2,21 @@ import { BaseComponent } from '../base/base';
 import { Card } from '../card/card';
 import './playingField.scss';
 import { Timer } from '../timer/timer';
+import { Congratulations } from '../congratulations/congratulations';
 
 const SHOW_TIME = 3;
 
 export class PlayingField extends BaseComponent {
   private cards: Card[] = [];
 
+  private congratulations: Congratulations;
+
   private timer: Timer;
 
   constructor() {
     super('div', ['playingField']);
     this.timer = new Timer();
+    this.congratulations = new Congratulations();
   }
 
   clear() {
@@ -20,7 +24,7 @@ export class PlayingField extends BaseComponent {
     this.element.innerHTML = '';
   }
 
-  complete(complexity = 8) {
+  complete(complexity = 2) {
     this.cards.length = complexity;
     return complexity;
   }
@@ -37,7 +41,8 @@ export class PlayingField extends BaseComponent {
   }
 
   congrats() {
-    console.log('congrats');
+    this.element.append(this.congratulations.element);
+    this.congratulations.redirect();
   }
 
   stop() {

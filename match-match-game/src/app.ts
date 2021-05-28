@@ -17,7 +17,7 @@ export class App {
     this.rootElement.append(this.registrationForm.element);
   }
 
-  navigate() {
+  navigate(): void {
     this.rootElement.appendChild(this.content);
     this.registrationForm.validateForm();
   }

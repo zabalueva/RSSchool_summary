@@ -6,10 +6,6 @@ import { DataBase } from '../../controllers/dbConnect/dbConnect';
 export class RegistrationForm extends BaseComponent {
   private dataBase?: DataBase;
 
-  private submitButton?: HTMLButtonElement;
-
-  private cancelButton?: HTMLButtonElement;
-
   private stopSubmit = false;
 
   constructor() {
@@ -61,11 +57,11 @@ export class RegistrationForm extends BaseComponent {
           }
 
           if (cancelButton) {
-            cancelButton.addEventListener('click', (e) => {
-              e.preventDefault();
+            cancelButton.addEventListener('click', (event) => {
+              event.preventDefault();
               inputCustomValidation.clearInvalidities();
-              for (let i = 0; i < inputs.length; i++) {
-                inputs[i].value = '';
+              for (let j = 0; j < inputs.length; j++) {
+                inputs[j].value = '';
               }
             });
           }

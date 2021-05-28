@@ -2,7 +2,6 @@ import { About } from '../pages/about';
 import { Settings } from '../pages/settings';
 import { BestScore } from '../pages/bestScore';
 import { Page } from '../models/page';
-import { RegistrationForm } from '../components/registrationForm/registrationForm';
 
 type Path = { path: string, component: Page };
 
