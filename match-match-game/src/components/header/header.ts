@@ -1,11 +1,6 @@
 import { BaseComponent } from '../base/base';
 import { Game } from '../../services/game';
-import { ImageCategory } from '../../models/imageCategory';
-import { Route } from '../../models/route';
 import './header.scss';
-import { About } from '../../pages/about';
-import { Settings } from '../../pages/settings';
-import { BestScore } from '../../pages/bestScore';
 
 export class Header extends BaseComponent {
   private readonly menuAbout: HTMLAnchorElement;
@@ -49,7 +44,6 @@ export class Header extends BaseComponent {
       } else {
         this.game.stopGame();
         this.startButton.innerHTML='START GAME';
-
       }
     });
   }

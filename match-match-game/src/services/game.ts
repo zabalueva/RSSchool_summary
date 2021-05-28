@@ -2,7 +2,8 @@ import { PlayingField } from '../components/playingField/playingField';
 import { BaseComponent } from '../components/base/base';
 import { Card } from '../components/card/card';
 import { delay } from '../shared/delay';
-import { ImageCategory } from '../models/imageCategory';
+import { ImageBase } from '../models/imageBase';
+import { Settings } from '../pages/settings';
 
 const turnDelay = 0;
 export class Game extends BaseComponent {
@@ -20,38 +21,42 @@ export class Game extends BaseComponent {
 
   public numberIncorrectComparisons = 0;
 
+  public customSettings: Settings;
+
   constructor() {
     super('div');
     this.playingField = new PlayingField();
+    this.customSettings = new Settings();
     this.element.appendChild(this.playingField.element);
   }
 
-  async startSettings() {
+  async startSettings(): Promise<void> {
     this.isGame = true;
     const response = await fetch('./images.json');
-    const categories: ImageCategory[] = await response.json();
-    const animal = categories[0];
-    const images = animal.images.map((item) => `${animal.category}/${item}`);
-    this.startGame(images);
+    const baseImages: ImageBase[] = await response.json();
+    const category = baseImages.filter((el) => el.category === this.customSettings.getCategory());
+    const needImage = category[0];
+    const images = needImage.images.map((item: string) => `${needImage.category}/${item}`);
+    this.startGame(images.slice(0, this.customSettings.getDifficulty() / 2));
   }
 
-  startGame(images: string[]/* , complexity: number */) {
+  startGame(images: string[]):void {
     this.playingField.clear();
-    /* this.playingField.complete(complexity); */
+    (document.querySelector('.settings') as Element).innerHTML='';
     const cards = images.concat(images).map((url) => new Card(url)).sort(() => Math.random() - 0.5);
     cards.forEach((card) => card.element.addEventListener('click', () => this.cardTurn(card)));
     this.playingField.addCards(cards);
   }
 
   stopGame() {
-    this.isGame=false;
+    this.isGame = false;
     this.calculateScore();
     this.playingField.stop();
     this.playingField.congrats();
   }
 
   calculateScore() {
-    this.score = (this.numberComparisons - this.numberIncorrectComparisons) * 100 - this.playingField.stop() * 10 * this.playingField.complete();
+    this.score = (this.numberComparisons - this.numberIncorrectComparisons) * 100 - this.playingField.stop() * 10 * this.playingField.complete(this.customSettings.getDifficulty());
     return this.score > 0 ? this.score : 0;
   }
 
@@ -79,7 +84,7 @@ export class Game extends BaseComponent {
       cardElement.classList.add('playingField__correctPairs');
     }
 
-    if ((this.numberComparisons - this.numberIncorrectComparisons) === this.playingField.complete()) {
+    if ((this.numberComparisons - this.numberIncorrectComparisons) === this.playingField.complete(this.customSettings.getDifficulty())) {
       this.stopGame();
     }
 

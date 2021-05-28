@@ -21,12 +21,12 @@ export class PlayingField extends BaseComponent {
 
   clear() {
     this.cards = [];
-    this.element.innerHTML = '';
+    this.element.innerHTML='';
   }
 
-  complete(complexity = 2) {
-    this.cards.length = complexity;
-    return complexity;
+  complete(difficulty:number) {
+    this.cards.length = difficulty;
+    return difficulty;
   }
 
   addCards(cards: Card[]) {
