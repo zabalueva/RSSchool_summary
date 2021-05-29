@@ -3,7 +3,6 @@ import './card.scss';
 
 const TURN_CLASS = 'turned';
 export class Card extends BaseComponent {
-
   isTurned = false;
 
   constructor(readonly image: string) {

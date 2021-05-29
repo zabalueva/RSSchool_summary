@@ -19,7 +19,8 @@ export class About extends BaseComponent {
       `,
   };
 
-  destroy():void {
+  destroy(): void {
+    this.element.innerHTML = '';
     document.querySelector('.rules')?.classList.add('settings_hidden');
   }
 }

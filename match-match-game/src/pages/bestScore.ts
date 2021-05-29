@@ -14,6 +14,4 @@ export class BestScore extends BaseComponent {
     <div>The best</div>
       `,
   };
-
-  
 }
