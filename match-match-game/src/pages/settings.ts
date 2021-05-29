@@ -1,9 +1,3 @@
-/* На странице Settings должны находится настройки
-приложения. Допускаются любые настройки, но две базовые нельзя игнорировать:
-
-Настройка сложности игры (4х4, 6х6, 8х8)
-Настройка типов карточек для сравнений (можно использовать любые типы. Пример: Животные, автомобили и т.п.)
- */
 import { BaseComponent } from '../components/base/base';
 
 const BASE_DIFFICULTY = 16;
@@ -11,15 +5,21 @@ const BASE_CATEGORY = 'animal';
 export class Settings extends BaseComponent {
   private readonly settings: HTMLDivElement;
 
+  private difficulty: number;
+
+  private category: string;
+
   constructor() {
     super('div', ['settings']);
-    this.settings=document.createElement('div');
+    this.settings = document.createElement('div');
     this.element.append(this.settings);
+    this.difficulty = BASE_DIFFICULTY;
+    this.category = BASE_CATEGORY;
   }
 
   getView = {
-    render: () => `
-    <div class="settings">Settings for game
+    render: ():string => `
+    <div class="settings">
     <p> Choose difficulty</p>
     <select name="difficulty" class="settings__difficulty">
         <option value="16" selected>16</option>
@@ -30,26 +30,26 @@ export class Settings extends BaseComponent {
         <option value="animal" selected>animal</option>
         <option value="nature">nature</option>
     </select>
-
-    <button class="settings__button btn" onclick="${this.destroy()}"}>OK</button>
+    <button class="settings__button btn"}>OK</button>
     </div>
       `,
-
   };
 
   getDifficulty(): number {
     const selectDifficulty = document.querySelector('.settings__difficulty') as HTMLSelectElement;
+    this.difficulty = +selectDifficulty?.value;
     return +selectDifficulty?.value || BASE_DIFFICULTY;
   }
 
   getCategory(): string {
     const selectCategory = document.querySelector('.settings__category') as HTMLSelectElement;
-    return selectCategory?.value||BASE_CATEGORY;
+    this.category = selectCategory?.value;
+    return selectCategory?.value || BASE_CATEGORY;
   }
 
-  destroy() {
-    console.log(this.settings);
-    this.settings.innerHTML='';
-    this.element.classList.add('settings_hidden');
+  destroy():void {
+    document.querySelector('.settings')?.classList.add('settings_hidden');
+    this.difficulty = BASE_DIFFICULTY;
+    this.category = BASE_CATEGORY;
   }
 }

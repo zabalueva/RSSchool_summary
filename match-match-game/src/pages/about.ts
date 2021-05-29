@@ -10,12 +10,16 @@ export class About extends BaseComponent {
   }
 
   getView = {
-    render: () => `
-    <ul>
-    <li>Register</li>
-<li>Configure your game settings</li>
-<li> Start your new game! Remember card positions and match it before times up </li>
-</ul >
+    render: ():string => `
+    <div class="rules">
+    <p>Register</p>
+    <p>Configure your game settings</p>
+    <p> Start your new game! Remember card positions and match it before times up </p>
+    </div >
       `,
   };
+
+  destroy():void {
+    document.querySelector('.rules')?.classList.add('settings_hidden');
+  }
 }

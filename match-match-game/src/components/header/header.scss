@@ -1,10 +1,14 @@
 .header {
   min-width: 1200px;
+  width: 100%;
+  overflow: auto;
   min-height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  position: sticky;
+  /* background-color: #2D9CDB; */
 }
 
 .menu__item {
@@ -13,6 +17,6 @@
 
 .menu__item_active {
   text-shadow: 1px 1px 2px black, 0 0 1em;
-  color: white; /* Белый цвет текста */
-  font-size: 1em; /* Размер надписи */
+  color: white;
+  font-size: 1em;
 }

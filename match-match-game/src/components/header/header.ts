@@ -24,6 +24,7 @@ export class Header extends BaseComponent {
     this.startButton = document.createElement('button');
     this.startButton.innerHTML = 'START GAME';
     this.startButton.classList.add('startButton');
+    this.startButton.classList.add('startButton_disabled');
 
     this.element.append(this.menuAbout);
     this.element.append(this.menuBestScore);
@@ -38,12 +39,28 @@ export class Header extends BaseComponent {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
 
       if (!this.game.isGame) {
-        this.startButton.innerHTML='STOP GAME';
+        this.startButton.innerHTML = 'STOP GAME';
         this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
         this.game.startSettings();
       } else {
         this.game.stopGame();
-        this.startButton.innerHTML='START GAME';
+        this.startButton.innerHTML = 'START GAME';
+      }
+    });
+  }
+
+  addStartButton():void {
+    this.startButton?.classList.remove('startButton_disabled');
+    this.startButton.addEventListener('click', async () => {
+      document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
+
+      if (!this.game.isGame) {
+        this.startButton.innerHTML = 'STOP GAME';
+        this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
+        this.game.startSettings();
+      } else {
+        this.game.stopGame();
+        this.startButton.innerHTML = 'START GAME';
       }
     });
   }

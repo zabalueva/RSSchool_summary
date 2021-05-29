@@ -43,16 +43,16 @@ export class DataBase {
 
   const users = this.transaction.objectStore('users'); */
 
-  addUser(nameI: string, surnameI: string, emailI: string) {
+  async addUser(nameI: string, surnameI: string, emailI: string) {
     const user = {
       name: 'kd',
       surname: 'dk',
       email: 'djdjjfd',
     };
-    console.log('yuy');
+    console.log(nameI, surnameI, emailI);
 
-    const transaction = this.db.transaction(['shows'], 'readwrite');
-    const store = transaction.objectStore('shows');
+    const transaction = await this.db.transaction(['users'], 'readwrite');
+    const store = transaction.objectStore('users');
     const request = store.add(user);
 
     /* const request = this.db.transaction('users', 'readwrite')

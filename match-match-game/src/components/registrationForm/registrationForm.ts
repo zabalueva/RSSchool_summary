@@ -6,7 +6,7 @@ import { DataBase } from '../../controllers/dbConnect/dbConnect';
 export class RegistrationForm extends BaseComponent {
   private dataBase?: DataBase;
 
-  private stopSubmit = false;
+  public stopSubmit = false;
 
   constructor() {
     super('div', ['registrationForm']);
@@ -20,16 +20,9 @@ export class RegistrationForm extends BaseComponent {
       <button class="form__cancel formButton">Cancel</button>
       </form>
     </div>`;
-    /* this.registrationButton = document.createElement('button');
-    this.registrationButton.innerHTML = 'ADD USER';
-    this.registrationButton.classList.add('startButton'); */
-    /* this.cancelButton = document.createElement('button');
-    this.cancelButton.innerHTML = 'CANCEL';
-    this.cancelButton.classList.add('startButton');
-    this.element.append(this.cancelButton); */
   }
 
-  validateForm() {
+  validateForm():void {
     const nameInput = document.querySelector('.form__input_name') as HTMLInputElement;
     const surnameInput = document.querySelector('.form__input_surname') as HTMLInputElement;
     const emailInput = document.querySelector('.form__input_email') as HTMLInputElement;
@@ -75,6 +68,7 @@ export class RegistrationForm extends BaseComponent {
         if (!this.stopSubmit) {
           e.preventDefault();
           this.element.classList.add('registrationForm_hidden');
+          document.querySelector('.startButton')?.classList.remove('startButton_disabled');
           this.dataBase?.openInitDB();
           this.dataBase?.addUser(nameInput.value, surnameInput.value, emailInput.value);
         }

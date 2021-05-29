@@ -4,8 +4,10 @@ import { Card } from '../components/card/card';
 import { delay } from '../shared/delay';
 import { ImageBase } from '../models/imageBase';
 import { Settings } from '../pages/settings';
+import { About } from '../pages/about';
 
-const turnDelay = 0;
+const TURN_DELAY = 0;
+const BASE_DIFFICULTY = 16;
 export class Game extends BaseComponent {
   private readonly playingField: PlayingField;
 
@@ -23,10 +25,13 @@ export class Game extends BaseComponent {
 
   public customSettings: Settings;
 
+  public about: About;
+
   constructor() {
     super('div');
     this.playingField = new PlayingField();
     this.customSettings = new Settings();
+    this.about = new About();
     this.element.appendChild(this.playingField.element);
   }
 
@@ -42,21 +47,31 @@ export class Game extends BaseComponent {
 
   startGame(images: string[]):void {
     this.playingField.clear();
-    (document.querySelector('.settings') as Element).innerHTML='';
     const cards = images.concat(images).map((url) => new Card(url)).sort(() => Math.random() - 0.5);
     cards.forEach((card) => card.element.addEventListener('click', () => this.cardTurn(card)));
     this.playingField.addCards(cards);
+
+    if (this.customSettings.getDifficulty() > BASE_DIFFICULTY) {
+      document.querySelectorAll(
+        '.playingField__card-wrap',
+      )?.forEach((el) => el.classList.add('playingField__card-wrap_big'));
+    }
+    this.customSettings?.destroy();
+    this.about?.destroy();
   }
 
-  stopGame() {
+  stopGame():void {
     this.isGame = false;
     this.calculateScore();
     this.playingField.stop();
-    this.playingField.congrats();
   }
 
-  calculateScore() {
-    this.score = (this.numberComparisons - this.numberIncorrectComparisons) * 100 - this.playingField.stop() * 10 * this.playingField.complete(this.customSettings.getDifficulty());
+  calculateScore():number {
+    this.score = ((
+      this.numberComparisons - this.numberIncorrectComparisons
+    ) * 100 - this.playingField.stop() * 10) * Math.sqrt(
+      this.playingField.complete(this.customSettings.getDifficulty()),
+    );
     return this.score > 0 ? this.score : 0;
   }
 
@@ -82,10 +97,11 @@ export class Game extends BaseComponent {
     if (this.activeCard.image === card.image) {
       activeCardElement.classList.add('playingField__correctPairs');
       cardElement.classList.add('playingField__correctPairs');
-    }
-
-    if ((this.numberComparisons - this.numberIncorrectComparisons) === this.playingField.complete(this.customSettings.getDifficulty())) {
-      this.stopGame();
+      if ((this.numberComparisons - this.numberIncorrectComparisons)
+        === this.playingField.complete(this.customSettings.getDifficulty() / 2)) {
+        this.playingField.congrats(this.calculateScore(), this.playingField.stop());
+        this.stopGame();
+      }
     }
 
     if (this.activeCard.image !== card.image) {
@@ -94,7 +110,7 @@ export class Game extends BaseComponent {
       activeCardElement.classList.add('playingField__incorrectPairs');
       cardElement.classList.add('playingField__incorrectPairs');
 
-      await delay(turnDelay);
+      await delay(TURN_DELAY);
       await Promise.all([this.activeCard.getBack(), card.getBack()]);
 
       activeCardElement.classList.remove('playingField__incorrectPairs');

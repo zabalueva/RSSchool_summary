@@ -19,20 +19,19 @@ export class PlayingField extends BaseComponent {
     this.congratulations = new Congratulations();
   }
 
-  clear() {
+  clear(): void {
     this.cards = [];
-    this.element.innerHTML='';
+    this.element.innerHTML = '';
   }
 
-  complete(difficulty:number) {
+  complete(difficulty:number): number {
     this.cards.length = difficulty;
     return difficulty;
   }
 
-  addCards(cards: Card[]) {
+  addCards(cards: Card[]): void {
     this.cards = cards;
     this.element.parentNode?.append(this.timer.element);
-
     this.cards.forEach((item) => this.element.appendChild(item.element));
     setTimeout(() => {
       this.cards.forEach((card) => card.getBack());
@@ -40,12 +39,12 @@ export class PlayingField extends BaseComponent {
     }, SHOW_TIME * 1000);
   }
 
-  congrats() {
+  congrats(score: number, time: number): void {
     this.element.append(this.congratulations.element);
-    this.congratulations.redirect();
+    this.congratulations.redirect(score, time);
   }
 
-  stop() {
+  stop(): number {
     return this.timer.stopTimer();
   }
 }
