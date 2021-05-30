@@ -10,7 +10,7 @@ export class Timer extends BaseComponent {
     this.timer = 0;
   }
 
-  startTimer() {
+  startTimer():string {
     this.timer = window.setInterval(() => {
       this.counter += 1;
       this.element.textContent = `Timer: ${Math.ceil(this.counter)}
@@ -21,9 +21,8 @@ export class Timer extends BaseComponent {
     return `${this.counter}`;
   }
 
-  stopTimer() {
+  stopTimer():number {
     window.clearInterval(this.timer);
-    const timeGame = this.counter;
     return this.counter;
   }
 }

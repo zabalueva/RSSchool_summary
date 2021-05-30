@@ -22,6 +22,13 @@ export class RegistrationForm extends BaseComponent {
     </div>`;
   }
 
+  clearForm(inputs:HTMLInputElement[]): void {
+    for (let j = 0; j < inputs.length; j++) {
+      inputs[j].value = '';
+    }
+    this.stopSubmit = false;
+  }
+
   validateForm():void {
     const nameInput = document.querySelector('.form__input_name') as HTMLInputElement;
     const surnameInput = document.querySelector('.form__input_surname') as HTMLInputElement;
@@ -36,26 +43,17 @@ export class RegistrationForm extends BaseComponent {
       submitButton.addEventListener('click', (e) => {
         for (let i = 0; i < inputs.length; i++) {
           const input = inputs[i];
-
           const inputCustomValidation = new CustomValidation();
-          inputCustomValidation.checkValidity(input);
-
           if (inputCustomValidation.checkValidity(input).length) {
-            const customValidityMessage = inputCustomValidation.getInvalidities();
-            input.setCustomValidity(customValidityMessage);
-
             const customValidityMessageForHTML = inputCustomValidation.getInvaliditiesForHTML();
             input.insertAdjacentHTML('afterend', `<p class="error-message">${customValidityMessageForHTML}</p>`);
             this.stopSubmit = true;
           }
-
           if (cancelButton) {
             cancelButton.addEventListener('click', (event) => {
               event.preventDefault();
               inputCustomValidation.clearInvalidities();
-              for (let j = 0; j < inputs.length; j++) {
-                inputs[j].value = '';
-              }
+              this.clearForm(inputs);
             });
           }
         }
@@ -68,9 +66,23 @@ export class RegistrationForm extends BaseComponent {
         if (!this.stopSubmit) {
           e.preventDefault();
           this.element.classList.add('registrationForm_hidden');
+          submitButton.classList.remove('btn_inactive');
           document.querySelector('.startButton')?.classList.remove('startButton_disabled');
           this.dataBase?.openInitDB();
           this.dataBase?.addUser(nameInput.value, surnameInput.value, emailInput.value);
+        }
+      });
+    }
+
+    if (cancelButton) {
+      cancelButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        this.clearForm(inputs);
+        const errors = document.querySelectorAll('.error-message');
+        if (errors) {
+          Array.from(document.querySelectorAll('.form__input'))?.forEach((el) => {
+            (el.nextSibling as Element).innerHTML = '';
+          });
         }
       });
     }

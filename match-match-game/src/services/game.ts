@@ -6,7 +6,7 @@ import { ImageBase } from '../models/imageBase';
 import { Settings } from '../pages/settings';
 import { About } from '../pages/about';
 
-const TURN_DELAY = 0;
+const TURN_DELAY = 30;
 const BASE_DIFFICULTY = 16;
 export class Game extends BaseComponent {
   private readonly playingField: PlayingField;

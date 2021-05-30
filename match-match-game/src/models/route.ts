@@ -1,6 +1,6 @@
-import { BaseComponent } from '../components/base/base';
+import { Page } from './page';
 
 export interface Route {
-  component: BaseComponent;
   path: string;
+  component: Page;
 }

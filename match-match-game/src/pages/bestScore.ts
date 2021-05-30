@@ -4,13 +4,13 @@ export class BestScore extends BaseComponent {
   private readonly bestScore: HTMLDivElement;
 
   constructor() {
-    super('div', ['about']);
+    super('div', ['bestScore']);
     this.bestScore = document.createElement('div');
     this.element.append(this.bestScore);
   }
 
   getView = {
-    render: () => `
+    render: ():string => `
     <div>The best</div>
       `,
   };

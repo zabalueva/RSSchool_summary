@@ -1,9 +1,7 @@
 import { About } from '../pages/about';
 import { Settings } from '../pages/settings';
 import { BestScore } from '../pages/bestScore';
-import { Page } from '../models/page';
-
-type Path = { path: string, component: Page };
+import { Route } from '../models/route';
 
 const BestScoreLayout = {
   render: () => `
@@ -22,11 +20,11 @@ const routes = [
 const parseLocation = () => window.location.hash.slice(1).toLowerCase() || '/';
 
 const findComponentByPath = (
-  path: string, routesLine: Array<Path>,
+  path: string, routesLine: Array<Route>,
 ) => routesLine
   .find((r) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
-export const router = () => {
+export const router = ():void => {
   document.querySelector('registration__wrap')?.classList.add('registration__wrap_hidden');
   const path = parseLocation();
   const { component = BestScoreLayout } = findComponentByPath(path, routes) || {};

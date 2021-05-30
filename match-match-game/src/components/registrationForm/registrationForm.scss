@@ -1,10 +1,12 @@
 .registration__wrap {
+  position: absolute;
+  top: 12vh;
+  left: 55%;
   width: 500px;
   height: 300px;
-  margin-top: 400px;
+  border-radius: 14px;
   background-color: #fff;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12), 0px 12px 12px rgba(0, 0, 0, 0.24);
-  border-radius: 14px;
 }
 
 .registration__form {
@@ -16,6 +18,7 @@
   min-height: 300px;
   height: auto;
   background-color: #fff;
+  border-radius: 14px;
 }
 
 .registrationForm_hidden {

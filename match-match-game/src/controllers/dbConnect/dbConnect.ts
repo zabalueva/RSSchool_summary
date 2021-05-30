@@ -1,9 +1,7 @@
-import { User } from '../../models/user';
-
 export class DataBase {
   public db!: IDBDatabase;
 
-  constuctor() {
+  constructor() {
     this.openInitDB();
   }
 
@@ -45,11 +43,10 @@ export class DataBase {
 
   async addUser(nameI: string, surnameI: string, emailI: string) {
     const user = {
-      name: 'kd',
-      surname: 'dk',
-      email: 'djdjjfd',
+      name: nameI,
+      surname: surnameI,
+      email: emailI,
     };
-    console.log(nameI, surnameI, emailI);
 
     const transaction = await this.db.transaction(['users'], 'readwrite');
     const store = transaction.objectStore('users');
