@@ -11,7 +11,8 @@ export class CustomValidation {
     }
 
     if (input.type === 'email') {
-      if (!input.value.match(/.+@.+\..+/i) && !input.value === false) {
+      const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!input.value.match(emailRegExp) && !input.value === false) {
         this.addInvalidity('Must comply with the standard email generation rule [RFC]');
       }
     }
