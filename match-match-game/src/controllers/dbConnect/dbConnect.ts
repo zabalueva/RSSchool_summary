@@ -1,19 +1,39 @@
+import { User } from '../../models/user';
+
+export const displayUsers = (usersTop: User[]):void => {
+  let listHTML = '<ul>';
+  console.log(usersTop);
+
+  for (let i = 0; i < usersTop.length; i++) {
+    const userInTop = usersTop[i];
+    listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
+  }
+  const bestScore = document.querySelector('.bestScore');
+
+  if (bestScore) {
+    bestScore.innerHTML = listHTML;
+  }
+};
+
 export class DataBase {
   public db!: IDBDatabase;
+
+  public topUsers: User[] = [];
+
+  reverseOrder = false;
 
   constructor() {
     this.openInitDB();
   }
 
-  openInitDB() {
+  openInitDB(): void {
     const dbRequest: IDBOpenDBRequest = indexedDB.open('zabalueva', 1);
 
     if (!window.indexedDB) {
-      window.alert("Your browser doesn't support a stable version of IndexedDB.");
+      throw new Error("Your browser doesn't support a stable version of IndexedDB.");
     }
 
     dbRequest.onupgradeneeded = (event) => {
-      console.log('running onupgradeneeded');
       const eventElement = event.target as IDBOpenDBRequest;
       this.db = eventElement?.result;
       if (!this.db.objectStoreNames.contains('users')) {
@@ -28,20 +48,21 @@ export class DataBase {
       this.db = eventElement?.result;
     };
 
-    dbRequest.onerror = (event) => {
-      console.error(`error opening database ${dbRequest.error}`);
+    dbRequest.onerror = () => {
+      throw new Error(`error opening database ${dbRequest.error}`);
     };
 
-    dbRequest.onblocked = (event) => {
-      console.error('another connection');
+    dbRequest.onblocked = () => {
+      throw new Error('another connection');
     };
   }
 
-  async addUser(nameI: string, surnameI: string, emailI: string) {
+  async addUser(nameInput: string, surnameInput: string, emailInput: string, scoring = 0): Promise<void> {
     const user = {
-      name: nameI,
-      surname: surnameI,
-      email: emailI,
+      name: nameInput,
+      surname: surnameInput,
+      email: emailInput,
+      score: scoring,
     };
 
     const transaction = await this.db.transaction(['users'], 'readwrite');
@@ -49,68 +70,34 @@ export class DataBase {
     store.add(user);
 
     transaction.oncomplete = () => {
-      console.log('sucess');
+      console.log('success');
+      this.getBestPlayers();
     };
 
     transaction.onerror = (event) => {
-      console.log('error');
+      throw new Error(`error ${event}`);
     };
   }
 
-  /* async getBestPlayers() {
-    return new Promise((resolve) => {
-      if (!this.db) {
-        throw new Error('database\'s not exist yet');
-      } else {
-        const transaction = await this.db.transaction(['users'], 'readwrite');
-        const store = transaction.objectStore('users');
-        const data = await store.index('score').
-
-        request.onsuccess() {
-          document.querySelector('.bestScore')?.classList.add('.best__score_show');
-        };
-
-        request.onerror = function (event) {
-          alert('Unable to add data\r\nPrasad is already exist in your database! ');
-        };
-
-      }
-    });
-  } */
-
-  /* async getBestPlayers() {
-    const tx = this.db.transaction(['users'], 'readonly');
+  async getBestPlayers(): Promise<void> {
+    const tx = await this.db.transaction(['users'], 'readonly');
     const store = tx.objectStore('users');
-    // Создать запрос курсора
-    const req = store.openCursor();
-    const allUsers = [];
+    const index = store.index('score');
+    const req = index.openCursor();
+    const allUsers: User[] = [];
     req.onsuccess = (event) => {
-      // Результатом req.onsuccess в запросах openCursor является
-      // IDBCursor
+      console.log('getBestP');
       const eventElement = event.target as IDBOpenDBRequest;
       const cursor = eventElement?.result as unknown as IDBCursorWithValue;
       if (cursor != null) {
-        // Если курсор не нулевой, мы получили элемент.
         allUsers.push(cursor.value);
         cursor.continue();
       } else {
-        // Если у нас нулевой курсор, это означает, что мы получили
-        // все данные, поэтому отображаем заметки, которые мы получили.
-        this.displayUsers(allUsers);
+        displayUsers(allUsers);
       }
     };
-    req.onerror = (event) => {
-      const eventElement = event.target as IDBOpenDBRequest;
-      alert(`error in cursor request ${eventElement?.errorCode}`);
+    req.onerror = () => {
+      throw new Error(`error in cursor request ${req.error}`);
     };
-  } */
-
-  /* displayUsers(usersTop):void {
-    let listHTML = '<ul>';
-    for (let i = 0; i < usersTop.length; i++) {
-      const userInTop = usersTop[i];
-      listHTML += `<li>${userInTop.text}</li>`;
-    }
-    document.querySelector('.bestScore')?.innerHTML = listHTML;
-  } */
+  }
 }

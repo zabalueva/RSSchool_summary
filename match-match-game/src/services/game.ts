@@ -5,11 +5,14 @@ import { delay } from '../shared/delay';
 import { ImageBase } from '../models/imageBase';
 import { Settings } from '../pages/settings';
 import { About } from '../pages/about';
+import { RegistrationForm } from '../components/registrationForm/registrationForm';
 
-const TURN_DELAY = 30;
+const TURN_DELAY = 3;
 const BASE_DIFFICULTY = 16;
 export class Game extends BaseComponent {
   private readonly playingField: PlayingField;
+
+  private readonly registrationForm: RegistrationForm;
 
   private activeCard?: Card;
 
@@ -31,6 +34,7 @@ export class Game extends BaseComponent {
     super('div');
     this.playingField = new PlayingField();
     this.customSettings = new Settings();
+    this.registrationForm = new RegistrationForm();
     this.about = new About();
     this.element.appendChild(this.playingField.element);
   }
@@ -64,6 +68,7 @@ export class Game extends BaseComponent {
     this.isGame = false;
     this.calculateScore();
     this.playingField.stop();
+    this.element.append(this.registrationForm.element);
   }
 
   calculateScore():number {

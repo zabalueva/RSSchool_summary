@@ -27,13 +27,14 @@ export class Header extends BaseComponent {
     this.startButton.classList.add('startButton_disabled');
 
     this.element.append(this.menuAbout);
-    this.element.append(this.menuBestScore);
     this.element.append(this.menuSettings);
+    this.element.append(this.menuBestScore);
+
     this.element.append(this.startButton);
 
     this.menuAbout.innerHTML = '<a href="#/about" class="menu__item">About</a> ';
     this.menuSettings.innerHTML = '<a href="#/settings" class="menu__item">Settings</a>';
-    this.menuBestScore.innerHTML = '<a href="#/bestScore" class="menu__item">BestScore</a>';
+    this.menuBestScore.innerHTML = '<a href="#/bestscore" class="menu__item">BestScore</a>';
 
     this.startButton.addEventListener('click', async () => {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');

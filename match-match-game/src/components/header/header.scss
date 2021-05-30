@@ -5,10 +5,10 @@
   min-height: 100px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-direction: row;
   position: sticky;
-  /* background-color: #2D9CDB; */
+  background-color: #2D9CDB;
 }
 
 .menu__item {

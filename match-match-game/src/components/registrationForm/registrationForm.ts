@@ -70,6 +70,8 @@ export class RegistrationForm extends BaseComponent {
           document.querySelector('.startButton')?.classList.remove('startButton_disabled');
           this.dataBase?.openInitDB();
           this.dataBase?.addUser(nameInput.value, surnameInput.value, emailInput.value);
+          this.dataBase?.getBestPlayers();
+          this.clearForm(inputs);
         }
       });
     }

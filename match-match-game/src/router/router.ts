@@ -15,7 +15,7 @@ const routes = [
   { path: '/', component: new About().getView },
   { path: '/about', component: new About().getView },
   { path: '/settings', component: new Settings().getView },
-  { path: '/bestScore', component: new BestScore().getView },
+  { path: '/bestscore', component: new BestScore().getView },
 ];
 const parseLocation = () => window.location.hash.slice(1).toLowerCase() || '/';
 

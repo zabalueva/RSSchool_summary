@@ -4,7 +4,7 @@ import './playingField.scss';
 import { Timer } from '../timer/timer';
 import { Congratulations } from '../congratulations/congratulations';
 
-const SHOW_TIME = 30;
+const SHOW_TIME = 3;
 
 export class PlayingField extends BaseComponent {
   private cards: Card[] = [];

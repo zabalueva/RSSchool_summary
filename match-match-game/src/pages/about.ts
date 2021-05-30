@@ -13,7 +13,11 @@ export class About extends BaseComponent {
     render: ():string => `
     <div class="rules">
     <p>Register</p>
+    </div >
+    <div class="rules rules_step2">
     <p>Configure your game settings</p>
+    </div >
+    <div class="rules rules_step3">
     <p> Start your new game! Remember card positions and match it before times up </p>
     </div >
       `,

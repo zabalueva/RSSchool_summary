@@ -1,17 +1,27 @@
 import { BaseComponent } from '../components/base/base';
+import { DataBase } from '../controllers/dbConnect/dbConnect';
 
 export class BestScore extends BaseComponent {
   private readonly bestScore: HTMLDivElement;
+
+  private dataBase?: DataBase;
 
   constructor() {
     super('div', ['bestScore']);
     this.bestScore = document.createElement('div');
     this.element.append(this.bestScore);
+    this.dataBase = new DataBase();
   }
 
   getView = {
     render: ():string => `
-    <div>The best</div>
+    <div class="bestScore">The best</div>
+    <div>${this.dataBase?.getBestPlayers()}</div>
       `,
   };
+
+  destroy(): void {
+    this.element.innerHTML = '';
+    document.querySelector('.rules')?.classList.add('settings_hidden');
+  }
 }
