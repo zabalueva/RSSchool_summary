@@ -60,6 +60,13 @@ export class DataBase {
     };
   }
 
+  /* async saveCurrent(nameInput: string, surnameInput: string, emailInput: string) {
+    const currentName = nameInput;
+    const currentSurname = surnameInput;
+    const currentEmail = emailInput;
+    return currentEmail;
+  } */
+
   async addUser(nameInput: string, surnameInput: string, emailInput: string, scoring = 0): Promise<void> {
     const user = {
       name: nameInput,
@@ -71,6 +78,27 @@ export class DataBase {
     const transaction = await this.db.transaction(['users'], 'readwrite');
     const store = transaction.objectStore('users');
     store.add(user);
+
+    transaction.oncomplete = () => {
+      this.getBestPlayers();
+    };
+
+    transaction.onerror = (event) => {
+      throw new Error(`error ${event}`);
+    };
+  }
+
+  async updateUser(nameInput: string, surnameInput: string, emailInput: string, scoring = 0): Promise<void> {
+    const user = {
+      name: nameInput,
+      surname: surnameInput,
+      email: emailInput,
+      score: scoring,
+    };
+
+    const transaction = await this.db.transaction(['users'], 'readwrite');
+    const store = transaction.objectStore('users');
+    store.put(user);
 
     transaction.oncomplete = () => {
       this.getBestPlayers();

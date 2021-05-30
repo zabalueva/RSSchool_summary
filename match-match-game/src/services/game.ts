@@ -73,6 +73,7 @@ export class Game extends BaseComponent {
   stopGame():void {
     this.isGame = false;
     this.calculateScore();
+    /* this.dataBase?.updateUser(currentEmail, this.calculateScore()); */
     this.playingField.stop();
   }
 

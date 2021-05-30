@@ -12,11 +12,19 @@ export class Timer extends BaseComponent {
 
   startTimer():string {
     this.timer = window.setInterval(() => {
+      const sec = 0;
+      const minutes = Math.ceil(this.counter) / 60;
       this.counter += 1;
-      this.element.textContent = `Timer: ${Math.ceil(this.counter)}
-
-      These are seconds that go by.
-      Don't focus on displaying them - just play!`;
+      if (this.counter < 10) {
+        this.element.textContent = `00:0${Math.ceil(this.counter)}`;
+      } else if (this.counter > 60 && minutes < 10) {
+        this.element.textContent = `0 ${minutes}:${Math.ceil(this.counter - minutes * 60)}`;
+      } else if (minutes > 10) {
+        this.element.textContent = `${minutes}:${Math.ceil(this.counter)}`;
+      } else {
+        this.element.textContent = `00:${Math.ceil(this.counter)}  These are seconds that go by.
+        Don't focus on displaying them - just play!`;
+      }
     }, 1000);
     return `${this.counter}`;
   }
