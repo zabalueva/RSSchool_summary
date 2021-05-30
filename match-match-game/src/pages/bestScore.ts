@@ -11,17 +11,18 @@ export class BestScore extends BaseComponent {
     this.bestScore = document.createElement('div');
     this.element.append(this.bestScore);
     this.dataBase = new DataBase();
+    this.dataBase?.getBestPlayers();
   }
 
   getView = {
     render: ():string => `
     <div class="bestScore">The best</div>
-    <div>${this.dataBase?.getBestPlayers()}</div>
+    <div>${JSON.stringify(this.dataBase?.getBestPlayers())}</div>
       `,
   };
 
   destroy(): void {
     this.element.innerHTML = '';
-    document.querySelector('.rules')?.classList.add('settings_hidden');
+    document.querySelector('.bestScore')?.classList.add('settings_hidden');
   }
 }

@@ -2,10 +2,13 @@ import { User } from '../../models/user';
 
 export const displayUsers = (usersTop: User[]):void => {
   let listHTML = '<ul>';
-  console.log(usersTop);
 
   for (let i = 0; i < usersTop.length; i++) {
     const userInTop = usersTop[i];
+    const tempScoreArray = [];
+    tempScoreArray.push(userInTop.score);
+    tempScoreArray.sort((a, b) => b - a);
+    tempScoreArray.slice(0, 9);
     listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
   }
   const bestScore = document.querySelector('.bestScore');
@@ -70,7 +73,6 @@ export class DataBase {
     store.add(user);
 
     transaction.oncomplete = () => {
-      console.log('success');
       this.getBestPlayers();
     };
 
@@ -86,7 +88,6 @@ export class DataBase {
     const req = index.openCursor();
     const allUsers: User[] = [];
     req.onsuccess = (event) => {
-      console.log('getBestP');
       const eventElement = event.target as IDBOpenDBRequest;
       const cursor = eventElement?.result as unknown as IDBCursorWithValue;
       if (cursor != null) {

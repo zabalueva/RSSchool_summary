@@ -16,6 +16,10 @@ export class RegistrationForm extends BaseComponent {
       <input class="form__input form__input_name" type="text" placeholder="Name" required>
       <input class="form__input form__input_surname" type="text" placeholder="Surname" required>
       <input class="form__input form__input_email" type="email" placeholder="Email" required>
+      <label class="btn-load" for="form__input">
+            Avatar
+            <input class="form__input form__input_loadAvatar" id="form__input" name="upload" type="file" placeholder="Load picture">
+          </label>
       <button class="form__submit formButton">Add user</button>
       <button class="form__cancel formButton">Cancel</button>
       </form>
@@ -70,7 +74,6 @@ export class RegistrationForm extends BaseComponent {
           document.querySelector('.startButton')?.classList.remove('startButton_disabled');
           this.dataBase?.openInitDB();
           this.dataBase?.addUser(nameInput.value, surnameInput.value, emailInput.value);
-          this.dataBase?.getBestPlayers();
           this.clearForm(inputs);
         }
       });

@@ -5,14 +5,14 @@ import { delay } from '../shared/delay';
 import { ImageBase } from '../models/imageBase';
 import { Settings } from '../pages/settings';
 import { About } from '../pages/about';
-import { RegistrationForm } from '../components/registrationForm/registrationForm';
+
+import { DataBase } from '../controllers/dbConnect/dbConnect';
+import { BestScore } from '../pages/bestScore';
 
 const TURN_DELAY = 3;
 const BASE_DIFFICULTY = 16;
 export class Game extends BaseComponent {
   private readonly playingField: PlayingField;
-
-  private readonly registrationForm: RegistrationForm;
 
   private activeCard?: Card;
 
@@ -30,12 +30,17 @@ export class Game extends BaseComponent {
 
   public about: About;
 
+  public bestScore: BestScore;
+
+  private dataBase?: DataBase;
+
   constructor() {
     super('div');
     this.playingField = new PlayingField();
     this.customSettings = new Settings();
-    this.registrationForm = new RegistrationForm();
+    this.dataBase = new DataBase();
     this.about = new About();
+    this.bestScore = new BestScore();
     this.element.appendChild(this.playingField.element);
   }
 
@@ -62,13 +67,13 @@ export class Game extends BaseComponent {
     }
     this.customSettings?.destroy();
     this.about?.destroy();
+    this.bestScore?.destroy();
   }
 
   stopGame():void {
     this.isGame = false;
     this.calculateScore();
     this.playingField.stop();
-    this.element.append(this.registrationForm.element);
   }
 
   calculateScore():number {
@@ -77,6 +82,7 @@ export class Game extends BaseComponent {
     ) * 100 - this.playingField.stop() * 10) * Math.sqrt(
       this.playingField.complete(this.customSettings.getDifficulty()),
     );
+    this.dataBase?.getBestPlayers();
     return this.score > 0 ? this.score : 0;
   }
 
