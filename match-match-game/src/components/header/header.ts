@@ -38,14 +38,10 @@ export class Header extends BaseComponent {
 
     this.startButton.addEventListener('click', async () => {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
-
+      this.toggleStartButton();
       if (!this.game.isGame) {
-        this.startButton.innerHTML = 'STOP GAME';
         this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
         this.game.startSettings();
-      } else {
-        this.game.stopGame();
-        this.startButton.innerHTML = 'START GAME';
       }
     });
   }
@@ -54,15 +50,20 @@ export class Header extends BaseComponent {
     this.startButton?.classList.remove('startButton_disabled');
     this.startButton.addEventListener('click', async () => {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
-
+      this.toggleStartButton();
       if (!this.game.isGame) {
-        this.startButton.innerHTML = 'STOP GAME';
         this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
         this.game.startSettings();
-      } else {
-        this.game.stopGame();
-        this.startButton.innerHTML = 'START GAME';
       }
     });
+  }
+
+  toggleStartButton():void {
+    if (!this.game.isGame) {
+      this.startButton.innerHTML = 'STOP GAME';
+    } else {
+      this.game.stopGame();
+      this.startButton.innerHTML = 'START GAME';
+    }
   }
 }

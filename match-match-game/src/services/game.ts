@@ -111,8 +111,8 @@ export class Game extends BaseComponent {
       cardElement.classList.add('playingField__correctPairs');
       if ((this.numberComparisons - this.numberIncorrectComparisons)
         === this.playingField.complete(this.customSettings.getDifficulty() / 2)) {
-        this.playingField.congrats(this.calculateScore(), this.playingField.stop());
         this.stopGame();
+        this.playingField.congrats(this.calculateScore(), this.playingField.stop());
       }
     }
 

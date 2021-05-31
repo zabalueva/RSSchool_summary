@@ -1,5 +1,7 @@
 import { User } from '../../models/user';
 
+let COUNT_TOP = 0;
+const TOP_PLAYERS = 10;
 export const displayUsers = (usersTop: User[]):void => {
   let listHTML = '<ul>';
 
@@ -9,7 +11,10 @@ export const displayUsers = (usersTop: User[]):void => {
     tempScoreArray.push(userInTop.score);
     tempScoreArray.sort((a, b) => b - a);
     tempScoreArray.slice(0, 9);
-    listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
+    if (COUNT_TOP < TOP_PLAYERS) {
+      listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
+      COUNT_TOP += 1;
+    }
   }
   const bestScore = document.querySelector('.bestScore');
 

@@ -12,8 +12,7 @@ export class Timer extends BaseComponent {
 
   startTimer():string {
     this.timer = window.setInterval(() => {
-      const sec = 0;
-      const minutes = Math.ceil(this.counter) / 60;
+      const minutes = Math.ceil(Math.ceil(this.counter) / 60);
       this.counter += 1;
       if (this.counter < 10) {
         this.element.textContent = `00:0${Math.ceil(this.counter)}`;

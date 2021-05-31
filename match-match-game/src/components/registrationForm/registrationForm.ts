@@ -18,7 +18,7 @@ export class RegistrationForm extends BaseComponent {
       <input class="form__input form__input_email" type="email" placeholder="Email" required>
       <label class="btn-load" for="form__input">
             Avatar
-            <input class="form__input form__input_loadAvatar" id="form__input" name="upload" type="file" placeholder="Load picture">
+            <input class="form__input form__input_loadAvatar" id="form__input" name="upload" type="file">
           </label>
       <button class="form__submit formButton">Add user</button>
       <button class="form__cancel formButton">Cancel</button>
