@@ -35,19 +35,7 @@ export class Header extends BaseComponent {
     this.menuAbout.innerHTML = '<a href="#/about" class="menu__item">About</a> ';
     this.menuSettings.innerHTML = '<a href="#/settings" class="menu__item">Settings</a>';
     this.menuBestScore.innerHTML = '<a href="#/bestscore" class="menu__item">BestScore</a>';
-
-    this.startButton.addEventListener('click', async () => {
-      document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
-      this.toggleStartButton();
-      if (!this.game.isGame) {
-        this.element?.nextSibling?.nextSibling?.appendChild(this.game.element);
-        this.game.startSettings();
-      }
-    });
-  }
-
-  addStartButton():void {
-    this.startButton?.classList.remove('startButton_disabled');
+    window.addEventListener('hashchange', this.toggleStartButton);
     this.startButton.addEventListener('click', async () => {
       document.getElementsByClassName('registrationForm')[0]?.classList.add('registrationForm_hidden');
       this.toggleStartButton();

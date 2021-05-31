@@ -7,7 +7,6 @@ let CURRENT_NAME: string;
 
 export const displayUsers = (usersTop: User[]):void => {
   let listHTML = '<ul>';
-  CURRENT_NAME = usersTop[usersTop.length - 1].name;
 
   for (let i = 0; i < usersTop.length; i++) {
     const userInTop = usersTop[i];
@@ -16,8 +15,10 @@ export const displayUsers = (usersTop: User[]):void => {
     tempScoreArray.sort((a, b) => b - a);
     tempScoreArray.slice(0, 9);
     if (COUNT_TOP < TOP_PLAYERS) {
-      listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
-      COUNT_TOP += 1;
+      if (userInTop.score > 0) {
+        listHTML += `<li>${userInTop.name} - ${userInTop.score}</li>`;
+        COUNT_TOP += 1;
+      }
     }
   }
   const bestScore = document.querySelector('.bestScore');
@@ -69,13 +70,6 @@ export class DataBase {
     };
   }
 
-  /* async saveCurrent(nameInput: string, surnameInput: string, emailInput: string) {
-    const currentName = nameInput;
-    const currentSurname = surnameInput;
-    const currentEmail = emailInput;
-    return currentEmail;
-  } */
-
   async addUser(nameInput: string, surnameInput: string, emailInput: string, scoring = 0): Promise<void> {
     const user = {
       name: nameInput,
@@ -83,6 +77,8 @@ export class DataBase {
       email: emailInput,
       score: scoring,
     };
+
+    CURRENT_NAME = nameInput;
 
     const transaction = await this.db.transaction(['users'], 'readwrite');
     const store = transaction.objectStore('users');
