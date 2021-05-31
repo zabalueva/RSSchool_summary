@@ -2,8 +2,12 @@ import { User } from '../../models/user';
 
 let COUNT_TOP = 0;
 const TOP_PLAYERS = 10;
+
+let CURRENT_NAME: string;
+
 export const displayUsers = (usersTop: User[]):void => {
   let listHTML = '<ul>';
+  CURRENT_NAME = usersTop[usersTop.length - 1].name;
 
   for (let i = 0; i < usersTop.length; i++) {
     const userInTop = usersTop[i];
@@ -93,11 +97,11 @@ export class DataBase {
     };
   }
 
-  async updateUser(nameInput: string, surnameInput: string, emailInput: string, scoring = 0): Promise<void> {
+  async updateUser(scoring = 0): Promise<void> {
     const user = {
-      name: nameInput,
-      surname: surnameInput,
-      email: emailInput,
+      name: CURRENT_NAME,
+      surname: CURRENT_NAME,
+      email: CURRENT_NAME,
       score: scoring,
     };
 
@@ -106,7 +110,7 @@ export class DataBase {
     store.put(user);
 
     transaction.oncomplete = () => {
-      this.getBestPlayers();
+      console.log('success update');
     };
 
     transaction.onerror = (event) => {

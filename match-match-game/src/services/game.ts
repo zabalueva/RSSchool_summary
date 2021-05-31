@@ -73,7 +73,6 @@ export class Game extends BaseComponent {
   stopGame():void {
     this.isGame = false;
     this.calculateScore();
-    /* this.dataBase?.updateUser(currentEmail, this.calculateScore()); */
     this.playingField.stop();
   }
 
@@ -111,6 +110,7 @@ export class Game extends BaseComponent {
       cardElement.classList.add('playingField__correctPairs');
       if ((this.numberComparisons - this.numberIncorrectComparisons)
         === this.playingField.complete(this.customSettings.getDifficulty() / 2)) {
+        this.dataBase?.updateUser(this.calculateScore());
         this.stopGame();
         this.playingField.congrats(this.calculateScore(), this.playingField.stop());
       }
