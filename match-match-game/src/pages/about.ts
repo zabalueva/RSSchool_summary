@@ -25,7 +25,6 @@ export class About extends BaseComponent {
 
   destroy(): void {
     this.element.innerHTML = '';
-    console.log((document.querySelectorAll('.rules')));
     Array.from(document.querySelectorAll('.rules'))?.forEach((el) => el.classList.add('settings_hidden'));
   }
 }
