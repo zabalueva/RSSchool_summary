@@ -1,3 +1,13 @@
-import './styles.scss';
+import { App } from './app';
+import { getAllCars } from './controllers/server';
+import { router } from './router/router';
+import './style.scss';
 
-console.log('Async Race');
+window.onload = () => {
+  const appRoot = document.getElementById('root');
+  const allCars = getAllCars(1);
+  if (!appRoot) throw new Error('Root element not found');
+  new App(appRoot).navigate();
+  window.addEventListener('hashchange', router);
+  window.addEventListener('load', router);
+};
