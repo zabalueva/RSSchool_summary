@@ -1,6 +1,3 @@
 import { getAllCars } from '../controllers/server';
 
-export const getCars = async () => {
-  const res = await getAllCars(1);
-  return res;
-};
+export const getCars = async() => await getAllCars(1);
