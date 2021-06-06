@@ -1,50 +1,52 @@
 import { BaseComponent } from '../components/base/base';
-import { getAllCars } from '../controllers/server';
+import { getAllCars, MAX_CARS_ON_PAGE } from '../controllers/server';
+import { Car } from '../models/car';
 import { GarageModel } from '../models/garageModel';
 import { getCars } from '../store/store';
 
 const FIRST_STATE_GARAGE = 5;
-let garageCarCount = getAllCars(1);
 
-getCars();
-console.log(getCars())
-let quantityCars = getCars().then((res)=> res).then((result) => console.log(result.length));
-console.log(quantityCars)
+const renderTotalquantityCars = async () => {
+  const cars = await getCars();
+  const quantity = cars.length;
+}
 
 export class Garage extends BaseComponent {
   private readonly garageView: HTMLDivElement;
 
-  public allCars: any;
-
-  public pageNumber: number;
-
   constructor() {
     super('div', ['garageView']);
     this.garageView = document.createElement('div');
-    this.pageNumber=1;
-    this.allCars = getCars();
+    renderTotalquantityCars();
   }
 
   getView={
     render: (): string => `
-    <div class="page">
-    <p>Garage(${quantityCars})</p>
+    <div class="page__garage garage">
+    <p>${this.getCount()}</p>
     </div>
-    <p>Page ${this.allCars.then((res:any)=>res)}</p>
-    <div class="page__cars cars-list">
-    <p> </p>
+    <div class="garage__listCar">
+    <p>${this.getCarsImage()}</p>
     </div>
       `,
   };
 
-  /* getCount = async () => {
-    const quantityCarsAll = await getCars.then((res) => res.count);
-    if (quantityCarsAll) {
-      quantityCars=+quantityCarsAll;
-    }
-    console.log(quantityCars)
-    return quantityCars;
-  }; */
+  getCount = async () => {
+    const cars = await getCars();
+    const quantity = cars.length;
+    const pageNumber = Math.ceil(quantity / MAX_CARS_ON_PAGE);
+    const el = `<div>Garage ${quantity}<div>
+    <div>Page ${pageNumber}<div>`;
+    document.getElementsByClassName('page__garage')[0].innerHTML = el
+  };
+
+  getCarsImage = async () => {
+    const cars = await getCars();
+    console.log(cars)
+    cars.forEach((el:Car) => el.name);
+    const view = `<div>cars ${cars[0].name}<div>`
+    document.getElementsByClassName('garage__listCar')[0].innerHTML = view
+  };
 
   destroy(): void {
     this.element.innerHTML='';
