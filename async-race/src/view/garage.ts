@@ -1,12 +1,10 @@
 import { BaseComponent } from '../components/base/base';
 import { getAllCars, MAX_CARS_ON_PAGE } from '../controllers/server';
-import { Car } from '../models/car';
-import { GarageModel } from '../models/garageModel';
 import { getCars } from '../store/store';
-import { createCar } from '../controllers/server'
+import { createCar, deleteCar } from '../controllers/server';
+import { selectCar, deleteSelectCar} from '../store/actions/actions'
 import './garage.scss';
 
-const FIRST_STATE_GARAGE = 5;
 export class Garage extends BaseComponent {
   private readonly garageView: HTMLDivElement;
 
@@ -27,7 +25,8 @@ export class Garage extends BaseComponent {
       </div>
       <div class="page__garage garage">
       <p>${this.getCount()}</p>
-      ${this.getInput()}
+      ${this.getCreateButton()}
+      ${selectCar}
       </div>
       <div class="garage__listCar listCar">
       <p>${this.getCarsImage()}</p>
@@ -36,17 +35,19 @@ export class Garage extends BaseComponent {
       `,
   };
 
-  getInput()  {
+  getCreateButton()  {
     const button = document.createElement('button');
     (document.getElementById('root') as Element).insertBefore(button,  (document.getElementById('root') as Element).lastChild);
     button.classList.add('form__button');
     button.innerHTML = `create car`;
     button?.addEventListener('click', this.createNewCar);
-    button?.addEventListener('click', this.getCarsImage)
+    button?.addEventListener('click', this.getCarsImage);
     return button;
   }
 
-  createNewCar = async() => await createCar('bmw', 'white', 5)
+  createNewCar = async() => await createCar(
+    (document.querySelector('.form__input_brand') as HTMLInputElement).value,
+    (document.querySelector('.form__input_color') as HTMLInputElement).value, 5);
 
   getCount = async () => {
     const cars = await getCars();
@@ -62,6 +63,8 @@ export class Garage extends BaseComponent {
     let viewCar = ``
     for (let car of cars){
       viewCar += `<div class="listCar__carTrack">
+      <button class="deleteCar">Delete</button>
+      <button class="selectCar">Select</button>
       ${car.name}
       <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
