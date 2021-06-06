@@ -3,34 +3,50 @@ import { getAllCars, MAX_CARS_ON_PAGE } from '../controllers/server';
 import { Car } from '../models/car';
 import { GarageModel } from '../models/garageModel';
 import { getCars } from '../store/store';
+import { createCar } from '../controllers/server'
 import './garage.scss';
 
 const FIRST_STATE_GARAGE = 5;
-
-const renderTotalquantityCars = async () => {
-  const cars = await getCars();
-  const quantity = cars.length;
-}
-
 export class Garage extends BaseComponent {
   private readonly garageView: HTMLDivElement;
 
   constructor() {
     super('div', ['garageView']);
     this.garageView = document.createElement('div');
-    renderTotalquantityCars();
+    this.element.append(this.garageView);
   }
 
   getView={
     render: (): string => `
-    <div class="page__garage garage">
-    <p>${this.getCount()}</p>
-    </div>
-    <div class="garage__listCar listCar">
-    <p>${this.getCarsImage()}</p>
+    <div class="garageView">
+      <div class="garage__create">
+      <input class="form__input form__input_brand" type="text" placeholder="car brand">
+      <input class="form__input form__input_color" type="color">
+      <div class="page__button">
+      </div>
+      </div>
+      <div class="page__garage garage">
+      <p>${this.getCount()}</p>
+      ${this.getInput()}
+      </div>
+      <div class="garage__listCar listCar">
+      <p>${this.getCarsImage()}</p>
+      </div>
     </div>
       `,
   };
+
+  getInput()  {
+    const button = document.createElement('button');
+    (document.getElementById('root') as Element).insertBefore(button,  (document.getElementById('root') as Element).lastChild);
+    button.classList.add('form__button');
+    button.innerHTML = `create car`;
+    button?.addEventListener('click', this.createNewCar);
+    button?.addEventListener('click', this.getCarsImage)
+    return button;
+  }
+
+  createNewCar = async() => await createCar('bmw', 'white', 5)
 
   getCount = async () => {
     const cars = await getCars();
@@ -43,8 +59,6 @@ export class Garage extends BaseComponent {
 
   getCarsImage = async () => {
     const cars = await getCars();
-    console.log(cars)
-    const allCars = [];
     let viewCar = ``
     for (let car of cars){
       viewCar += `<div class="listCar__carTrack">
@@ -109,9 +123,4 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     }
     document.getElementsByClassName('garage__listCar')[0].innerHTML = viewCar
   };
-
-  destroy(): void {
-    this.element.innerHTML='';
-    Array.from(document.querySelectorAll('.page__cars'))?.forEach((el) => el.classList.add('hidden'));
-  }
 }

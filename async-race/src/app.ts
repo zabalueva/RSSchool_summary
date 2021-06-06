@@ -1,5 +1,4 @@
 import { Header } from './components/header/header';
-import { getAllCars } from './controllers/server';
 
 export class App {
   private readonly content: HTMLDivElement;
