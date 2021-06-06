@@ -20,10 +20,4 @@ export const router = ():void => {
   document.getElementsByClassName('main')[0].innerHTML = `
   <section>${component.render()}</section>
   `;
-  const menuItems = document.getElementsByClassName('menu__item');
-  Array.from(menuItems)
-    .forEach((el) => el.classList.remove('menu__item_active'));
-  Array.from(menuItems)
-    .find((el) => el.innerHTML.toLowerCase() === path.slice(1).toLowerCase())
-    ?.classList.add('menu__item_active');
 };
