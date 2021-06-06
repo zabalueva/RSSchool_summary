@@ -1,0 +1,13 @@
+.page {
+  &__garage{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+height: 100px;
+  }
+}
+
+.car_img {
+  width: 500px;
+  height: 60px;
+}
