@@ -1,10 +1,8 @@
-import { deleteCar } from '../../controllers/server'
+import { deleteCar } from '../../controllers/server';
 
 export const selectCar = () => {
-  (document.querySelector('.selectCar') as HTMLButtonElement).addEventListener('click', (e) => {console.log(e.target)}
-  )
-  console.log('dksjf')
-  return (document.querySelector('.selectCar') as HTMLButtonElement).closest;
-}
+  (document.querySelector('.selectCar') as HTMLButtonElement).addEventListener('click', (e) => { console.log(e.target); });
+  console.log('dksjf');
+};
 
-export const deleteSelectCar = async() => await deleteCar(2);
+export const deleteSelectCar = async () => deleteCar(2);

@@ -1,8 +1,10 @@
 import { BaseComponent } from '../components/base/base';
-import { getAllCars, MAX_CARS_ON_PAGE } from '../controllers/server';
+import {
+  getAllCars, MAX_CARS_ON_PAGE, createCar, deleteCar,
+} from '../controllers/server';
 import { getCars } from '../store/store';
-import { createCar, deleteCar } from '../controllers/server';
-import { selectCar, deleteSelectCar} from '../store/actions/actions'
+import { selectCar, deleteSelectCar } from '../store/actions/actions';
+import { Car } from '../models/car';
 import './garage.scss';
 
 export class Garage extends BaseComponent {
@@ -12,59 +14,64 @@ export class Garage extends BaseComponent {
     super('div', ['garageView']);
     this.garageView = document.createElement('div');
     this.element.append(this.garageView);
+    this.getCreateButton();
   }
 
-  getView={
+  getView = {
     render: (): string => `
     <div class="garageView">
       <div class="garage__create">
       <input class="form__input form__input_brand" type="text" placeholder="car brand">
       <input class="form__input form__input_color" type="color">
-      <div class="page__button">
-      </div>
       </div>
       <div class="page__garage garage">
       <p>${this.getCount()}</p>
-      ${this.getCreateButton()}
-      ${selectCar}
       </div>
       <div class="garage__listCar listCar">
       <p>${this.getCarsImage()}</p>
+      ${this.getSelectButton()}
       </div>
     </div>
       `,
   };
 
-  getCreateButton()  {
-    const button = document.createElement('button');
-    (document.getElementById('root') as Element).insertBefore(button,  (document.getElementById('root') as Element).lastChild);
-    button.classList.add('form__button');
-    button.innerHTML = `create car`;
-    button?.addEventListener('click', this.createNewCar);
-    button?.addEventListener('click', this.getCarsImage);
-    return button;
-  }
+  getCreateButton = async (): Promise<void> => {
+    if (!document.querySelector('.form__button')) {
+      const createButton = document.createElement('button');
+      (document.getElementById('root') as Element).insertBefore(
+        createButton, (document.getElementById('root') as Element).lastChild,
+      );
+      createButton.classList.add('form__button');
+      createButton.innerHTML = 'create car';
+      createButton?.addEventListener('click', this.createNewCar);
+      createButton?.addEventListener('click', this.getCarsImage);
+      createButton?.addEventListener('click', this.getCount);
+    }
+  };
 
-  createNewCar = async() => await createCar(
+  createNewCar = async (): Promise <Response> => createCar(
     (document.querySelector('.form__input_brand') as HTMLInputElement).value,
-    (document.querySelector('.form__input_color') as HTMLInputElement).value, 5);
+    (document.querySelector('.form__input_color') as HTMLInputElement).value, 5,
+  );
 
-  getCount = async () => {
+  deleteSelectCar = async (): Promise <void> => deleteCar(2);
+
+  getCount = async ():Promise <void> => {
     const cars = await getCars();
     const quantity = cars.length;
     const pageNumber = Math.ceil(quantity / MAX_CARS_ON_PAGE);
     const el = `<div>Garage ${quantity}<div>
     <div>Page ${pageNumber}<div>`;
-    document.getElementsByClassName('page__garage')[0].innerHTML = el
+    document.getElementsByClassName('page__garage')[0].innerHTML = el;
   };
 
-  getCarsImage = async () => {
+  getCarsImage = async (): Promise <Node[]> => {
     const cars = await getCars();
-    let viewCar = ``
-    for (let car of cars){
+    let viewCar = '';
+    cars.forEach((car: Car) => {
       viewCar += `<div class="listCar__carTrack">
       <button class="deleteCar">Delete</button>
-      <button class="selectCar">Select</button>
+      <button class="selectCar ${car.id}">Select</button>
       ${car.name}
       <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -122,8 +129,18 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
 </g>
 </svg>
       </div>
-      <div>`
-    }
-    document.getElementsByClassName('garage__listCar')[0].innerHTML = viewCar
+      <div>`;
+    });
+    document.getElementsByClassName('garage__listCar')[0].innerHTML = viewCar;
+    return Array.from(document.querySelectorAll('.selectCar'));
+  };
+
+  getSelectButton = async (): Promise<void> => {
+    const select = await this.getCarsImage();
+    const ID_STORAGE = 1;
+    select.forEach((e) => e.addEventListener(
+      'click', (ev) => { console.log((ev.target as Element).classList[ID_STORAGE]);
+      }
+    ));
   };
 }

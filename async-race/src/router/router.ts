@@ -14,7 +14,6 @@ const findComponentByPath = (
   .find((r) => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
 
 export const router = ():void => {
-  document.querySelector('registration__wrap')?.classList.add('registration__wrap_hidden');
   const path = parseLocation();
   const { component = new Garage().getView } = findComponentByPath(path, routes) || {};
   document.getElementsByClassName('main')[0].innerHTML = `
