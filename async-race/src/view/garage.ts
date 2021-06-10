@@ -60,9 +60,9 @@ export class Garage extends BaseComponent {
     const cars = await getCars();
     const quantity = cars.length;
     const pageNumber = Math.ceil(quantity / MAX_CARS_ON_PAGE);
-    const el = `<div>Garage ${quantity}<div>
+    const headerPageGarage = `<div>Garage ${quantity}<div>
     <div>Page ${pageNumber}<div>`;
-    document.getElementsByClassName('page__garage')[0].innerHTML = el;
+    document.getElementsByClassName('page__garage')[0].innerHTML = headerPageGarage;
   };
 
   getCarsImage = async (): Promise <Node[]> => {

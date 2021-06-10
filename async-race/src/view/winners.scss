@@ -1,0 +1,35 @@
+table {
+border-spacing: 0 10px;
+font-family: 'Open Sans', sans-serif;
+font-weight: bold;
+width: 800px;
+}
+th {
+padding: 10px 20px;
+background: #4434a0;
+color: #3b91d6;
+border-right: 2px solid;
+font-size: 0.9em;
+}
+th:first-child {
+text-align: left;
+}
+th:last-child {
+border-right: none;
+}
+td {
+vertical-align: middle;
+padding: 10px;
+font-size: 14px;
+text-align: center;
+border-top: 2px solid #5944b8;
+border-bottom: 2px solid #5d8ee9;
+border-right: 2px solid #1423a8;
+}
+td:first-child {
+border-left: 2px solid #2628a8;
+border-right: none;
+}
+td:nth-child(2){
+text-align: left;
+}
