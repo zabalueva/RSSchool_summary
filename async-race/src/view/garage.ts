@@ -7,6 +7,7 @@ import { selectCar, deleteSelectCar } from '../store/actions/actions';
 import { Car } from '../models/car';
 import './garage.scss';
 
+const ID_STORAGE = 1;
 export class Garage extends BaseComponent {
   private readonly garageView: HTMLDivElement;
 
@@ -30,6 +31,7 @@ export class Garage extends BaseComponent {
       <div class="garage__listCar listCar">
       <p>${this.getCarsImage()}</p>
       ${this.getSelectButton()}
+      ${this.getDeleteButton()}
       </div>
     </div>
       `,
@@ -53,8 +55,6 @@ export class Garage extends BaseComponent {
     (document.querySelector('.form__input_brand') as HTMLInputElement).value,
     (document.querySelector('.form__input_color') as HTMLInputElement).value, 5,
   );
-
-  deleteSelectCar = async (): Promise <void> => deleteCar(2);
 
   getCount = async ():Promise <void> => {
     const cars = await getCars();
@@ -135,12 +135,28 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     return Array.from(document.querySelectorAll('.selectCar'));
   };
 
-  getSelectButton = async (): Promise<void> => {
-    const select = await this.getCarsImage();
-    const ID_STORAGE = 1;
-    select.forEach((e) => e.addEventListener(
-      'click', (ev) => { console.log((ev.target as Element).classList[ID_STORAGE]);
-      }
+  getSelectButton = async (): Promise<Node[]> => {
+    const selectButtons = await this.getCarsImage();
+    selectButtons.forEach((e) => e.addEventListener(
+      'click', (ev) => {
+        console.log((ev.target as Element).classList[ID_STORAGE]);
+      },
+    ));
+    return Array.from(document.querySelectorAll('.deleteCar'));
+  };
+
+  getDeleteButton = async () => {
+    const deleteButtons = await this.getSelectButton();
+    deleteButtons.forEach((e) => e.addEventListener(
+      'click', (ev:Event) => {
+        deleteCar(Number(((ev.target as Element).nextElementSibling?.classList[ID_STORAGE])));
+      },
+    ));
+    deleteButtons.forEach((e) => e.addEventListener(
+      'click', () => this.getCarsImage,
+    ));
+    deleteButtons.forEach((e) => e.addEventListener(
+      'click', () => this.getCount,
     ));
   };
 }

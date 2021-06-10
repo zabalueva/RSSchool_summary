@@ -1,4 +1,3 @@
 import { createCar, getAllCars } from '../controllers/server';
 
-
-export const getCars = async() => await getAllCars(1);
+export const getCars = async () => getAllCars(1);
