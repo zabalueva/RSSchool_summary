@@ -1,4 +1,4 @@
-import { GarageModel } from '../models/garageModel';
+import { Car } from '../models/car';
 
 const SERVER = 'http://localhost:3000';
 
@@ -16,9 +16,10 @@ export const getTotalCount = async (page:number, limit = MAX_CARS_ON_PAGE): Prom
 };
 
 // http://127.0.0.1:3000/engine/?id=1&status=started
-export const createCar = async (name:string, color: string, id: number):Promise<Response> => {
+export const createCar = async (body: Car):Promise<Response> => {
   const newCar = await fetch(`${SERVER}/garage`, {
     method: 'POST',
+    body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',
     },

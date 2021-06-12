@@ -1,11 +1,16 @@
 import { BaseComponent } from '../components/base/base';
 import {
-  getAllCars, MAX_CARS_ON_PAGE, createCar, deleteCar,
+  MAX_CARS_ON_PAGE, createCar, deleteCar,
 } from '../controllers/server';
 import { getCars } from '../store/store';
-import { selectCar, deleteSelectCar } from '../store/actions/actions';
 import { Car } from '../models/car';
 import './garage.scss';
+
+const START_ID = 4;
+let countedId = START_ID;
+function countId() {
+  return countedId++;
+}
 
 const ID_STORAGE = 1;
 export class Garage extends BaseComponent {
@@ -52,8 +57,11 @@ export class Garage extends BaseComponent {
   };
 
   createNewCar = async (): Promise <Response> => createCar(
-    (document.querySelector('.form__input_brand') as HTMLInputElement).value,
-    (document.querySelector('.form__input_color') as HTMLInputElement).value, 5,
+    {
+      name: (document.querySelector('.form__input_brand') as HTMLInputElement).value || '',
+      color: (document.querySelector('.form__input_color') as HTMLInputElement).value,
+      id: countId(),
+    },
   );
 
   getCount = async ():Promise <void> => {
@@ -145,7 +153,7 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     return Array.from(document.querySelectorAll('.deleteCar'));
   };
 
-  getDeleteButton = async () => {
+  getDeleteButton = async (): Promise<void> => {
     const deleteButtons = await this.getSelectButton();
     deleteButtons.forEach((e) => e.addEventListener(
       'click', (ev:Event) => {
