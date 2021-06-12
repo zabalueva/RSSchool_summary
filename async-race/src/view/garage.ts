@@ -5,13 +5,7 @@ import {
 import { getCars } from '../store/store';
 import { Car } from '../models/car';
 import './garage.scss';
-
-const START_ID = 4;
-
-function countId(maxId:number):number {
-  const generatrId = maxId + 1;
-  return generatrId;
-}
+import { getRandomButton } from '../components/randomButton/randomButton';
 
 let selectedId:number;
 
@@ -23,18 +17,18 @@ export class Garage extends BaseComponent {
     super('div', ['garageView']);
     this.garageView = document.createElement('div');
     this.element.append(this.garageView);
-    this.getCreateButton();
+    getRandomButton();
   }
 
   getView = {
     render: (): string => `
     <div class="garageView">
       <div class="garage__create">
-      <input class="form__input form__input_brand" type="text" placeholder="car brand">
+      <input class="form__input form__input_brand" type="text" placeholder="Create car brand">
       <input class="form__input form__input_color" type="color">
       </div>
       <div class="garage__update">
-      <input class="form__input form__update_brand" type="text" placeholder="car brand">
+      <input class="form__input form__update_brand" type="text" placeholder="Update car brand">
       <input class="form__input form__update_color" type="color">
       </div>
       <div class="page__garage garage">
@@ -44,6 +38,7 @@ export class Garage extends BaseComponent {
       <p>${this.getCarsImage()}</p>
       ${this.getSelectButton()}
       ${this.getDeleteButton()}
+      ${this.getCreateButton()}
       ${this.getUpdateButton()}
       </div>
     </div>
@@ -61,6 +56,7 @@ export class Garage extends BaseComponent {
       createButton?.addEventListener('click', this.createNewCar);
       createButton?.addEventListener('click', this.getCarsImage);
       createButton?.addEventListener('click', this.getCount);
+      createButton?.addEventListener('click', this.getDeleteButton);
     }
   };
 
@@ -77,6 +73,7 @@ export class Garage extends BaseComponent {
       updateButton?.addEventListener('click', this.getCarsImage);
       updateButton?.addEventListener('click', this.getCount);
       updateButton?.addEventListener('click', this.getSelectButton);
+      updateButton?.addEventListener('click', this.getDeleteButton);
     }
   };
 
@@ -107,6 +104,7 @@ export class Garage extends BaseComponent {
 
   getCarsImage = async (): Promise <Node[]> => {
     const cars = await getCars();
+    console.log(cars);
     let viewCar = '';
     cars.forEach((car: Car) => {
       viewCar += `<div class="listCar__carTrack">
@@ -180,7 +178,6 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     selectButtons.forEach((e) => e.addEventListener(
       'click', (ev) => {
         selectedId = +(ev.target as Element).classList[ID_STORAGE];
-        console.log(selectedId);
       },
     ));
     return Array.from(document.querySelectorAll('.deleteCar'));
@@ -198,6 +195,9 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     ));
     deleteButtons.forEach((e) => e.addEventListener(
       'click', () => this.getCount,
+    ));
+    deleteButtons.forEach((e) => e.addEventListener(
+      'click', () => this.getSelectButton,
     ));
   };
 }
