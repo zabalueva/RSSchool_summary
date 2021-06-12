@@ -1,6 +1,6 @@
 import { createCar } from '../controllers/server';
 
-const brands = ['Lada', 'Mersy', 'Cama', 'Jimny', 'Subaru', 'Jira', 'Huyndai', 'Oka', 'ODA', 'NIVA]'];
+const brands = ['Lada', 'Mersy', 'Cama', 'Jimny', 'Subaru', 'Jira', 'Huyndai', 'Oka', 'ODA', 'NIVA'];
 const models = ['V3', 'X13', 'Mustang', 'RT', 'Class', 'Ogon', '9', 'extra', 'V5', 'Excellent'];
 
 export const getRandomName = (): string => {
