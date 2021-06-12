@@ -1,16 +1,19 @@
 import { BaseComponent } from '../components/base/base';
 import {
-  MAX_CARS_ON_PAGE, createCar, deleteCar,
+  MAX_CARS_ON_PAGE, createCar, deleteCar, updateCar,
 } from '../controllers/server';
 import { getCars } from '../store/store';
 import { Car } from '../models/car';
 import './garage.scss';
 
 const START_ID = 4;
-let countedId = START_ID;
-function countId() {
-  return countedId++;
+
+function countId(maxId:number):number {
+  const generatrId = maxId + 1;
+  return generatrId;
 }
+
+let selectedId:number;
 
 const ID_STORAGE = 1;
 export class Garage extends BaseComponent {
@@ -30,6 +33,10 @@ export class Garage extends BaseComponent {
       <input class="form__input form__input_brand" type="text" placeholder="car brand">
       <input class="form__input form__input_color" type="color">
       </div>
+      <div class="garage__update">
+      <input class="form__input form__update_brand" type="text" placeholder="car brand">
+      <input class="form__input form__update_color" type="color">
+      </div>
       <div class="page__garage garage">
       <p>${this.getCount()}</p>
       </div>
@@ -37,6 +44,7 @@ export class Garage extends BaseComponent {
       <p>${this.getCarsImage()}</p>
       ${this.getSelectButton()}
       ${this.getDeleteButton()}
+      ${this.getUpdateButton()}
       </div>
     </div>
       `,
@@ -56,13 +64,37 @@ export class Garage extends BaseComponent {
     }
   };
 
-  createNewCar = async (): Promise <Response> => createCar(
+  getUpdateButton = async (): Promise<void> => {
+    if (!document.querySelector('.button_update')) {
+      const updateButton = document.createElement('button');
+      (document.getElementById('root') as Element).insertBefore(
+        updateButton, (document.getElementById('root') as Element).firstChild,
+      );
+      updateButton.classList.add('form__button');
+      updateButton.classList.add('button_update');
+      updateButton.innerHTML = 'update car';
+      updateButton?.addEventListener('click', this.updateSelectedCar);
+      updateButton?.addEventListener('click', this.getCarsImage);
+      updateButton?.addEventListener('click', this.getCount);
+      updateButton?.addEventListener('click', this.getSelectButton);
+    }
+  };
+
+  updateSelectedCar = async (): Promise <Response> => updateCar(
     {
-      name: (document.querySelector('.form__input_brand') as HTMLInputElement).value || '',
-      color: (document.querySelector('.form__input_color') as HTMLInputElement).value,
-      id: countId(),
-    },
+      name: (document.querySelector('.form__update_brand') as HTMLInputElement).value || '',
+      color: (document.querySelector('.form__update_color') as HTMLInputElement).value,
+    }, selectedId,
   );
+
+  createNewCar = async (): Promise <void> => {
+    createCar(
+      {
+        name: (document.querySelector('.form__input_brand') as HTMLInputElement).value || '',
+        color: (document.querySelector('.form__input_color') as HTMLInputElement).value,
+      },
+    ); this.getView.render();
+  };
 
   getCount = async ():Promise <void> => {
     const cars = await getCars();
@@ -147,7 +179,8 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     const selectButtons = await this.getCarsImage();
     selectButtons.forEach((e) => e.addEventListener(
       'click', (ev) => {
-        console.log((ev.target as Element).classList[ID_STORAGE]);
+        selectedId = +(ev.target as Element).classList[ID_STORAGE];
+        console.log(selectedId);
       },
     ));
     return Array.from(document.querySelectorAll('.deleteCar'));

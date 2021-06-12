@@ -1,4 +1,4 @@
-import { Car } from '../models/car';
+import { Car, CarRequest } from '../models/car';
 
 const SERVER = 'http://localhost:3000';
 
@@ -16,7 +16,7 @@ export const getTotalCount = async (page:number, limit = MAX_CARS_ON_PAGE): Prom
 };
 
 // http://127.0.0.1:3000/engine/?id=1&status=started
-export const createCar = async (body: Car):Promise<Response> => {
+export const createCar = async (body: CarRequest):Promise<Response> => {
   const newCar = await fetch(`${SERVER}/garage`, {
     method: 'POST',
     body: JSON.stringify(body),
@@ -27,8 +27,20 @@ export const createCar = async (body: Car):Promise<Response> => {
   return newCar;
 };
 
+export const updateCar = async (body: CarRequest, id: number):Promise<Response> => {
+  const selectedCar = await fetch(`${SERVER}/garage/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  console.log('car');
+  return selectedCar;
+};
+
 export const deleteCar = async (id: number): Promise<void> => {
-  const deletedCar = await fetch(`${SERVER}/garage/${id}`, { method: 'DELETE' });
+  await fetch(`${SERVER}/garage/${id}`, { method: 'DELETE' });
 };
 
 export const getAllWinners = async (page:number, limit = MAX_CARS_ON_PAGE) => {
