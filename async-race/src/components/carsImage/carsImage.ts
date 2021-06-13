@@ -1,6 +1,6 @@
 import { Car } from '../../models/car';
 import {
-  createCar, getAllCars, getAllWinners, getCountWinners,
+  getAllCars,
 } from '../../controllers/server';
 
 export const getCarsImage = async (): Promise <Node[]> => {
@@ -9,8 +9,10 @@ export const getCarsImage = async (): Promise <Node[]> => {
   let viewCar = '';
   cars.forEach((car: Car) => {
     viewCar += `<div class="listCar__carTrack">
-    <button class="deleteCar">Delete</button>
+    <button class="button_delete deleteCar">Delete</button>
     <button class="selectCar ${car.id}">Select</button>
+    <button class="button_start ${car.id}">Go</button>
+    <button class="button_stop ${car.id}">Stop</button>
     ${car.name}
     <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +72,9 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     </div>
     <div>`;
   });
+  if (document.getElementsByClassName('garage__listCar')[0]) {
   document.getElementsByClassName('garage__listCar')[0].innerHTML = viewCar;
+  }
   return Array.from(document.querySelectorAll('.selectCar'));
 };
 
@@ -81,6 +85,8 @@ export const getCarsImageNext = async (page:number): Promise <void> => {
     viewCar += `<div class="listCar__carTrack">
     <button class="deleteCar">Delete</button>
     <button class="selectCar ${car.id}">Select</button>
+    <button class="button_start ${car.id}">Go</button>
+    <button class="button_stop ${car.id}">Stop</button>
     ${car.name}
     <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"

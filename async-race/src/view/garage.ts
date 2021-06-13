@@ -1,15 +1,14 @@
 import { BaseComponent } from '../components/base/base';
 import {
-  createCar, deleteCar, updateCar, getTotalCount,
+  createCar, deleteCar, updateCar, startEngine,
 } from '../controllers/server';
-import { getCars } from '../store/store';
-import { Car } from '../models/car';
 import './garage.scss';
 import { getRandomButton } from '../components/randomButton/randomButton';
 import { getCarsImage } from '../components/carsImage/carsImage';
 import { pagination } from '../components/pagination/pagination';
 import { getCount } from '../components/getCount/getCount';
-import { getPageNumber } from '../components/getPageNumber/getPageNumber';
+import { animationCar } from '../components/animation/animation';
+import { getStartEngine } from '../components/stateEngine/stateEngine';
 
 let selectedId:number;
 
@@ -22,6 +21,7 @@ export class Garage extends BaseComponent {
     this.garageView = document.createElement('div');
     this.element.append(this.garageView);
     getRandomButton();
+    this.getStartEngineButtons();
   }
 
   getView = {
@@ -39,16 +39,17 @@ export class Garage extends BaseComponent {
       ${pagination()}
       <p>${getCount()}</p>
       </div>
-      <div class="pagination">
-      </div>
+
       <div class="garage__listCar listCar">
       <p>${getCarsImage()}</p>
       ${this.getSelectButton()}
       ${this.getDeleteButton()}
       ${this.getCreateButton()}
       ${this.getUpdateButton()}
-
-      </div>
+      ${this.getStartEngineButtons()}
+    </div>
+    <div class="pagination">
+    </div>
     </div>
       `,
   };
@@ -104,15 +105,15 @@ export class Garage extends BaseComponent {
 
   getSelectButton = async (): Promise<Node[]> => {
     const selectButtons = await getCarsImage();
-    selectButtons.forEach((e:any) => e.addEventListener(
-      'click', (ev:any) => {
+    selectButtons.forEach((e: Node) => e.addEventListener(
+      'click', (ev: Event) => {
         selectedId = +(ev.target as Element).classList[ID_STORAGE];
       },
     ));
     return Array.from(document.querySelectorAll('.deleteCar'));
   };
 
-  getDeleteButton = async (): Promise<void> => {
+  getDeleteButton = async (): Promise<Node[]> => {
     const deleteButtons = await this.getSelectButton();
     deleteButtons.forEach((e) => e.addEventListener(
       'click', (ev:Event) => {
@@ -128,5 +129,35 @@ export class Garage extends BaseComponent {
     deleteButtons.forEach((e) => e.addEventListener(
       'click', () => this.getSelectButton,
     ));
+    return Array.from(document.querySelectorAll('.button_start'));
+  };
+
+  getStartEngineButtons = async (): Promise<void> => {
+    const startButtons = await this.getDeleteButton();
+    if (startButtons) {
+      startButtons.forEach((e: Node) => e.addEventListener(
+        'click', async (ev: Event) => {
+          const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
+          console.log(speed);
+          animationCar(((
+            ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
+            ), (speed.distance / 1000), speed.velocity);
+        },
+      ));
+    }
+  };
+  getDriveCars = async (): Promise<void> => {
+    const startButtons = await this.getDeleteButton();
+    if (startButtons) {
+      startButtons.forEach((e: Node) => e.addEventListener(
+        'click', async (ev: Event) => {
+          const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
+          console.log(speed);
+          animationCar(((
+            ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
+            ), (speed.distance / 1000), speed.velocity);
+        },
+      ));
+    }
   };
 }

@@ -1,4 +1,4 @@
-import { getAllCars, getTotalCount, MAX_CARS_ON_PAGE } from '../../controllers/server';
+import { getTotalCount, MAX_CARS_ON_PAGE } from '../../controllers/server';
 import { getCarsImageNext } from '../carsImage/carsImage';
 import { getPageNumber } from '../getPageNumber/getPageNumber';
 
@@ -28,6 +28,10 @@ function incrementPageNumber() {
 
 function decrementPageNumber() {
   return getPageNumber(currentPage);
+}
+
+function startPageNumber() {
+  return getPageNumber(1);
 }
 
 export const pagination = async (): Promise<void> => {
