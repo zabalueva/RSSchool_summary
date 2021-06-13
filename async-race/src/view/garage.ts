@@ -10,6 +10,7 @@ import { getCount } from '../components/getCount/getCount';
 import { animationCar, stopAnimation } from '../components/animation/animation';
 import { getStartEngine, getDriveEngine } from '../components/stateEngine/stateEngine';
 import { getStartButton } from '../components/startRace/startRace';
+import { getResetButton } from '../components/reset/reset';
 import { animation } from '../store/store';
 
 let selectedId:number;
@@ -24,6 +25,7 @@ export class Garage extends BaseComponent {
     this.element.append(this.garageView);
     getRandomButton();
     getStartButton();
+    getResetButton();
     this.getSelectButton();
   }
 
