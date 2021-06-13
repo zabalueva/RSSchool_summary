@@ -3,6 +3,7 @@ import { getAllWinners, getCountWinners } from '../controllers/server';
 import { getWinners, getCommonCountWinners } from '../store/store';
 import { Winner } from '../models/winner';
 import './winners.scss';
+import { getAllCountWinners } from '../components/getCountWinners/getCountWinners';
 
 export const MAX_CARS_ON_PAGE = 10;
 export class Winners extends BaseComponent {
@@ -18,15 +19,16 @@ export class Winners extends BaseComponent {
     render: ():string => `
     <div class="page__winners">
     Winners
+    ${getAllCountWinners()}
     ${this.getWinnersList()}
     </div>
-    <div class="page__winners"></div>
+    <div class="winners__table"></div>
       `,
   };
 
   getWinnersList = async ():Promise <void> => {
     const winners = await getWinners();
-    const headerPageWinners = `<div>Winners ${getCommonCountWinners()}<div>
+    const headerPageWinners = `
     <div>Page ${Math.ceil(winners.length / MAX_CARS_ON_PAGE)}<div>
     <table>
     <tr>
@@ -104,6 +106,6 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
     });
     const tableWinners = `<div>Winners ${getCommonCountWinners()}<div>
     <div>Page ${Math.ceil(winners.length / MAX_CARS_ON_PAGE)}<div>`;
-    document.getElementsByClassName('page__winners')[0].innerHTML = headerPageWinners + viewWinner;
+    document.getElementsByClassName('winners__table')[0].innerHTML = headerPageWinners + viewWinner;
   };
 }

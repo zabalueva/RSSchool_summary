@@ -46,18 +46,21 @@ export const getAllWinners = async (page:number, limit = MAX_CARS_ON_PAGE) => {
   return allWinners.json();
 };
 
-export const getCountWinners = async (page:number, limit = MAX_CARS_ON_PAGE) => {
+export const getCountWinners = async (page:number, limit = MAX_CARS_ON_PAGE):Promise<string | null> => {
   const allWinners = await fetch(`${SERVER}/winners?_page=${page}&_limit=${limit}`);
   const totalCount = allWinners.headers.get('X-Total-Count');
   return totalCount;
 };
 
-export const startEngine = async (id:number) => {
+export const startEngine = async (id:number):Promise<{
+  velocity: number,
+  distance: number,
+}> => {
   const startedCars = await fetch(`${SERVER}/engine/?id=${id}&status=started`);
   return startedCars.json();
 };
 
-export const driveEngine = async (id:number) => {
+export const driveEngine = async (id:number):Promise<Response> => {
   const drivedCars = await fetch(`${SERVER}/engine/?id=${id}&status=drive`);
   return drivedCars;
 };

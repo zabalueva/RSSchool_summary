@@ -1,8 +1,20 @@
 import { animationCar } from '../animation/animation';
 
+let car:HTMLElement;
 
-function startRace(id, distance, velocity) {
-  return animationCar(id, distance, velocity);
+function getSpeedParams() {
+  return 130;
+}
+
+function getIdParams() {
+  return car;
+}
+function getDistanceParams() {
+  return 100;
+}
+
+function startRace() {
+  return animationCar(getIdParams(), getDistanceParams(), getSpeedParams());
 }
 
 export const getStartButton = async (): Promise<void> => {
@@ -14,6 +26,6 @@ export const getStartButton = async (): Promise<void> => {
     startButton.classList.add('form__button');
     startButton.classList.add('button_start');
     startButton.innerHTML = 'start race';
-    startButton?.addEventListener('click', startRace(id, distance, velocity));
+    startButton?.addEventListener('click', startRace);
   }
 };

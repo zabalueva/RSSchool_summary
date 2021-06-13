@@ -21,10 +21,6 @@ export const animationCar = (id: HTMLElement, distance: number, during: number):
   return state;
 };
 
-/* export const animationAllCars = async (fullfilled, ids: HTMLElement)=> {
-  const {success, id, time} = await Promise.race(fullfilled);
-
-  if (!success) {
-
-  }
- */
+export const stopAnimation = (move:number):void => {
+  window.cancelAnimationFrame(move);
+};

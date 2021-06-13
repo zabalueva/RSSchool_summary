@@ -1,14 +1,16 @@
 import { BaseComponent } from '../components/base/base';
 import {
-  createCar, deleteCar, updateCar, startEngine,
+  createCar, deleteCar, updateCar,
 } from '../controllers/server';
 import './garage.scss';
 import { getRandomButton } from '../components/randomButton/randomButton';
 import { getCarsImage } from '../components/carsImage/carsImage';
-import { pagination } from '../components/pagination/pagination';
+import { pagination, updateCarsImage } from '../components/pagination/pagination';
 import { getCount } from '../components/getCount/getCount';
-import { animationCar } from '../components/animation/animation';
-import { getStartEngine } from '../components/stateEngine/stateEngine';
+import { animationCar, stopAnimation } from '../components/animation/animation';
+import { getStartEngine, getDriveEngine } from '../components/stateEngine/stateEngine';
+import { getStartButton } from '../components/startRace/startRace';
+import { animation } from '../store/store';
 
 let selectedId:number;
 
@@ -21,7 +23,8 @@ export class Garage extends BaseComponent {
     this.garageView = document.createElement('div');
     this.element.append(this.garageView);
     getRandomButton();
-    this.getStartEngineButtons();
+    getStartButton();
+    this.getSelectButton();
   }
 
   getView = {
@@ -39,9 +42,8 @@ export class Garage extends BaseComponent {
       ${pagination()}
       <p>${getCount()}</p>
       </div>
-
       <div class="garage__listCar listCar">
-      <p>${getCarsImage()}</p>
+      <p>${getCarsImage(1)}</p>
       ${this.getSelectButton()}
       ${this.getDeleteButton()}
       ${this.getCreateButton()}
@@ -64,7 +66,7 @@ export class Garage extends BaseComponent {
       createButton.classList.add('button_create');
       createButton.innerHTML = 'create car';
       createButton?.addEventListener('click', this.createNewCar);
-      createButton?.addEventListener('click', getCarsImage);
+      /* createButton?.addEventListener('click', getCarsImage); */
       createButton?.addEventListener('click', getCount);
       createButton?.addEventListener('click', this.getDeleteButton);
     }
@@ -80,8 +82,7 @@ export class Garage extends BaseComponent {
       updateButton.classList.add('button_update');
       updateButton.innerHTML = 'update car';
       updateButton?.addEventListener('click', this.updateSelectedCar);
-      updateButton?.addEventListener('click', getCarsImage);
-      updateButton?.addEventListener('click', getCount);
+      updateButton?.addEventListener('click', updateCarsImage);
       updateButton?.addEventListener('click', this.getSelectButton);
       updateButton?.addEventListener('click', this.getDeleteButton);
     }
@@ -104,7 +105,7 @@ export class Garage extends BaseComponent {
   };
 
   getSelectButton = async (): Promise<Node[]> => {
-    const selectButtons = await getCarsImage();
+    const selectButtons = await getCarsImage(1);
     selectButtons.forEach((e: Node) => e.addEventListener(
       'click', (ev: Event) => {
         selectedId = +(ev.target as Element).classList[ID_STORAGE];
@@ -133,29 +134,39 @@ export class Garage extends BaseComponent {
   };
 
   getStartEngineButtons = async (): Promise<void> => {
-    const startButtons = await this.getDeleteButton();
+    let startButtons = await this.getDeleteButton();
     if (startButtons) {
+      if (startButtons.length < Array.from(document.querySelectorAll('.button_start')).length) {
+        startButtons = Array.from(document.getElementsByClassName('.button_start'));
+      }
+      console.log(Array.from(document.querySelectorAll('.button_start')));
       startButtons.forEach((e: Node) => e.addEventListener(
         'click', async (ev: Event) => {
+          console.log('dfj');
           const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
-          console.log(speed);
-          animationCar(((
+          /* animation[+(ev.target as HTMLElement).classList[ID_STORAGE]] =  */animationCar(((
             ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
-            ), (speed.distance / 1000), speed.velocity);
+          ), (speed.distance / 1000), speed.velocity);
+          const drive = await getDriveEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
+          if (drive.status === 500) {
+            console.log('error 500 handled');
+            /* stopAnimation(animation[(+(ev.target as HTMLElement).classList[ID_STORAGE])].id); */
+          }
         },
       ));
     }
   };
+
   getDriveCars = async (): Promise<void> => {
-    const startButtons = await this.getDeleteButton();
-    if (startButtons) {
-      startButtons.forEach((e: Node) => e.addEventListener(
+    const raceButtons = await this.getDeleteButton();
+    if (raceButtons) {
+      raceButtons.forEach((e: Node) => e.addEventListener(
         'click', async (ev: Event) => {
           const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
           console.log(speed);
           animationCar(((
             ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
-            ), (speed.distance / 1000), speed.velocity);
+          ), (speed.distance / 1000), speed.velocity);
         },
       ));
     }

@@ -1,5 +1,5 @@
 import { getTotalCount, MAX_CARS_ON_PAGE } from '../../controllers/server';
-import { getCarsImageNext } from '../carsImage/carsImage';
+import { getCarsImage } from '../carsImage/carsImage';
 import { getPageNumber } from '../getPageNumber/getPageNumber';
 
 let currentPage = 1;
@@ -10,7 +10,7 @@ export function getNextPage():number {
 }
 
 function loadNextPage() {
-  return getCarsImageNext(getNextPage());
+  return getCarsImage(getNextPage());
 }
 
 function getPrevPage():number {
@@ -19,7 +19,7 @@ function getPrevPage():number {
 }
 
 function loadPrevPage() {
-  return getCarsImageNext(getPrevPage());
+  return getCarsImage(getPrevPage());
 }
 
 function incrementPageNumber() {
@@ -30,9 +30,7 @@ function decrementPageNumber() {
   return getPageNumber(currentPage);
 }
 
-function startPageNumber() {
-  return getPageNumber(1);
-}
+export const updateCarsImage = ():Promise <Node[]> => getCarsImage(currentPage);
 
 export const pagination = async (): Promise<void> => {
   if (!document.querySelector('.button_next')) {

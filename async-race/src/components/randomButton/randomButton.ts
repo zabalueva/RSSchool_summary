@@ -1,4 +1,4 @@
-import { getRandomCars } from '../../shared/generatorRandom';
+import { getAllRandomCars } from '../../shared/generatorRandom';
 import { getCount } from '../getCount/getCount';
 
 export const getRandomButton = async (): Promise<void> => {
@@ -9,8 +9,8 @@ export const getRandomButton = async (): Promise<void> => {
     );
     randomButton.classList.add('form__button');
     randomButton.classList.add('button_random');
-    randomButton.innerHTML = 'random car';
-    randomButton?.addEventListener('click', getRandomCars);
+    randomButton.innerHTML = 'generate random car';
+    randomButton?.addEventListener('click', getAllRandomCars);
     randomButton?.addEventListener('click', getCount);
   }
 };
