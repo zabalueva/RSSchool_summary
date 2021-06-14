@@ -1,20 +1,8 @@
-import { animationCar } from '../animation/animation';
-
-let car:HTMLElement;
-
-function getSpeedParams() {
-  return 130;
-}
-
-function getIdParams() {
-  return car;
-}
-function getDistanceParams() {
-  return 100;
-}
-
 function resetAllCars() {
-  return animationCar(getIdParams(), 0, getSpeedParams());
+  const allCars = document.querySelectorAll('.car_img');
+  allCars.forEach((item) => {
+    (item as HTMLElement).style.transform = 'translateX(0px)';
+  });
 }
 
 export const getResetButton = async (): Promise<void> => {
