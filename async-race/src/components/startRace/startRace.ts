@@ -1,20 +1,30 @@
 import { animationCar } from '../animation/animation';
+import { getDriveEngine, getStartEngine } from '../stateEngine/stateEngine';
 
-let car:HTMLElement;
-
-function getSpeedParams() {
-  return 130;
-}
-
-function getIdParams() {
-  return car;
-}
-function getDistanceParams() {
-  return 100;
-}
+let drived = false;
+const ID_STORAGE = 1;
 
 function startRace() {
-  return animationCar(getIdParams(), getDistanceParams(), getSpeedParams());
+  const allCars = document.querySelectorAll('.car_img');
+  const allPromisesCars:Response[] = [];
+  if (!drived) {
+    drived = true;
+    document.querySelector('.button_race')?.classList.add('button_disabled');
+    allCars.forEach(async (item) => {
+      const speed = await getStartEngine(+((
+        item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE]);
+      const drive = await getDriveEngine(+(item as HTMLElement).classList[ID_STORAGE]);
+      if (drive.status === 500) {
+        console.log('error 500 handled');
+        /* stopAnimation(animation[(+(ev.target as HTMLElement).classList[ID_STORAGE])].id); */
+      }
+      allPromisesCars.push(drive);
+      Promise.all(allPromisesCars).then(
+        () => animationCar((item as HTMLElement), (speed.distance / 1000), speed.velocity),
+      );
+    });
+  }
+  drived = false;
 }
 
 export const getStartButton = async (): Promise<void> => {
@@ -29,3 +39,5 @@ export const getStartButton = async (): Promise<void> => {
     startButton?.addEventListener('click', startRace);
   }
 };
+
+drived = false;
