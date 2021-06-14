@@ -7,6 +7,8 @@ const ID_STORAGE = 1;
 function startRace() {
   const allCars = document.querySelectorAll('.car_img');
   const allPromisesCars:Response[] = [];
+  let speedest = 0;
+  let bestSpeed = 0;
   if (!drived) {
     drived = true;
     document.querySelector('.button_race')?.classList.add('button_disabled');
@@ -22,9 +24,15 @@ function startRace() {
       Promise.all(allPromisesCars).then(
         () => animationCar((item as HTMLElement), (speed.distance / 1000), speed.velocity),
       );
+      speedest = speed.velocity > speedest ? +((
+        item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE] : speedest;
+
+      bestSpeed = speed.velocity > bestSpeed ? +((
+        item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE] : bestSpeed;
     });
   }
   drived = false;
+  return { winner: speedest, speed: bestSpeed };
 }
 
 export const getStartButton = async (): Promise<void> => {
