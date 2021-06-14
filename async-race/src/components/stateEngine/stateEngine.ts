@@ -1,5 +1,4 @@
 import { startEngine, driveEngine } from '../../controllers/server';
-import { getRandomCars } from '../../shared/generatorRandom';
 
 export const getStartEngine = async (id:number):Promise<{
   velocity: number,
@@ -18,14 +17,9 @@ export const getDriveEngine = async (id:number):Promise<Response> => {
 };
 
 export const getStopEngineButtons = async (): Promise<void> => {
-  if (!document.querySelector('.button_stop')) {
-    const stopButton = document.createElement('button');
-    (document.getElementById('root') as Element).insertBefore(
-      stopButton, (document.getElementById('root') as Element).childNodes[0],
-    );
-    stopButton.classList.add('form__button');
-    stopButton.classList.add('button_stop');
-    stopButton.innerHTML = 'random car';
-    stopButton?.addEventListener('click', getRandomCars);
-  }
+  document.addEventListener('click', (e) => {
+    if ((e.target as Element)?.classList.contains('button_stop')) {
+      ((e.target as HTMLElement).nextSibling?.nextSibling as HTMLElement).style.transform = 'translateX(0px)';
+    }
+  });
 };

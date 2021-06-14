@@ -8,7 +8,7 @@ import { getCarsImage } from '../components/carsImage/carsImage';
 import { pagination, updateCarsImage } from '../components/pagination/pagination';
 import { getCount } from '../components/getCount/getCount';
 import { animationCar, stopAnimation } from '../components/animation/animation';
-import { getStartEngine, getDriveEngine } from '../components/stateEngine/stateEngine';
+import { getStartEngine, getDriveEngine, getStopEngineButtons } from '../components/stateEngine/stateEngine';
 import { getStartButton } from '../components/startRace/startRace';
 import { getResetButton } from '../components/reset/reset';
 import { animation } from '../store/store';
@@ -27,6 +27,7 @@ export class Garage extends BaseComponent {
     getStartButton();
     getResetButton();
     this.getSelectButton();
+    getStopEngineButtons();
   }
 
   getView = {
@@ -154,21 +155,6 @@ export class Garage extends BaseComponent {
             console.log('error 500 handled');
             /* stopAnimation(animation[(+(ev.target as HTMLElement).classList[ID_STORAGE])].id); */
           }
-        },
-      ));
-    }
-  };
-
-  getDriveCars = async (): Promise<void> => {
-    const raceButtons = await this.getDeleteButton();
-    if (raceButtons) {
-      raceButtons.forEach((e: Node) => e.addEventListener(
-        'click', async (ev: Event) => {
-          const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
-          console.log(speed);
-          animationCar(((
-            ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
-          ), (speed.distance / 1000), speed.velocity);
         },
       ));
     }
