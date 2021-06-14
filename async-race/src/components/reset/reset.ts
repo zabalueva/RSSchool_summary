@@ -7,13 +7,13 @@ function resetAllCars() {
 
 export const getResetButton = async (): Promise<void> => {
   if (!document.querySelector('.button_reset')) {
-    const startButton = document.createElement('button');
+    const resetButton = document.createElement('button');
     (document.getElementById('root') as Element).insertBefore(
-      startButton, (document.getElementById('root') as Element).childNodes[0],
+      resetButton, (document.getElementById('root') as Element).childNodes[0],
     );
-    startButton.classList.add('form__button');
-    startButton.classList.add('button_reset');
-    startButton.innerHTML = 'reset';
-    startButton?.addEventListener('click', resetAllCars);
+    resetButton.classList.add('form__button');
+    resetButton.classList.add('button_reset');
+    resetButton.innerHTML = 'reset';
+    resetButton?.addEventListener('click', resetAllCars);
   }
 };

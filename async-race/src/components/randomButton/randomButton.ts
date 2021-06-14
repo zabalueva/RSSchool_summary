@@ -1,5 +1,6 @@
 import { getAllRandomCars } from '../../shared/generatorRandom';
 import { getCount } from '../getCount/getCount';
+import { updateCarsImage } from '../pagination/pagination';
 
 export const getRandomButton = async (): Promise<void> => {
   if (!document.querySelector('.button_random')) {
@@ -12,5 +13,6 @@ export const getRandomButton = async (): Promise<void> => {
     randomButton.innerHTML = 'generate random car';
     randomButton?.addEventListener('click', getAllRandomCars);
     randomButton?.addEventListener('click', getCount);
+    randomButton?.addEventListener('click', updateCarsImage);
   }
 };

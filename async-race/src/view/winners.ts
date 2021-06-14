@@ -104,8 +104,6 @@ c-138 31 -378 85 -535 121 -157 35 -289 66 -294 67 -5 2 12 16 38 31 27 16 74
 <td>${item.time}</td>
 </tr></table>`;
     });
-    const tableWinners = `<div>Winners ${getCommonCountWinners()}<div>
-    <div>Page ${Math.ceil(winners.length / MAX_CARS_ON_PAGE)}<div>`;
     document.getElementsByClassName('winners__table')[0].innerHTML = headerPageWinners + viewWinner;
   };
 }

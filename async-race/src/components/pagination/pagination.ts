@@ -36,7 +36,7 @@ export const pagination = async (): Promise<void> => {
   if (!document.querySelector('.button_next')) {
     const nextButton = document.createElement('button');
     (document.getElementById('root') as Element).insertBefore(
-      nextButton, (document.getElementById('root') as Element).lastChild,
+      nextButton, (document.getElementById('root') as Element).childNodes[8],
     );
     nextButton.classList.add('form__button');
     nextButton.classList.add('button_next');

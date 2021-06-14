@@ -5,3 +5,9 @@ export interface Winner {
   wins: number,
   time: number
 }
+
+export interface WinnerRequest {
+  id: number,
+  wins: number,
+  time: number
+}

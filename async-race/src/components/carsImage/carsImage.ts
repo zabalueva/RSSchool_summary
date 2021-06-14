@@ -9,7 +9,7 @@ export const getCarsImage = async (page:number): Promise <Node[]> => {
   cars.forEach((car: Car) => {
     viewCar += `<div class="listCar__carTrack">
     <button class="button_delete deleteCar button_smart">Delete</button>
-    <button class="selectCar ${car.id} button_smart">Select</button>
+    <button class="selectCar ${car.id} ${car.name} ${car.color} button_smart">Select</button>
     <button class="button_start ${car.id} button_smart">Go</button>
     <button class="button_stop ${car.id} button_smart">Stop</button>
     ${car.name}

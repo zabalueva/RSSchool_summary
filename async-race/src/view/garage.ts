@@ -13,6 +13,7 @@ import { getStartButton } from '../components/startRace/startRace';
 import { getResetButton } from '../components/reset/reset';
 import { animation } from '../store/store';
 import { getStartEngineButtons } from '../components/startEngineButtons/startEngineButtons';
+import { getDeleteButtons } from '../components/deleteButtons/getDeleteButtons';
 
 let selectedId:number;
 
@@ -30,6 +31,7 @@ export class Garage extends BaseComponent {
     this.getSelectButton();
     getStopEngineButtons();
     getStartEngineButtons();
+    getDeleteButtons();
   }
 
   getView = {
@@ -50,7 +52,6 @@ export class Garage extends BaseComponent {
       <div class="garage__listCar listCar">
       <p>${getCarsImage(1)}</p>
       ${this.getSelectButton()}
-      ${this.getDeleteButton()}
       ${this.getCreateButton()}
       ${this.getUpdateButton()}
     </div>
@@ -64,15 +65,13 @@ export class Garage extends BaseComponent {
     if (!document.querySelector('.button_create')) {
       const createButton = document.createElement('button');
       (document.getElementById('root') as Element).insertBefore(
-        createButton, (document.getElementById('root') as Element).childNodes[2],
+        createButton, (document.getElementById('root') as Element).childNodes[4],
       );
       createButton.classList.add('form__button');
       createButton.classList.add('button_create');
       createButton.innerHTML = 'create car';
       createButton?.addEventListener('click', this.createNewCar);
-      /* createButton?.addEventListener('click', getCarsImage); */
       createButton?.addEventListener('click', getCount);
-      createButton?.addEventListener('click', this.getDeleteButton);
     }
   };
 
@@ -80,7 +79,7 @@ export class Garage extends BaseComponent {
     if (!document.querySelector('.button_update')) {
       const updateButton = document.createElement('button');
       (document.getElementById('root') as Element).insertBefore(
-        updateButton, (document.getElementById('root') as Element).childNodes[3],
+        updateButton, (document.getElementById('root') as Element).childNodes[5],
       );
       updateButton.classList.add('form__button');
       updateButton.classList.add('button_update');
@@ -88,7 +87,6 @@ export class Garage extends BaseComponent {
       updateButton?.addEventListener('click', this.updateSelectedCar);
       updateButton?.addEventListener('click', updateCarsImage);
       updateButton?.addEventListener('click', this.getSelectButton);
-      updateButton?.addEventListener('click', this.getDeleteButton);
     }
   };
 
@@ -116,24 +114,5 @@ export class Garage extends BaseComponent {
       },
     ));
     return Array.from(document.querySelectorAll('.deleteCar'));
-  };
-
-  getDeleteButton = async (): Promise<Node[]> => {
-    const deleteButtons = await this.getSelectButton();
-    deleteButtons.forEach((e) => e.addEventListener(
-      'click', (ev:Event) => {
-        deleteCar(Number(((ev.target as Element).nextElementSibling?.classList[ID_STORAGE])));
-      },
-    ));
-    deleteButtons.forEach((e) => e.addEventListener(
-      'click', () => getCarsImage,
-    ));
-    deleteButtons.forEach((e) => e.addEventListener(
-      'click', () => getCount,
-    ));
-    deleteButtons.forEach((e) => e.addEventListener(
-      'click', () => this.getSelectButton,
-    ));
-    return Array.from(document.querySelectorAll('.button_start'));
   };
 }

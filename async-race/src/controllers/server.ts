@@ -1,4 +1,5 @@
 import { CarRequest } from '../models/car';
+import { Winner, WinnerRequest } from '../models/winner';
 
 const SERVER = 'http://localhost:3000';
 
@@ -63,4 +64,15 @@ export const startEngine = async (id:number):Promise<{
 export const driveEngine = async (id:number):Promise<Response> => {
   const drivedCars = await fetch(`${SERVER}/engine/?id=${id}&status=drive`);
   return drivedCars;
+};
+
+export const createWinner = async (body: Winner):Promise<Response> => {
+  const newCar = await fetch(`${SERVER}/winners`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return newCar;
 };
