@@ -12,6 +12,7 @@ import { getStartEngine, getDriveEngine, getStopEngineButtons } from '../compone
 import { getStartButton } from '../components/startRace/startRace';
 import { getResetButton } from '../components/reset/reset';
 import { animation } from '../store/store';
+import { getStartEngineButtons } from '../components/startEngineButtons/startEngineButtons';
 
 let selectedId:number;
 
@@ -28,6 +29,7 @@ export class Garage extends BaseComponent {
     getResetButton();
     this.getSelectButton();
     getStopEngineButtons();
+    getStartEngineButtons();
   }
 
   getView = {
@@ -51,7 +53,6 @@ export class Garage extends BaseComponent {
       ${this.getDeleteButton()}
       ${this.getCreateButton()}
       ${this.getUpdateButton()}
-      ${this.getStartEngineButtons()}
     </div>
     <div class="pagination">
     </div>
@@ -134,29 +135,5 @@ export class Garage extends BaseComponent {
       'click', () => this.getSelectButton,
     ));
     return Array.from(document.querySelectorAll('.button_start'));
-  };
-
-  getStartEngineButtons = async (): Promise<void> => {
-    let startButtons = await this.getDeleteButton();
-    if (startButtons) {
-      if (startButtons.length < Array.from(document.querySelectorAll('.button_start')).length) {
-        startButtons = Array.from(document.getElementsByClassName('.button_start'));
-      }
-      console.log(Array.from(document.querySelectorAll('.button_start')));
-      startButtons.forEach((e: Node) => e.addEventListener(
-        'click', async (ev: Event) => {
-          console.log('dfj');
-          const speed = await getStartEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
-          /* animation[+(ev.target as HTMLElement).classList[ID_STORAGE]] =  */animationCar(((
-            ev.target as HTMLElement).nextSibling?.nextSibling?.nextSibling?.nextSibling as HTMLElement
-          ), (speed.distance / 1000), speed.velocity);
-          const drive = await getDriveEngine(+(ev.target as HTMLElement).classList[ID_STORAGE]);
-          if (drive.status === 500) {
-            console.log('error 500 handled');
-            /* stopAnimation(animation[(+(ev.target as HTMLElement).classList[ID_STORAGE])].id); */
-          }
-        },
-      ));
-    }
   };
 }

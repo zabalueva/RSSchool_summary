@@ -18,13 +18,13 @@ function startRace() {
 }
 
 export const getStartButton = async (): Promise<void> => {
-  if (!document.querySelector('.button_start')) {
+  if (!document.querySelector('.button_race')) {
     const startButton = document.createElement('button');
     (document.getElementById('root') as Element).insertBefore(
       startButton, (document.getElementById('root') as Element).childNodes[0],
     );
     startButton.classList.add('form__button');
-    startButton.classList.add('button_start');
+    startButton.classList.add('button_race');
     startButton.innerHTML = 'start race';
     startButton?.addEventListener('click', startRace);
   }

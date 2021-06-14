@@ -20,6 +20,7 @@ export const getStopEngineButtons = async (): Promise<void> => {
   document.addEventListener('click', (e) => {
     if ((e.target as Element)?.classList.contains('button_stop')) {
       ((e.target as HTMLElement).nextSibling?.nextSibling as HTMLElement).style.transform = 'translateX(0px)';
+      ((e.target as HTMLElement)?.previousSibling?.previousSibling as HTMLElement)?.classList.remove('button_disabled');
     }
   });
 };

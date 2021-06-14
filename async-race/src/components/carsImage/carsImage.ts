@@ -8,10 +8,10 @@ export const getCarsImage = async (page:number): Promise <Node[]> => {
   let viewCar = '';
   cars.forEach((car: Car) => {
     viewCar += `<div class="listCar__carTrack">
-    <button class="button_delete deleteCar">Delete</button>
-    <button class="selectCar ${car.id}">Select</button>
-    <button class="button_start ${car.id}">Go</button>
-    <button class="button_stop ${car.id}">Stop</button>
+    <button class="button_delete deleteCar button_smart">Delete</button>
+    <button class="selectCar ${car.id} button_smart">Select</button>
+    <button class="button_start ${car.id} button_smart">Go</button>
+    <button class="button_stop ${car.id} button_smart">Stop</button>
     ${car.name}
     <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
