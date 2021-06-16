@@ -14,6 +14,9 @@ function loadNextPage() {
 }
 
 function getPrevPage():number {
+  if (currentPage === 1) {
+    return 1;
+  }
   currentPage -= 1;
   return currentPage;
 }
@@ -54,13 +57,10 @@ export const pagination = async (): Promise<void> => {
       prevButton, (document.getElementById('root') as Element).lastChild,
     );
     prevButton.classList.add('form__button');
+    prevButton.style.display = 'block';
     prevButton.classList.add('button_prev');
     prevButton.innerHTML = 'prev';
     prevButton?.addEventListener('click', loadPrevPage);
     prevButton?.addEventListener('click', decrementPageNumber);
-    if (currentPage < 1) {
-      prevButton?.removeEventListener('click', decrementPageNumber);
-      prevButton.classList.add('button_disabled');
-    }
   }
 };
