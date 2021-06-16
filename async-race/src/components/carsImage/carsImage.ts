@@ -10,8 +10,8 @@ export const getCarsImage = async (page:number): Promise <Node[]> => {
     viewCar += `<div class="listCar__carTrack">
     <button class="button_delete deleteCar button_smart">Delete</button>
     <button class="selectCar ${car.id} ${car.name} ${car.color} button_smart">Select</button>
-    <button class="button_start ${car.id} button_smart">Go</button>
-    <button class="button_stop ${car.id} button_smart">Stop</button>
+    <button class="button_start ${car.id} ${car.name} ${car.color} button_smart">Go</button>
+    <button class="button_stop ${car.id} ${car.name} ${car.color} button_smart">Stop</button>
     ${car.name}
     <div class="car_img">
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"

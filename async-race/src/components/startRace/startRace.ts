@@ -1,5 +1,5 @@
 import { createWinner } from '../../controllers/server';
-import { Winner, WinnerRequest } from '../../models/winner';
+import { Winner } from '../../models/winner';
 import { getWinners } from '../../store/store';
 import { animationCar } from '../animation/animation';
 import { getDriveEngine, getStartEngine } from '../stateEngine/stateEngine';
@@ -8,11 +8,25 @@ let drived = false;
 const ID_STORAGE = 1;
 const NAME_STORAGE = 2;
 const COLOR_STORAGE = 3;
+let bestTime:number;
+let bestName;
+let bestColor;
+
+function getCreateWinner(id:number, wins:number, time:number, name:string, color:string) {
+  return createWinner({
+    id,
+    wins,
+    time,
+    name,
+    color,
+  });
+}
 
 async function startRace() {
   const allCars = document.querySelectorAll('.car_img');
   const allPromisesCars:Response[] = [];
   const winners = await getWinners();
+  const speeds:number[] = [];
   let speedest = 0;
   let bestSpeed = 0;
   if (!drived) {
@@ -33,29 +47,28 @@ async function startRace() {
         console.log('error 500 handled');
         /* stopAnimation(animation[(+(ev.target as HTMLElement).classList[ID_STORAGE])].id); */
       }
+      speeds.push(speed.velocity);
       speedest = speed.velocity > speedest ? +((
         item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE] : speedest;
 
-      bestSpeed = speed.velocity > bestSpeed ? +((
-        item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE] : bestSpeed;
+      bestSpeed = speed.velocity > bestSpeed ? speed.velocity : bestSpeed;
+      bestTime = +(speed.distance / speed.velocity / 1000).toFixed(2) > bestTime ? +(speed.distance / speed.velocity / 1000).toFixed(2) : bestTime;
 
-      let countWins = 0;
+      let countWins = 1;
       winners.forEach((winner:Winner) => {
         if (winner.id === speedest) {
           countWins += 1;
         }
       });
-
-      createWinner({
-        id: speedest,
-        wins: countWins,
-        time: +(speed.distance / speed.velocity / 1000).toFixed(2),
-        name: ((item as HTMLElement).previousSibling?.previousSibling as Element).classList[NAME_STORAGE],
-        color: ((item as HTMLElement).previousSibling?.previousSibling as Element).classList[COLOR_STORAGE],
-      });
+      getCreateWinner(
+        bestSpeed,
+        countWins,
+        +(speed.distance / speed.velocity / 1000).toFixed(2),
+        ((item as HTMLElement).previousSibling?.previousSibling as Element).classList[NAME_STORAGE],
+        ((item as HTMLElement).previousSibling?.previousSibling as Element).classList[COLOR_STORAGE],
+      );
     });
   }
-
   drived = false;
   return { winner: speedest, speed: bestSpeed };
 }

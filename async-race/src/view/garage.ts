@@ -72,6 +72,7 @@ export class Garage extends BaseComponent {
       createButton.innerHTML = 'create car';
       createButton?.addEventListener('click', this.createNewCar);
       createButton?.addEventListener('click', getCount);
+      createButton?.addEventListener('click', updateCarsImage);
     }
   };
 
