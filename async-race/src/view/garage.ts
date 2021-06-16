@@ -1,6 +1,6 @@
 import { BaseComponent } from '../components/base/base';
 import {
-  createCar, deleteCar, updateCar,
+  createCar, updateCar,
 } from '../controllers/server';
 import './garage.scss';
 import { getRandomButton } from '../components/randomButton/randomButton';

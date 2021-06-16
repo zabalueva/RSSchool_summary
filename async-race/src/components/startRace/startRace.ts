@@ -9,8 +9,6 @@ const ID_STORAGE = 1;
 const NAME_STORAGE = 2;
 const COLOR_STORAGE = 3;
 let bestTime:number;
-let bestName;
-let bestColor;
 
 function getCreateWinner(id:number, wins:number, time:number, name:string, color:string) {
   return createWinner({
@@ -52,7 +50,9 @@ async function startRace() {
         item as HTMLElement).previousSibling?.previousSibling as Element).classList[ID_STORAGE] : speedest;
 
       bestSpeed = speed.velocity > bestSpeed ? speed.velocity : bestSpeed;
-      bestTime = +(speed.distance / speed.velocity / 1000).toFixed(2) > bestTime ? +(speed.distance / speed.velocity / 1000).toFixed(2) : bestTime;
+      bestTime = +(
+        speed.distance / speed.velocity / 1000).toFixed(2) > bestTime ? +(
+          speed.distance / speed.velocity / 1000).toFixed(2) : bestTime;
 
       let countWins = 1;
       winners.forEach((winner:Winner) => {
