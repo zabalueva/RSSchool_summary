@@ -42,6 +42,9 @@ export const updateCar = async (body: CarRequest, id: number):Promise<Response> 
 export const deleteCar = async (id: number): Promise<void> => {
   await fetch(`${SERVER}/garage/${id}`, { method: 'DELETE' });
 };
+export const deleteWinner = async (id: number): Promise<void> => {
+  await fetch(`${SERVER}/winners/${id}`, { method: 'DELETE' });
+};
 
 export const getAllWinners = async (page:number, limit = MAX_CARS_ON_WIN_PAGE) => {
   const allWinners = await fetch(`${SERVER}/winners?_page=${page}&_limit=${limit}`);

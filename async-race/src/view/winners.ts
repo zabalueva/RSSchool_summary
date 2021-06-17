@@ -5,6 +5,7 @@ import { Winner } from '../models/winner';
 import './winners.scss';
 import { getAllCountWinners } from '../components/getCountWinners/getCountWinners';
 import { getWinnersList } from '../components/getWinnersList/getWinnersList';
+import { getDeleteButtons } from '../components/deleteButtons/getDeleteButtons';
 
 export const MAX_CARS_ON_PAGE = 10;
 export class Winners extends BaseComponent {
@@ -23,7 +24,7 @@ export class Winners extends BaseComponent {
     </div>
     Winners
     ${getAllCountWinners()}
-
+${getDeleteButtons}
     ${getWinnersList(1)}
     </div>
     <div class="winners__table"></div>
