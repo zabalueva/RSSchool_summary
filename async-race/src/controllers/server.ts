@@ -4,6 +4,7 @@ import { Winner, WinnerRequest } from '../models/winner';
 const SERVER = 'http://localhost:3000';
 
 export const MAX_CARS_ON_PAGE = 7;
+export const MAX_CARS_ON_WIN_PAGE = 10;
 
 export const getAllCars = async (page:number, limit = MAX_CARS_ON_PAGE) => {
   const allCarsServer = await fetch(`${SERVER}/garage?_page=${page}&_limit=${limit}`);
@@ -42,7 +43,7 @@ export const deleteCar = async (id: number): Promise<void> => {
   await fetch(`${SERVER}/garage/${id}`, { method: 'DELETE' });
 };
 
-export const getAllWinners = async (page:number, limit = MAX_CARS_ON_PAGE) => {
+export const getAllWinners = async (page:number, limit = MAX_CARS_ON_WIN_PAGE) => {
   const allWinners = await fetch(`${SERVER}/winners?_page=${page}&_limit=${limit}`);
   return allWinners.json();
 };
