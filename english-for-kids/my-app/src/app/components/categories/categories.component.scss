@@ -1,0 +1,9 @@
+.category-card{
+  transition: transform .5s;
+}
+
+.category-card:hover{
+  transform: scale(1.05) ;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(14, 13, 13, 0.2);
+}
