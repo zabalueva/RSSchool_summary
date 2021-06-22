@@ -1,6 +1,6 @@
 
 <div class="page__content post card hoverable horizontal " fxLayout="row">
-  <a href="https://angular.io/guide/router">
+  <a routerLink="/card" routerLinkActive="active">
     <mat-card class="category-card">
       <mat-card-header>
         <mat-card-title>{{category.title}}</mat-card-title>
@@ -9,3 +9,4 @@
     </mat-card>
   </a>
 </div>
+<router-outlet></router-outlet>
