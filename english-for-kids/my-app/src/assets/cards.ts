@@ -1,5 +1,5 @@
 const cards = [
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
+  ['Action (set A)', 'Action (set B)', 'animal', 'Animal (set B)', 'Clothes', 'Emotions'],
   [
     {
       word: 'cry',
