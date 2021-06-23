@@ -10,7 +10,11 @@ import cards from 'src/assets/cards';
 export class SidenavComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   listNav = cards[0];
-  
+  link = '/card';
+
+  fillerLink = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
+
+
   fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
 
   private _mobileQueryListener: () => void;

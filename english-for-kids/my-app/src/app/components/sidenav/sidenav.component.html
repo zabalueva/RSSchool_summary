@@ -11,7 +11,7 @@
                 </div>
       <mat-nav-list>
         <a mat-list-item routerLink=".">Main Page</a>
-        <a mat-list-item routerLink="/animal" *ngFor="let navItem of fillerNav">{{navItem}}</a>
+        <a mat-list-item [routerLink]="link" *ngFor="let navItem of fillerNav">{{navItem}}</a>
       </mat-nav-list>
     </mat-sidenav>
 

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardsViewComponent } from './components/cards-view/cards-view.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 const routes: Routes = [
   { path: 'card', component: CardsViewComponent },
-  { path: 'animal', component: CardsViewComponent },
-  { path: 'statistics', component: CardsViewComponent },
+  { path: 'animal', component: CategoriesComponent },
+  { path: 'statistics', component: CategoriesComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
