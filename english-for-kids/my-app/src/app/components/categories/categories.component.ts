@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Category } from 'src/app/models/category';
-impoet { AppRoutingModule }
 
 @Component({
   selector: 'app-categories',

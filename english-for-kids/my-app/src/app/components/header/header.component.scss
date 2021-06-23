@@ -1,0 +1,36 @@
+/* .header {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  height: 10vh;
+}
+
+.header__menu {
+ border: none;
+ outline: none;
+ background-color: #ffffff;
+ cursor: pointer;
+} */
+
+.header__menu {
+  display: flex;
+  flex-direction: column;
+ }
+.example-container {
+  background-color: #ffffff;
+  width: 500px;
+  height: 340px;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.example-sidenav {
+  padding: 20px;
+  background-color: #74d7e9;
+}

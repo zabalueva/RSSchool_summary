@@ -1,25 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CategoriesComponent } from './categories/categories.component';
 import { CardsViewComponent } from './cards-view/cards-view.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 
 
 @NgModule({
   declarations: [
     CategoriesComponent,
-    CardsViewComponent
+    CardsViewComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatButtonToggleModule
   ],
   exports: [
     CategoriesComponent,
-    CardsViewComponent
+    CardsViewComponent,
+    HeaderComponent
   ]
 })
 export class ComponentsModule { }
