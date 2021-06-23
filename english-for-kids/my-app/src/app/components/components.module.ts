@@ -4,11 +4,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CategoriesComponent } from './categories/categories.component';
 import { CardsViewComponent } from './cards-view/cards-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 
@@ -16,7 +19,8 @@ import { HeaderComponent } from './header/header.component';
   declarations: [
     CategoriesComponent,
     CardsViewComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,
@@ -25,12 +29,15 @@ import { HeaderComponent } from './header/header.component';
     MatMenuModule,
     MatIconModule,
     MatSidenavModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatListModule,
+    MatToolbarModule
   ],
   exports: [
     CategoriesComponent,
     CardsViewComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidenavComponent
   ]
 })
 export class ComponentsModule { }
