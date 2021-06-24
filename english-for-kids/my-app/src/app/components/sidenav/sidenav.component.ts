@@ -30,7 +30,6 @@ export class SidenavComponent implements OnDestroy {
   main = true;
 
   toggleMode() {
-    console.log(this.checked)
     this.checked = !this.checked;
   }
   ngOnDestroy(): void {
