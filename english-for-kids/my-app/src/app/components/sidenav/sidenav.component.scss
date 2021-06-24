@@ -1,17 +1,16 @@
-.example-container {
+.header__menu {
   display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-
-.example-sidenav-container{
-  z-index: 1000;
+.toggle_mode {
+  background-color: rgb(51, 126, 211);
+  border-radius: 20px;
+  width: 7em;
+  padding-left: 4px;
 }
+
 .sidenav__button {
   border: none;
   outline: none;

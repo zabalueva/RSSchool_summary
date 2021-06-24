@@ -4,6 +4,7 @@ import { CardsViewComponent } from './components/cards-view/cards-view.component
 import { CategoriesComponent } from './components/categories/categories.component';
 
 const routes: Routes = [
+  { path: '.', component: CategoriesComponent },
   { path: 'card', component: CardsViewComponent },
   { path: 'animal', component: CategoriesComponent },
   { path: 'statistics', component: CategoriesComponent },
