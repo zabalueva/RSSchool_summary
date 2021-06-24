@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Category } from 'src/app/models/category';
+import cards from 'src/assets/cards';
 
 @Component({
   selector: 'app-categories',
@@ -11,6 +11,8 @@ export class CategoriesComponent implements OnInit {
   category: Category = {
     title: "Something good",
     };
+    listNav = cards[0];
+    fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
   constructor() { }
 
   ngOnInit(): void {

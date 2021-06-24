@@ -13,9 +13,6 @@ export class SidenavComponent implements OnDestroy {
   listNav = cards[0];
   link = '/card';
 
-  fillerLink = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
-
-
   fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
 
   private _mobileQueryListener: () => void;
@@ -30,6 +27,7 @@ export class SidenavComponent implements OnDestroy {
   color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
+  main = true;
 
   toggleMode() {
     console.log(this.checked)
