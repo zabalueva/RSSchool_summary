@@ -1,12 +1,22 @@
 <p>{{title}}</p>
 
+
 <div class="cards-container">
-  <div class="card-container" *ngFor="let card of fillerCategory" (click) = "soundOn(card.audioSrc)">
-    <div class="category-card card">
-      <div>
-        <span class="card__word">{{card.word}}</span>
+  <div class="card-container" *ngFor="let card of fillerCategory">
+    <div class="cards-container-flip">
+      <div class="category-card card card_front" (click)="soundOn(card.audioSrc)">
+        <div class="card__action">
+          <span class="card__word">{{card.word}}</span>
+          <span class="card__flipper" (click)="rotate($event)">&#8635;</span>
+        </div>
+        <img class="card__img" [src]=card.image alt="category">
       </div>
-      <img class="card__img" [src]=card.image alt="category">
+      <div class="category-card card card_back">
+        <div class="card__action">
+          <span class="card__transl">{{card.translation}}</span>
+        </div>
+        <img class="card__img" [src]=card.image alt="category">
+      </div>
     </div>
   </div>
 </div>
