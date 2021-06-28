@@ -1,6 +1,5 @@
 import { Component, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ThemePalette } from '@angular/material/core';
 import cards from 'src/assets/cards';
 
 @Component({
@@ -24,7 +23,6 @@ export class SidenavComponent implements OnDestroy {
   }
 
   public iconClose = '&times';
-  color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
   main = true;
@@ -32,6 +30,15 @@ export class SidenavComponent implements OnDestroy {
   toggleMode() {
     this.checked = !this.checked;
   }
+
+  toggleMenu() {
+
+  }
+
+  highlightSelected(){
+  console.log('ghgh')
+}
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

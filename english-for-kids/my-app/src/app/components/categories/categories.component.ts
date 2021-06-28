@@ -13,6 +13,7 @@ export class CategoriesComponent implements OnInit {
     };
     listNav = cards[0];
     fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
+    link = '/card';
   constructor() { }
 
   ngOnInit(): void {

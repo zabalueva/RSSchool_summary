@@ -1,1 +1,10 @@
-<p>cards-view works!</p>
+<p>{{title}}</p>
+
+<div class="cards-container" *ngFor="let card of category" (click) = "soundOn()">
+  <div class="category-card">
+    <div>
+      <span>{{card}}</span>
+    </div>
+    <img [src]="image" alt="category">
+  </div>
+</div>

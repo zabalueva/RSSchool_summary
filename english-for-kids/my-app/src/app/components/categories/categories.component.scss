@@ -1,9 +1,9 @@
 .page__content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr;
   margin: 0 auto;
-  grid-gap: 2em;
+  grid-gap: 2em 2em;
 }
 
 .category-card {
@@ -14,4 +14,14 @@
   transform: scale(1.05);
   cursor: pointer;
   box-shadow: 0 0 18px rgba(14, 13, 13, 0.2);
+}
+
+.card {
+  &__title {
+    position: absolute;
+  }
+
+  &__img {
+    width: 10em;
+  }
 }

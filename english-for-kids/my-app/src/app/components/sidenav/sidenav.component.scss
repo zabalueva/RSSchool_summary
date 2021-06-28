@@ -4,6 +4,144 @@
   justify-content: space-around;
 }
 
+.menu {
+  display: flex;
+  padding-inline-start: 15px;
+  list-style-type: none;
+  width: 575px;
+
+  &__item {
+    padding-left: 18px;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    list-style: none;
+    color: black;
+  }
+  &__item-active {
+    -webkit-text-stroke: 1px #70cb0e;
+    text-decoration: none;
+  }
+  &__item:hover {
+    cursor: pointer;
+    color: #70cb0e;
+  }
+  &__item-active:hover {
+    cursor: default;
+    text-decoration: none;
+    color: black;
+    -webkit-text-stroke: 1px #70cb0e;
+  }
+}
+
+//from https://github.com/rolling-scopes-school/zabalueva-JSFE2021Q1/blob/online-zoo/online-zoo/pages/landing/landing.scss
+.burger {
+  display: block;
+  cursor: pointer;
+
+&__item {
+      display: block;
+      width: 36px;
+      height: 2px;
+      margin: 0.5em auto;
+      background: black;
+  }
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 300px;
+  height: 302px;
+  background-color: #A7E1FF;
+  left: -103px;
+  top: 55px;
+  font-family: Rubik;
+  justify-content: space-evenly;
+}
+
+
+.menu_close {
+display: block;
+}
+.menu_close_show {
+display: block;
+position: absolute;
+left: 91%;
+top: -8%;
+font-size: 30px;
+color: #9CA498;
+font-family: helvetica,arial;
+line-height: 1;
+cursor: pointer;
+z-index: 1010;
+}
+
+.menu_close:hover {
+opacity: 0.5;
+}
+
+.toggle_button {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.toggle_button_input {
+  display:none;
+}
+
+/* The slider */
+.toggle_mode {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.toggle_mode:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .toggle_mode {
+  background-color: #2196F3;
+}
+
+input:focus + .toggle_mode {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .toggle_mode:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.toggle_mode {
+  border-radius: 34px;
+}
+
+.toggle_mode:before {
+  border-radius: 50%;
+}
+
 .toggle_mode {
   background-color: rgb(51, 126, 211);
   border-radius: 20px;
@@ -23,6 +161,10 @@
   font-size: 24px;
   color: #a87777;
   padding-left: 4em;
+}
+
+.navItem_selected {
+  background-color: rgb(61, 68, 170);
 }
 
 .table__categories {

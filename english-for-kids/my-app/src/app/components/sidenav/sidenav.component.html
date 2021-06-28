@@ -1,14 +1,46 @@
-<!-- fragment of official tools https://material.angular.io/components/sidenav/examples -->
+
 
 <div class="header__menu">
-  <button class="sidenav__button" mat-icon-button (click)="snav.toggle()">
+  <span id="burger" class="burger">
+    <p class="burger__item"></p>
+    <p class="burger__item"></p>
+    <p class="burger__item"></p>
+  </span>
+
+  <label class="toggle_button" (click)="toggleMode()">
+    <input class="toggle_button_input" type="checkbox">
+    <span class="toggle_mode" *ngIf="this.checked">TRAIN</span>
+    <span class="toggle_mode" *ngIf="!this.checked">PLAY</span>
+  </label>
+</div>
+  <nav class="header__nav">
+    <!-- <ul id="menu" class="nav__menu menu">
+      <li class="menu__item">
+        <a href="#" class="menu__item menu__item-active">About</a>
+      </li>
+      <li class="menu__item">
+        <a href="" class="menu__item">Map</a>
+      </li>
+      <li class="menu__item">
+        <a href="" class="menu__item">Zoos</a>
+      </li>
+
+
+    </ul>
+    <div class="sidenav__close" [innerHTML]="iconClose"></div>
+
+  </nav> -->
+
+
+
+  <!-- <button aria-label="menu" class="sidenav__button" mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-slide-toggle (click)="toggleMode()" (click)="snav.close()" class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
+  <mat-slide-toggle aria-label="train" (click)="toggleMode()" (click)="snav.close()" class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
     *ngIf="checked">
     TRAIN
   </mat-slide-toggle>
-  <mat-slide-toggle (click)="toggleMode()" (click)="snav.close()"  class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
+  <mat-slide-toggle aria-label="play" (click)="toggleMode()" (click)="snav.close()"  class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
     *ngIf="!checked">
     PLAY
   </mat-slide-toggle>
@@ -17,17 +49,15 @@
 <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
   <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
     fixedTopGap="56">
-    <div class="sidenav__close" (click)="snav.close()" [innerHTML]="iconClose">
+
     </div>
     <mat-nav-list>
-      <a mat-list-item routerLink=".">Main Page</a>
-      <a mat-list-item [routerLink]="link" *ngFor="let navItem of fillerNav">{{navItem}}</a>
+      <a mat-list-item routerLink="." [routerLinkActive]="['navItem_selected']">Main Page</a>
+      <a mat-list-item [routerLink]="link" [routerLinkActive]="['navItem_selected']" *ngFor="let navItem of fillerNav">{{navItem}}</a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
 
-  <mat-sidenav-content (click)="snav.close()">
+
     <div class="table__categories">
       <router-outlet></router-outlet>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
