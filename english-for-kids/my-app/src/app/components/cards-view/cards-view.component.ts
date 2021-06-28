@@ -52,11 +52,12 @@ export class CardsViewComponent implements OnInit {
   }
 
   turnCardAutomatic(event:any){
-    this.flipped = !this.flipped;
-    event.addEventListener(()=> console.log('dkfj') )
+    console.log((event.srcElement as Node).parentNode?.parentNode as Element);
+    ((event.srcElement as Node).parentNode as Element).classList.remove("animate");
   }
 
   rotate(event:any){
+    console.log((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element);
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped = !this.flipped;
   }

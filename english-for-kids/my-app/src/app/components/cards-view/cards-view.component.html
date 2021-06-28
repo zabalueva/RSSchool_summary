@@ -11,11 +11,11 @@
         </div>
         <img class="card__img" [src]=card.image alt="category">
       </div>
-      <div class="category-card card card_back">
+      <div class="category-card card card_back" (mouseleave)="turnCardAutomatic($event)">
         <div class="card__action">
           <span class="card__transl">{{card.translation}}</span>
         </div>
-        <img class="card__img" [src]=card.image alt="category">
+        <img class="card__img"  [src]=card.image alt="category">
       </div>
     </div>
   </div>
