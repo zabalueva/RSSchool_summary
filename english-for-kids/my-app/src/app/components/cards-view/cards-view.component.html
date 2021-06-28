@@ -1,7 +1,7 @@
 <p>{{title}}</p>
 
 <div class="cards-container">
-  <div class="card-container" *ngFor="let card of fillerCategory" (click) = "soundOn()">
+  <div class="card-container" *ngFor="let card of fillerCategory" (click) = "soundOn(card.audioSrc)">
     <div class="category-card card">
       <div>
         <span class="card__word">{{card.word}}</span>

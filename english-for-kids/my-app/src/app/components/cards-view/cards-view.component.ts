@@ -42,9 +42,9 @@ number:number = 0;
     console.log(this.fillCategory())
   }
 
-soundOn(){
+soundOn(src:string){
   let audio = new Audio();
-  audio.src = "../../../assets/audio/cat.mp3";
+  audio.src = src;
   audio.load();
   audio.play();
   this.mode = !this.mode;
