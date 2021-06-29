@@ -5,6 +5,7 @@ import { CardsViewComponent } from './cards-view/cards-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { CardViewWrapComponent } from './card-view-wrap/card-view-wrap.component';
 
 
 
@@ -13,7 +14,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     CategoriesComponent,
     CardsViewComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    CardViewWrapComponent
   ],
   imports: [
     CommonModule,

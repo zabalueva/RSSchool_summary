@@ -1,25 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Card } from 'src/app/models/card';
+import { NodeService } from 'src/app/services/nodeService';
+import { Subscription } from 'rxjs';
 import cards, { categories } from 'src/assets/cards';
 
 @Component({
   selector: 'app-cards-view',
+  providers: [NodeService],
   templateUrl: './cards-view.component.html',
   styleUrls: ['./cards-view.component.scss']
 })
 
 export class CardsViewComponent implements OnInit {
+  @Input() number:number = 6;
   title: string="animal";
   listNav=categories;
   fillerNav=Array.from({ length: 8 }, (_, i) => `${this.listNav[i]}`);
   flipped=false;
   mode=true;
   public fillerCategory: Card[]|null|undefined=[];
-  number: number = 0;
+  /* number: number = 0; */
 
-
-  constructor() {
-
+  constructor(nodeService:NodeService) {
+    console.log(this.number)
   }
 
   fillCategory(): Card[] {
@@ -32,9 +35,9 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTitle();
     this.number=this.fillerNav?.indexOf(this.title);
     this.fillerCategory=cards[this.number];
-    this.getTitle();
     this.fillCategory();
   }
 
@@ -54,5 +57,7 @@ export class CardsViewComponent implements OnInit {
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped = !this.flipped;
   }
+
+
 
 }

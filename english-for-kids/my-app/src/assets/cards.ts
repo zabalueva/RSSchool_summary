@@ -1,8 +1,7 @@
 import { Card } from "src/app/models/card";
 
 export const categories: string[] = [
-
-  'Action (set A)', 'Action (set B)', 'animal', 'Animal (set B)', 'Clothes', 'Emotions'
+  'Action (set A)', 'Action (set B)', 'animal', 'Animal (set B)', 'Clothes', 'Emotions', 'Professions', 'IT', 
 ]
 
 const cards: Card[][]=[
@@ -164,10 +163,10 @@ const cards: Card[][]=[
       audioSrc: '/assets/audio/bird.mp3'
     },
     {
-      word: 'fish',
+      word: 'team',
       translation: 'рыба',
-      image: '/assets/img/fish1.jpg',
-      audioSrc: '/assets/audio/fish.mp3'
+      image: '/assets/img/team1.jpg',
+      audioSrc: '/assets/audio/team.mp3'
     },
     {
       word: 'frog',
@@ -305,7 +304,107 @@ const cards: Card[][]=[
       image: '/assets/img/laugh.jpg',
       audioSrc: '/assets/audio/laugh.mp3'
     }
-  ]
+  ],
+  [
+    {
+      word: 'doctor',
+      translation: 'доктор',
+      image: '/assets/img/doctor.jpg',
+      audioSrc: '/assets/audio/doctor.mp3'
+    },
+    {
+      word: 'teacher',
+      translation: 'учитель',
+      image: '/assets/img/teacher.jpg',
+      audioSrc: '/assets/audio/teacher.mp3'
+    },
+    {
+      word: 'builder',
+      translation: 'строитель',
+      image: '/assets/img/builder.jpg',
+      audioSrc: '/assets/audio/builder.mp3'
+    },
+    {
+      word: 'engineer',
+      translation: 'инженер',
+      image: '/assets/img/engineer.jpg',
+      audioSrc: '/assets/audio/engineer.mp3'
+    },
+    {
+      word: 'writer',
+      translation: 'писатель',
+      image: '/assets/img/writer.jpg',
+      audioSrc: '/assets/audio/writer.mp3'
+    },
+    {
+      word: 'director',
+      translation: 'режиссёр',
+      image: '/assets/img/director.jpg',
+      audioSrc: '/assets/audio/director.mp3'
+    },
+    {
+      word: 'manager',
+      translation: 'менеджер',
+      image: '/assets/img/manager.jpg',
+      audioSrc: '/assets/audio/manager.mp3'
+    },
+    {
+      word: 'musician',
+      translation: 'музыкант',
+      image: '/assets/img/musician.jpg',
+      audioSrc: '/assets/audio/musician.mp3'
+    }
+  ],
+  [
+    {
+      word: 'environment',
+      translation: 'окружение',
+      image: '/assets/img/environment.jpg',
+      audioSrc: '/assets/audio/environment.mp3'
+    },
+    {
+      word: 'property',
+      translation: 'свойство',
+      image: '/assets/img/property.jpg',
+      audioSrc: '/assets/audio/property.mp3'
+    },
+    {
+      word: 'approve',
+      translation: 'утвердить',
+      image: '/assets/img/approve.jpg',
+      audioSrc: '/assets/audio/approve.mp3'
+    },
+    {
+      word: 'tool',
+      translation: 'инструмент',
+      image: '/assets/img/tool.jpg',
+      audioSrc: '/assets/audio/tool.mp3'
+    },
+    {
+      word: 'team',
+      translation: 'команда',
+      image: '/assets/img/team.jpg',
+      audioSrc: '/assets/audio/team.mp3'
+    },
+    {
+      word: 'application',
+      translation: 'приложение',
+      image: '/assets/img/application.jpg',
+      audioSrc: '/assets/audio/application.mp3'
+    },
+    {
+      word: 'request',
+      translation: 'запрос',
+      image: '/assets/img/request.jpg',
+      audioSrc: '/assets/audio/request.mp3'
+    },
+    {
+      word: 'issue',
+      translation: 'проблема',
+      image: '/assets/img/issue.jpg',
+      audioSrc: '/assets/audio/issue.mp3'
+    }
+  ],
 ]
 
 

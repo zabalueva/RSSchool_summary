@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import cards from 'src/assets/cards';
 
@@ -7,17 +7,14 @@ import cards from 'src/assets/cards';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent {
     listNav = cards[0];
     fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
     link = '/card';
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   saveNumberCategory(){
-    
+
   }
 
 }
