@@ -15,18 +15,12 @@ export class CardsViewComponent implements OnInit {
   flipped=false;
   mode=true;
   public fillerCategory: Card[]|null|undefined=[];
-  number: number=0;
+  number: number = 0;
 
 
   constructor() {
 
   }
-
-  /* findCategory(){
-    if (this.fillerCategory){
-    this.category = Array.from({length: 8}, (_, i) => `${this.fillerCategory[i]}`)
-    }
-  } */
 
   fillCategory(): Card[] {
     return this.fillerCategory as unknown as Card[]||[];
@@ -34,6 +28,7 @@ export class CardsViewComponent implements OnInit {
 
   getTitle():void {
     this.title = categories[this.number];
+    console.log(this.number, this.title)
   }
 
   ngOnInit() {
@@ -52,12 +47,10 @@ export class CardsViewComponent implements OnInit {
   }
 
   turnCardAutomatic(event:any){
-    console.log((event.srcElement as Node).parentNode?.parentNode as Element);
     ((event.srcElement as Node).parentNode as Element).classList.remove("animate");
   }
 
   rotate(event:any){
-    console.log((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element);
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped = !this.flipped;
   }

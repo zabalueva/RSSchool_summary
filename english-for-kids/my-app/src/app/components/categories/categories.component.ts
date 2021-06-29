@@ -8,15 +8,16 @@ import cards from 'src/assets/cards';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  category: Category = {
-    title: "Something good",
-    };
     listNav = cards[0];
     fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
     link = '/card';
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  saveNumberCategory(){
+    
   }
 
 }
