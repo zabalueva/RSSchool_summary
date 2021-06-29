@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import cards from 'src/assets/cards';
+import cards, { categories } from 'src/assets/cards';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,7 +9,7 @@ import cards from 'src/assets/cards';
 })
 export class SidenavComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-  listNav = cards[0];
+  listNav = categories;
   link = '/card';
 
   fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);

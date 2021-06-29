@@ -1,20 +1,15 @@
 <div class="header__menu">
   <input type="checkbox" id="hmt" class="hidden-menu-ticker">
   <label class="burger" for="hmt">
-    <span class="burger__item"></span>
-    <span class="burger__item"></span>
-    <span class="burger__item"></span>
+    <span class="burger__item burger__item_first"></span>
+    <span class="burger__item burger__item_second"></span>
+    <span class="burger__item burger__item_third"></span>
   </label>
   <ul id="menu" class="nav__menu menu">
     <li class="menu__item">
-      <a href="#" class="menu__item menu__item-active">About</a>
+      <a href="#" class="menu__item menu__item-active" routerLink=".">Main Page</a>
     </li>
-    <li class="menu__item">
-      <a href="" class="menu__item">Map</a>
-    </li>
-    <li class="menu__item">
-      <a href="" class="menu__item">Zoos</a>
-    </li>
+      <a class="menu__item" [routerLink]="link"  *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li></a>
   </ul>
   <label class="toggle_button" (click)="toggleMode()">
     <input class="toggle_button_input" type="checkbox">

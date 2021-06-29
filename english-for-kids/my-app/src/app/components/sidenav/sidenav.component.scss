@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-around;
 }
+//https://www.mobila.name/post/53eb5a219dcff/
 
 .menu {
     display: block;
@@ -13,22 +14,15 @@
     box-sizing: border-box;
     width: 200px;
     background-color: #eee;
-    height: 200px;
+    height: auto;
     top: 0;
     left: -200px;
     transition: left .2s;
     z-index: 2;
     -webkit-transform: translateZ(0);
     -webkit-backface-visibility: hidden;
-
-
-  /* display: flex;
-  padding-inline-start: 15px;
-  list-style-type: none;
-  width: 575px;
-
   &__item {
-    padding-left: 18px;
+    padding-top: 10px;
     font-family: "Roboto", sans-serif;
     font-size: 18px;
     font-weight: 700;
@@ -49,62 +43,13 @@
     text-decoration: none;
     color: black;
     -webkit-text-stroke: 1px #70cb0e;
-  } */
+  }
 }
 
 .hidden-menu-ticker {
   display: none;
 }
 
-
-//from https://github.com/rolling-scopes-school/zabalueva-JSFE2021Q1/blob/online-zoo/online-zoo/pages/landing/landing.scss
-/* .burger {
-  display: block;
-  cursor: pointer;
-
-&__item {
-      display: block;
-      width: 36px;
-      height: 2px;
-      margin: 0.5em auto;
-      background: black;
-  }
-}
-
-.show {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  position: absolute;
-  width: 300px;
-  height: 302px;
-  background-color: #A7E1FF;
-  left: -103px;
-  top: 55px;
-  font-family: Rubik;
-  justify-content: space-evenly;
-}
-
-
-.menu_close {
-display: block;
-}
-.menu_close_show {
-display: block;
-position: absolute;
-left: 91%;
-top: -8%;
-font-size: 30px;
-color: #9CA498;
-font-family: helvetica,arial;
-line-height: 1;
-cursor: pointer;
-z-index: 1010;
-}
-
-.menu_close:hover {
-opacity: 0.5;
-} */
 .burger{
   padding: 5px;
   position: fixed;
@@ -135,15 +80,15 @@ opacity: 0.5;
 .hidden-menu-ticker:checked ~ .menu {
   left: 0;
 }
-.hidden-menu-ticker:checked ~ .burger span.first {
-  -webkit-transform: rotate(45deg);
+.hidden-menu-ticker:checked ~ .burger .burger__item_first {
+  transform: rotate(45deg);
   top: 10px;
 }
-.hidden-menu-ticker:checked ~ .burger span.second {
+.hidden-menu-ticker:checked ~ .burger .burger__item_second {
   opacity: 0;
 }
-.hidden-menu-ticker:checked ~ .burger span.third {
-  -webkit-transform: rotate(-45deg);
+.hidden-menu-ticker:checked ~ .burger .burger__item_third {
+  transform: rotate(-45deg);
   top: -10px;
 }
 
