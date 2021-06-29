@@ -1,17 +1,19 @@
-<div class="header__menu">
+
   <input type="checkbox" id="hmt" class="hidden-menu-ticker">
   <label class="burger" for="hmt">
     <span class="burger__item burger__item_first"></span>
     <span class="burger__item burger__item_second"></span>
     <span class="burger__item burger__item_third"></span>
   </label>
-  <ul id="menu" class="nav__menu menu">
+
+      <ul id="menu" class="nav__menu menu" (click)="toggleMenu()">
     <li class="menu__item">
-      <a href="#" class="menu__item menu__item-active" routerLink=".">Main Page</a>
+      <a href="#" class="menu__item menu__item-active" routerLink="." >Main Page</a>
     </li>
       <a class="menu__item" [routerLink]="link"  *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li></a>
   </ul>
-  <label class="toggle_button" (click)="toggleMode()">
+  <div class="header__menu"  (click)="toggleMenu()">
+  <label class="toggle_button" (click)="toggleMode()" (click)="toggleMenu()">
     <input class="toggle_button_input" type="checkbox">
     <span class="toggle_mode" *ngIf="this.checked">TRAIN</span>
     <span class="toggle_mode" *ngIf="!this.checked">PLAY</span>
@@ -45,6 +47,7 @@
   </mat-sidenav> -->
 
 
-<div class="table__categories">
+<div class="table__categories" (click)="toggleMenu()">
+
   <router-outlet></router-outlet>
 </div>

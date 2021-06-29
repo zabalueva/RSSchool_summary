@@ -11,6 +11,7 @@ export class SidenavComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   listNav = categories;
   link = '/card';
+  chbox = document.getElementById('hmt');
 
   fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
 
@@ -32,7 +33,10 @@ export class SidenavComponent implements OnDestroy {
   }
 
   toggleMenu() {
-
+    console.log(document.getElementById('hmt'))
+if ((document.getElementById('hmt') as HTMLInputElement).checked){
+  (document.getElementById('hmt') as HTMLInputElement).checked = false;
+}
   }
 
   highlightSelected(){
