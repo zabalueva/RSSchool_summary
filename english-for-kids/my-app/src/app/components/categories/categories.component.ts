@@ -13,11 +13,6 @@ export class CategoriesComponent {
     fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
     link = '/card';
   constructor(private router: Router) {
-    console.log(this.router.getCurrentNavigation()?.extras.state?.number ?? 0)
-   }
-
-  saveNumberCategory(){
-
   }
 
 }

@@ -1,7 +1,7 @@
 import { Card } from "src/app/models/card";
 
 export const categories: string[] = [
-  'Action (set A)', 'Action (set B)', 'animal', 'Animal (set B)', 'Clothes', 'Emotions', 'Professions', 'IT', 
+  'Action (set A)', 'Action (set B)', 'Animal (set А)', 'Animal (set B)', 'Clothes', 'Emotions', 'Professions', 'IT',
 ]
 
 const cards: Card[][]=[
@@ -163,10 +163,10 @@ const cards: Card[][]=[
       audioSrc: '/assets/audio/bird.mp3'
     },
     {
-      word: 'team',
+      word: 'fish',
       translation: 'рыба',
-      image: '/assets/img/team1.jpg',
-      audioSrc: '/assets/audio/team.mp3'
+      image: '/assets/img/fish.jpg',
+      audioSrc: '/assets/audio/fish.mp3'
     },
     {
       word: 'frog',

@@ -1,3 +1,5 @@
+
+
 <input type="checkbox" id="hmt" class="hidden-menu-ticker">
 <label class="burger" for="hmt">
   <span class="burger__item burger__item_first"></span>
@@ -10,19 +12,19 @@
     routerLinkActive="navItem_selected">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
-  <a class="menu__item" [routerLink]="link" [state]="{number: getNumberCategory()}"
+  <a class="menu__item" [routerLink]="link"
   (click)="saveNumber($event)" (click)="highlight($event)"
-    *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li>
+    *ngFor="let navItem of fillerNav; let index = index" [state]="{categoryIndex: getNumberCategory()}">{{navItem}}<li class="menu__item"></li>
   </a>
 </ul>
 
-<div class="header__menu" (click)="toggleMenu()">
-  <label class="toggle_button" (click)="toggleMode()" (click)="toggleMenu()">
-    <input class="toggle_button_input" type="checkbox">
-    <span class="toggle_mode" *ngIf="this.checked">TRAIN</span>
-    <span class="toggle_mode" *ngIf="!this.checked">PLAY</span>
+
+<!-- <div class="header__menu" (click)="toggleMenu()">
+  <label class="toggle_button toggle_mode" (click)="toggleMode()" (click)="toggleMenu()" id="toggle">
+    <input class="toggle_button_input" type="checkbox" (click)="toggleMode()">
+    <span class="toggle_mode">TRAIN</span>
   </label>
-</div>
+</div> -->
 
 <div class="table__categories" (click)="toggleMenu()">
   <router-outlet></router-outlet>

@@ -17,14 +17,15 @@ export class SidenavComponent {
   numberCategory: number=this.getNumberCategory();
 
   constructor(private nodeService: NodeService, private router: Router) {
-    console.log(this.router.getCurrentNavigation()?.extras.state)
-    nodeService.number$.subscribe(numb => numb = this.numberCategory);
-    console.log(`sss ${this.numberCategory}`)
+
   }
 
-  checked=false;
+  checked = true;
 
   toggleMode() {
+    if (document.getElementsByClassName('toggle_button')) {
+      document.getElementsByClassName('toggle_button')[0].innerHTML=this.checked? "START":"TRAIN";
+    }
     this.checked=!this.checked;
   }
 
@@ -42,14 +43,14 @@ export class SidenavComponent {
     (event.target as Element).classList.add('menu__item-active');
   }
 
-  saveNumber(event: any):number {
-    const numberGh = this.numberCategory;
-    this.numberCategory=categories.findIndex((item) => item === event.target.text);
+  saveNumber(event: any): number {
+    const numberGh=this.numberCategory;
+    this.numberCategory=categories.findIndex((item) => item===event.target.text);
     this.nodeService.addNode(numberGh);
     return this.numberCategory;
   }
 
-  getNumberCategory(){
+  getNumberCategory() {
     return this.numberCategory;
   }
 }
