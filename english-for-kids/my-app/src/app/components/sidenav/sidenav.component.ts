@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import cards, { categories } from 'src/assets/cards';
 import { NodeService } from 'src/app/services/nodeService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,15 +10,14 @@ import { NodeService } from 'src/app/services/nodeService';
   styleUrls: ['./sidenav.component.scss']
 })
 
-
-
 export class SidenavComponent {
   listNav=categories;
   link='/card';
   fillerNav=Array.from({ length: 8 }, (_, i) => `${this.listNav[i]}`);
   numberCategory: number=this.getNumberCategory();
 
-  constructor(private nodeService: NodeService) {
+  constructor(private nodeService: NodeService, private router: Router) {
+    console.log(this.router.getCurrentNavigation()?.extras.state)
     nodeService.number$.subscribe(numb => numb = this.numberCategory);
     console.log(`sss ${this.numberCategory}`)
   }

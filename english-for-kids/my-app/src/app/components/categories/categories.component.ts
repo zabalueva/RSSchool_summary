@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import cards from 'src/assets/cards';
 
@@ -11,7 +12,9 @@ export class CategoriesComponent {
     listNav = cards[0];
     fillerNav = Array.from({length: 8}, (_, i) => `${this.listNav[i]}`);
     link = '/card';
-  constructor() { }
+  constructor(private router: Router) {
+    console.log(this.router.getCurrentNavigation()?.extras.state?.number ?? 0)
+   }
 
   saveNumberCategory(){
 

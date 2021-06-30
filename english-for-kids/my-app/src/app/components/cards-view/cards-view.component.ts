@@ -3,6 +3,7 @@ import { Card } from 'src/app/models/card';
 import { NodeService } from 'src/app/services/nodeService';
 import { Subscription } from 'rxjs';
 import cards, { categories } from 'src/assets/cards';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cards-view',
@@ -22,10 +23,8 @@ export class CardsViewComponent implements OnInit {
   public fillerCategory: Card[]|null|undefined=[];
   numberCategory: number = 0;
 
-  constructor(private nodeService:NodeService) {
-    this.getNumberCategory();
-    nodeService.number$.subscribe(numb => numb = this.numberCategory);
-    console.log(`sss ${this.numberCategory}`)
+  constructor(private nodeService:NodeService, private router: Router) {
+    this.number = this.router.getCurrentNavigation()?.extras.state?.number ?? 0
   }
 
   getTitle():void {
@@ -53,17 +52,6 @@ export class CardsViewComponent implements OnInit {
   rotate(event:any){
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped = !this.flipped;
-  }
-
-  saveNumber(event: any):number {
-    this.numberCategory=categories.findIndex((item) => item === event.target.text);
-    const numberGh = this.numberCategory;
-    this.nodeService.addNode(this.numberCategory);
-    return this.numberCategory;
-  }
-
-  getNumberCategory(){
-    return this.numberCategory;
   }
 
 }

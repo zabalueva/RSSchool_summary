@@ -10,7 +10,8 @@
     routerLinkActive="navItem_selected">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
-  <a class="menu__item" [routerLink]="link" (click)="saveNumber($event)" (click)="highlight($event)"
+  <a class="menu__item" [routerLink]="link" [state]="{number: getNumberCategory()}"
+  (click)="saveNumber($event)" (click)="highlight($event)"
     *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li>
   </a>
 </ul>
