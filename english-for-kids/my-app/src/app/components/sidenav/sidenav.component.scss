@@ -23,12 +23,17 @@
     -webkit-backface-visibility: hidden;
 
   &__item {
-    padding-top: 13px;
+    padding-top: 23px;
     font-family: "Roboto", sans-serif;
     font-size: 22px;
     text-decoration: none;
     list-style: none;
   }
+
+  &__item-main {
+    margin-bottom: 15px;
+  }
+
   &__item-active {
     -webkit-text-stroke: 1px #7e99e2;
     text-decoration: none;

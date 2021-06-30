@@ -3,14 +3,14 @@ import { Subject } from "rxjs";
 
 @Injectable()
 export class NodeService {
-  private node = new Subject<number>();
+  private number = new Subject<number>();
 
-  get node$(){
-    return this.node.asObservable();
+  get number$(){
+    return this.number.asObservable();
   }
 
   addNode(data:number) {
-    this.node.next(data);
+    this.number.next(data);
     console.log(data)
   }
 }

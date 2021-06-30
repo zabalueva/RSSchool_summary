@@ -1,6 +1,4 @@
 <p>{{title}}</p>
-
-
 <div class="cards-container">
   <div class="card-container" *ngFor="let card of fillerCategory">
     <div class="cards-container-flip">
@@ -15,7 +13,7 @@
         <div class="card__action">
           <span class="card__transl">{{card.translation}}</span>
         </div>
-        <img class="card__img"  [src]=card.image alt="category">
+        <img class="card__img" [src]=card.image alt="category">
       </div>
     </div>
   </div>

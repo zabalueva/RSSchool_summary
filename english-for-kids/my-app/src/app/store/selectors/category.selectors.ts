@@ -4,7 +4,7 @@ import { Category } from "src/app/models/category";
 
 export const selectCategoryFree = createSelector(
   (state: AppState) => state.categories,
-  (posts: Category[]) => posts,
+  (category: Category[]) => category,
 );
 
 export const selectAllCategories = createFeatureSelector<Category[]>('categories');

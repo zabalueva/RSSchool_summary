@@ -6,12 +6,15 @@
 </label>
 
 <ul id="menu" class="nav__menu menu" (click)="toggleMenu()">
-  <li class="menu__item">
-    <a href="#" class="menu__item menu__item-active" (click)="highlight($event)" routerLink="." routerLinkActive="navItem_selected">Main Page</a>
-  </li>
-  <a class="menu__item" [routerLink]="link" (click)="saveNumber($event)" (click)="highlight($event)" *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li>
-    </a>
+  <a href="#" class="menu__item menu__item-active " (click)="highlight($event)" routerLink="."
+    routerLinkActive="navItem_selected">
+    <li class="menu__item menu__item_main">Main Page</li>
+  </a>
+  <a class="menu__item" [routerLink]="link" (click)="saveNumber($event)" (click)="highlight($event)"
+    *ngFor="let navItem of fillerNav">{{navItem}}<li class="menu__item"></li>
+  </a>
 </ul>
+
 <div class="header__menu" (click)="toggleMenu()">
   <label class="toggle_button" (click)="toggleMode()" (click)="toggleMenu()">
     <input class="toggle_button_input" type="checkbox">
@@ -20,22 +23,6 @@
   </label>
 </div>
 
-
-
-<!-- <button aria-label="menu" class="sidenav__button" mat-icon-button (click)="snav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-slide-toggle aria-label="train" (click)="toggleMode()" (click)="snav.close()" class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
-    *ngIf="checked">
-    TRAIN
-  </mat-slide-toggle>
-  <mat-slide-toggle aria-label="play" (click)="toggleMode()" (click)="snav.close()"  class="toggle_mode" [color]="color" [checked]="checked" [disabled]="disabled"
-    *ngIf="!checked">
-    PLAY
-  </mat-slide-toggle>
-</div> -->
-
-
-<div class="table__categories" (click)="toggleMenu()" >
-    <router-outlet></router-outlet>
+<div class="table__categories" (click)="toggleMenu()">
+  <router-outlet></router-outlet>
 </div>

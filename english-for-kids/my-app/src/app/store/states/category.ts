@@ -1,28 +1,29 @@
 import { Category } from "src/app/models/category";
+import cards, { categories } from "src/assets/cards";
 
 export const initialCategoriesState: Category[] = [
   {
-    title: 'animal',
+    title: categories[0],
   },
   {
-    title: 'feat',
+    title: categories[1],
   },
   {
-    title: 'rtl',
+    title: categories[2],
   },
   {
-    title: 'emoji',
+    title: categories[3],
   },
   {
-    title: 'trees',
+    title: categories[4],
   },
   {
-    title: 'animal',
+    title: categories[5],
   },
   {
-    title: 'nature',
+    title: categories[6],
   },
   {
-    title: 'feel',
+    title: categories[7],
   },
 ];

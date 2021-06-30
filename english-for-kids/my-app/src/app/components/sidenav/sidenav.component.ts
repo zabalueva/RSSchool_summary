@@ -18,7 +18,7 @@ export class SidenavComponent {
   numberCategory: number=this.getNumberCategory();
 
   constructor(private nodeService: NodeService) {
-    nodeService.node$.subscribe(number => number = this.numberCategory);
+    nodeService.number$.subscribe(numb => numb = this.numberCategory);
     console.log(`sss ${this.numberCategory}`)
   }
 
@@ -53,4 +53,3 @@ export class SidenavComponent {
     return this.numberCategory;
   }
 }
-

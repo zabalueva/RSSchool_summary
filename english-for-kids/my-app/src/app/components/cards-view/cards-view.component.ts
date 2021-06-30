@@ -13,32 +13,29 @@ import cards, { categories } from 'src/assets/cards';
 
 export class CardsViewComponent implements OnInit {
   @Input() number:number = 6;
-  title: string="animal";
-  listNav=categories;
-  fillerNav=Array.from({ length: 8 }, (_, i) => `${this.listNav[i]}`);
-  flipped=false;
-  mode=true;
+
+  title: string = "animal";
+
+  fillerNav = Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
+  flipped = false;
+  mode = true;
   public fillerCategory: Card[]|null|undefined=[];
-  /* number: number = 0; */
+  numberCategory: number = 0;
 
-  constructor(nodeService:NodeService) {
-    console.log(this.number)
-  }
-
-  fillCategory(): Card[] {
-    return this.fillerCategory as unknown as Card[]||[];
+  constructor(private nodeService:NodeService) {
+    this.getNumberCategory();
+    nodeService.number$.subscribe(numb => numb = this.numberCategory);
+    console.log(`sss ${this.numberCategory}`)
   }
 
   getTitle():void {
     this.title = categories[this.number];
-    console.log(this.number, this.title)
   }
 
   ngOnInit() {
     this.getTitle();
-    this.number=this.fillerNav?.indexOf(this.title);
-    this.fillerCategory=cards[this.number];
-    this.fillCategory();
+    this.number = categories.indexOf(this.title);
+    this.fillerCategory = cards[this.number];
   }
 
   soundOn(src: string) {
@@ -58,6 +55,15 @@ export class CardsViewComponent implements OnInit {
     this.flipped = !this.flipped;
   }
 
+  saveNumber(event: any):number {
+    this.numberCategory=categories.findIndex((item) => item === event.target.text);
+    const numberGh = this.numberCategory;
+    this.nodeService.addNode(this.numberCategory);
+    return this.numberCategory;
+  }
 
+  getNumberCategory(){
+    return this.numberCategory;
+  }
 
 }
