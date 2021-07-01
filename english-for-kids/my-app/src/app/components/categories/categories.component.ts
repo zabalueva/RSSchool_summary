@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/models/category';
 import cards from 'src/assets/cards';
 
 @Component({

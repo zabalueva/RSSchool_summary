@@ -19,12 +19,13 @@
 </ul>
 
 
-<!-- <div class="header__menu" (click)="toggleMenu()">
+<div class="header__menu " (click)="toggleMenu()">
+  <input class="toggle_button_input" type="checkbox" (click)="toggleMode()">
   <label class="toggle_button toggle_mode" (click)="toggleMode()" (click)="toggleMenu()" id="toggle">
-    <input class="toggle_button_input" type="checkbox" (click)="toggleMode()">
-    <span class="toggle_mode">TRAIN</span>
+
+    <!-- <span class="toggle_mode">TRAIN</span> -->
   </label>
-</div> -->
+</div>
 
 <div class="table__categories" (click)="toggleMenu()">
   <router-outlet></router-outlet>
