@@ -25,7 +25,9 @@ export class SidenavComponent {
 
   toggleMode() {
     this.checked=!this.checked;
+    if (document.getElementById('button__start')){
     (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
+    }
   }
 
   toggleMenu() {
@@ -43,6 +45,8 @@ export class SidenavComponent {
   }
 
   saveNumber(event: any): number {
+    this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1
+    setTimeout(()=> this.router.navigate(['/card']), 0)
     const numberGh=this.numberCategory;
     this.numberCategory=categories.findIndex((item) => item===event.target.text);
     this.nodeService.addNode(numberGh);

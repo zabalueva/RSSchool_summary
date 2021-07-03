@@ -17,7 +17,8 @@ export class PlayViewComponent implements OnInit {
 
   public fillerCategory: Card[]|null|undefined=[];
   constructor(private router: Router) {
-    this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??0
+    this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??0;
+    console.log(this.number)
   }
 
   getTitle(): void {
@@ -39,6 +40,14 @@ export class PlayViewComponent implements OnInit {
     audio.load();
     audio.play();
     this.checkingWord = cards[this.number][randomNumber].word;
+  }
+
+  repeatRandomSound() {
+    let audio=new Audio();
+    /* audio.src=cards[this.number].forEach((el) => Array.from(el));
+    audio.load();
+    audio.play();
+    this.checkingWord = cards[this.number][randomNumber].word; */
   }
 
   checkCorrect(event:any){

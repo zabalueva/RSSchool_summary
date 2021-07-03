@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class CardsViewComponent implements OnInit {
   @Input() number:number = 6;
 
-  title: string = "animal";
+  title: string | null = "animal";
 
   fillerNav = Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
   flipped = false;
@@ -26,16 +26,23 @@ export class CardsViewComponent implements OnInit {
 
   constructor(private nodeService:NodeService, private router: Router) {
     //by @fomenkogregory
-    this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 0
+    this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1
   }
 
   getTitle():void {
-    this.title = categories[this.number];
+    if (document.getElementsByClassName('menu__item-active')[0].textContent) {
+      this.title = document.getElementsByClassName('menu__item-active')[0].textContent;
+      console.log(this.title);
+     /*  this.number = categories.indexOf(document.getElementsByClassName('menu__item-active')[0].textContent as String);
+     */
+    }
   }
 
   ngOnInit() {
     this.getTitle();
+    if (this.title){
     this.number = categories.indexOf(this.title);
+    }
     this.fillerCategory = cards[this.number];
   }
 
