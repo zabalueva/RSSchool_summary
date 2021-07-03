@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Card } from 'src/app/models/card';
-import { NodeService } from 'src/app/services/nodeService';
+import { ModeService } from 'src/app/services/modeService';
 import { Subscription } from 'rxjs';
 import cards, { categories } from 'src/assets/cards';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cards-view',
-  providers: [NodeService],
+  providers: [ModeService],
   templateUrl: './cards-view.component.html',
   styleUrls: ['./cards-view.component.scss']
 })
@@ -24,29 +24,37 @@ export class CardsViewComponent implements OnInit {
   numberCategory: number = 0;
 
 
-  constructor(private nodeService:NodeService, private router: Router) {
+  constructor(private modeService:ModeService, private router: Router) {
     //by @fomenkogregory
     this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1
   }
 
   getTitle():void {
     if (document.getElementsByClassName('menu__item-active')[0].textContent) {
+      if (document.getElementsByClassName('menu__item-active')[0].textContent === 'Main Page') {
+        this.title = categories[this.number];
+        console.log('fj')
+      } else {
       this.title = document.getElementsByClassName('menu__item-active')[0].textContent;
-      console.log(this.title);
-     /*  this.number = categories.indexOf(document.getElementsByClassName('menu__item-active')[0].textContent as String);
-     */
+      }
     }
+    console.log(this.mode);
   }
 
   ngOnInit() {
+    this.modeService.mode$.subscribe((mode) => this.mode=mode);
     this.getTitle();
-    if (this.title){
-    this.number = categories.indexOf(this.title);
+    console.log(this.title)
+    if (document.getElementsByClassName('menu__item-active')[0].textContent !== 'Main Page'){
+      if(typeof(this.title) === 'string'){
+            this.number = categories.indexOf(this.title);
+      }
     }
     this.fillerCategory = cards[this.number];
   }
 
   soundOn(src: string) {
+    this.mode = !this.mode;
     let audio=new Audio();
     audio.src=src;
     audio.load();

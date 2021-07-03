@@ -1,5 +1,3 @@
-
-
 <input type="checkbox" id="hmt" class="hidden-menu-ticker">
 <label class="burger" for="hmt">
   <span class="burger__item burger__item_first"></span>
@@ -11,16 +9,17 @@
   <a class="menu__item menu__item-active " (click)="highlight($event)" routerLink=".">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
-  <a class="menu__item" routerLink="."
-  (click)="navigate($event)" (click)="highlight($event)"
-    *ngFor="let navItem of fillerNav; let index = index" [state]="{categoryIndex: getNumberCategory()}">{{navItem}}<li class="menu__item"></li>
+  <a class="menu__item" routerLink="." (click)="navigate($event)" (click)="highlight($event)"
+    *ngFor="let navItem of fillerNav; let index = index" [state]="{categoryIndex: getNumberCategory()}">{{navItem}}<li
+      class="menu__item"></li>
   </a>
 </ul>
 
 
 <div class="header__menu onoffswitch" (click)="toggleMenu()">
   <input class="toggle_button_input onoffswitch-checkbox" type="checkbox" name="onoffswitch" id="myonoffswitch">
-  <label class="toggle_button toggle_mode onoffswitch-label" for="myonoffswitch" (click)="toggleMode()" (click)="toggleMenu()" id="toggle">
+  <label class="toggle_button toggle_mode onoffswitch-label" for="myonoffswitch" (click)="toggleMode()"
+    (click)="toggleMenu()" id="toggle">
     <span class="onoffswitch-inner"></span>
     <span class="onoffswitch-switch"></span>
   </label>

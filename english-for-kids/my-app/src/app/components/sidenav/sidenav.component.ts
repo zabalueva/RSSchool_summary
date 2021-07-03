@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import cards, { categories } from 'src/assets/cards';
-import { NodeService } from 'src/app/services/nodeService';
+import { ModeService } from 'src/app/services/modeService';
 import { Router } from '@angular/router';
 import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: 'app-sidenav',
-  providers: [NodeService],
+  providers: [ModeService],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
@@ -16,18 +16,18 @@ export class SidenavComponent {
   link='/card';
   fillerNav=Array.from({ length: 8 }, (_, i) => `${this.listNav[i]}`);
   numberCategory: number=this.getNumberCategory();
+  mode=false;
 
-  constructor(private nodeService: NodeService, private router: Router) {
-
+  constructor(private modeService: ModeService, private router: Router) {
+    modeService.mode$.subscribe((mode) => this.mode=mode)
   }
 
-  checked = true;
-
   toggleMode() {
-    this.checked=!this.checked;
-    if (document.getElementById('button__start')){
-    (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
+    this.mode=!this.mode;
+    if (document.getElementById('button__start')) {
+      (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
     }
+    console.log(`sidenav${this.mode}`)
   }
 
   toggleMenu() {
@@ -45,7 +45,7 @@ export class SidenavComponent {
   }
 
   navigate(event: any): void {
-    setTimeout(()=> this.router.navigate(['/card']), 0)
+    setTimeout(() => this.router.navigate(['/card']), 0)
   }
 
   getNumberCategory() {
