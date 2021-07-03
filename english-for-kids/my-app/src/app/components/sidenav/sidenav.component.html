@@ -8,7 +8,7 @@
 </label>
 
 <ul id="menu" class="nav__menu menu" (click)="toggleMenu()">
-  <a href="#" class="menu__item menu__item-active " (click)="highlight($event)" routerLink="."
+  <a class="menu__item menu__item-active " (click)="highlight($event)" routerLink="."
     routerLinkActive="navItem_selected">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
@@ -31,4 +31,4 @@
 <div class="table__categories" (click)="toggleMenu()">
   <router-outlet></router-outlet>
 </div>
-<div class="play-action"><button class="button__start button__start_disabled" id="button__start">Start</button></div>
+<div class="play-action"><a routerLink="/play"><button class="button__start button__start_disabled" id="button__start">Start</button></a></div>

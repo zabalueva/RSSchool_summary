@@ -23,8 +23,9 @@ export class CardsViewComponent implements OnInit {
   public fillerCategory: Card[]|null|undefined=[];
   numberCategory: number = 0;
 
-  //by @fomenkogregory
+
   constructor(private nodeService:NodeService, private router: Router) {
+    //by @fomenkogregory
     this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 0
   }
 

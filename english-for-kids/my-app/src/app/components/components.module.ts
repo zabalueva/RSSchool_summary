@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CardViewWrapComponent } from './card-view-wrap/card-view-wrap.component';
+import { PlayViewComponent } from './play-view/play-view.component';
 
 
 
@@ -15,7 +16,8 @@ import { CardViewWrapComponent } from './card-view-wrap/card-view-wrap.component
     CardsViewComponent,
     HeaderComponent,
     SidenavComponent,
-    CardViewWrapComponent
+    CardViewWrapComponent,
+    PlayViewComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { CardViewWrapComponent } from './card-view-wrap/card-view-wrap.component
     CategoriesComponent,
     CardsViewComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    PlayViewComponent
   ]
 })
 export class ComponentsModule { }
