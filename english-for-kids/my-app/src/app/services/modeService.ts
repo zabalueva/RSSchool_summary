@@ -3,10 +3,14 @@ import { BehaviorSubject} from "rxjs";
 
 @Injectable()
 export class ModeService {
-  public mode = new BehaviorSubject<boolean>(false);
+  public mode$ = new BehaviorSubject<boolean>(false);
 
-  get mode$(){
-    return this.mode.asObservable();
+  get modeS$(){
+    return this.mode$.asObservable();
+  }
+
+  toggleMode(data:boolean){
+    this.mode$.next(data);
   }
 
 }

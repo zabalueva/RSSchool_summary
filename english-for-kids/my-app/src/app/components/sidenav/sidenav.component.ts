@@ -23,7 +23,19 @@ export class SidenavComponent {
   }
 
   toggleMode() {
-    this.mode=!this.mode;
+    if (!this.mode) {
+      this.modeService.toggleMode(true);
+      console.log('play');
+      if (document.getElementById('button__start')) {
+        (document.getElementById('button__start') as Element).classList.remove('button__start_disabled');
+      }
+    } else {
+      this.modeService.toggleMode(false);
+      if (document.getElementById('button__start')) {
+        (document.getElementById('button__start') as Element).classList.add('button__start_disabled');
+      }
+    }
+
     if (document.getElementById('button__start')) {
       (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
     }

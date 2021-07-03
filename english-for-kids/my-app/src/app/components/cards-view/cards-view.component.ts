@@ -33,18 +33,16 @@ export class CardsViewComponent implements OnInit {
     if (document.getElementsByClassName('menu__item-active')[0].textContent) {
       if (document.getElementsByClassName('menu__item-active')[0].textContent === 'Main Page') {
         this.title = categories[this.number];
-        console.log('fj')
       } else {
       this.title = document.getElementsByClassName('menu__item-active')[0].textContent;
       }
     }
-    console.log(this.mode);
   }
 
   ngOnInit() {
     this.modeService.mode$.subscribe((mode) => this.mode=mode);
     this.getTitle();
-    console.log(this.title)
+    console.log(this.mode)
     if (document.getElementsByClassName('menu__item-active')[0].textContent !== 'Main Page'){
       if(typeof(this.title) === 'string'){
             this.number = categories.indexOf(this.title);
