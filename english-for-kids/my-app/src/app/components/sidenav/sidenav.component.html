@@ -11,29 +11,9 @@
   <a class="menu__item menu__item-active " (click)="highlight($event)" routerLink=".">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 0}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[0]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 1}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[1]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 2}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[2]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 3}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[3]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 4}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[4]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 5}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[5]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 6}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[6]}}<li class="menu__item"></li>
-  </a>
-  <a class="menu__item" routerLink="."  [state]="{categoryIndex: 7}"
-  (click)="saveNumber($event)" (click)="highlight($event)">{{fillerNav[7]}}<li class="menu__item"></li>
+  <a class="menu__item" routerLink="."
+  (click)="navigate($event)" (click)="highlight($event)"
+    *ngFor="let navItem of fillerNav; let index = index" [state]="{categoryIndex: getNumberCategory()}">{{navItem}}<li class="menu__item"></li>
   </a>
 </ul>
 

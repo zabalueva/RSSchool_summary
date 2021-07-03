@@ -44,13 +44,8 @@ export class SidenavComponent {
     (event.target as Element).classList.add('menu__item-active');
   }
 
-  saveNumber(event: any): number {
-    this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1
+  navigate(event: any): void {
     setTimeout(()=> this.router.navigate(['/card']), 0)
-    const numberGh=this.numberCategory;
-    this.numberCategory=categories.findIndex((item) => item===event.target.text);
-    this.nodeService.addNode(numberGh);
-    return this.numberCategory;
   }
 
   getNumberCategory() {
