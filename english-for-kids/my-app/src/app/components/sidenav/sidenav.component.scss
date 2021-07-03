@@ -6,21 +6,21 @@
 //https://www.mobila.name/post/53eb5a219dcff/
 
 .menu {
-    display: block;
-    position: fixed;
-    list-style:none;
-    padding: 10px;
-    margin: 0;
-    box-sizing: border-box;
-    width: 200px;
-    background: linear-gradient(40deg,#00bf82,#0099ae);
-    height: auto;
-    top: 0;
-    left: -200px;
-    transition: left .2s;
-    z-index: 2;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
+  display: block;
+  position: fixed;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  box-sizing: border-box;
+  width: 200px;
+  background: linear-gradient(40deg, #00bf82, #0099ae);
+  height: auto;
+  top: 0;
+  left: -200px;
+  transition: left 0.2s;
+  z-index: 2;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
 
   &__item {
     padding-top: 23px;
@@ -53,13 +53,13 @@
   display: none;
 }
 
-.burger{
+.burger {
   padding: 5px;
   position: fixed;
   top: 5px;
   left: 5px;
   cursor: pointer;
-  transition: left .23s;
+  transition: left 0.23s;
   z-index: 3;
   width: 35px;
   -webkit-transform: translateZ(0);
@@ -70,7 +70,7 @@
   height: 5px;
   background-color: #cdcdcd;
   margin: 5px 0 0;
-  transition: all .1s linear .23s;
+  transition: all 0.1s linear 0.23s;
   position: relative;
 }
 .burger span.first {
@@ -95,8 +95,6 @@
   top: -10px;
 }
 
-
-
 //https://stackoverflow.com/questions/55203317/how-do-i-add-text-to-this-css-switcher-toggle-switch
 .onoffswitch {
   position: relative;
@@ -113,7 +111,8 @@
   border-radius: 20px;
 }
 
-.onoffswitch-inner:before, .onoffswitch-inner:after {
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
   display: block;
   float: left;
   width: 50%;
@@ -141,7 +140,7 @@
   display: block;
   width: 18px;
   margin: 6px;
-  background: #FFFFFF;
+  background: #ffffff;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -151,23 +150,27 @@
   transition: all 0.3s ease-in 0s;
 }
 
-.onoffswitch-label:before, .onoffswitch-switch {
+.onoffswitch-label:before,
+.onoffswitch-switch {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin: 3px 0 0;
 }
 
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin: 4px 0 0;
   margin-top: 1px \9;
   line-height: normal;
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
 }
@@ -177,16 +180,16 @@ input[type="checkbox"], input[type="radio"] {
 }
 
 .onoffswitch-inner:before {
-  content: "START";
+  content: "PLAY";
   padding-left: 10px;
-  background-color: #34A7C1;
-  color: #FFFFFF;
+  background-color: #34a7c1;
+  color: #ffffff;
 }
 
 .onoffswitch-inner:after {
   content: "TRAIN";
   padding-right: 10px;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   color: #999999;
   text-align: right;
 }
@@ -222,6 +225,37 @@ input[type="checkbox"], input[type="radio"] {
   height: auto;
   min-height: 80vh;
 }
-.toggle_button_input {
-  display:none;
+
+.play-action {
+  display: flex;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.button__start {
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 20px;
+  width: 92px;
+  height: 92px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #00bf9a;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.button__start:hover {
+  background: #00bf9a;
+  box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.25);
+}
+
+.button__start:active {
+  background: #067962;
+  box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.25);
+}
+
+.button__start_disabled {
+  display: none;
 }

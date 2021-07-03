@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import cards, { categories } from 'src/assets/cards';
 import { NodeService } from 'src/app/services/nodeService';
 import { Router } from '@angular/router';
+import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: 'app-sidenav',
@@ -23,10 +24,8 @@ export class SidenavComponent {
   checked = true;
 
   toggleMode() {
-    /* if (document.getElementsByClassName('toggle_button')) {
-      document.getElementsByClassName('toggle_button')[0].innerHTML=this.checked? "START":"TRAIN";
-    } */
     this.checked=!this.checked;
+    (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
   }
 
   toggleMenu() {
