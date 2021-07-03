@@ -23,9 +23,9 @@ export class SidenavComponent {
   checked = true;
 
   toggleMode() {
-    if (document.getElementsByClassName('toggle_button')) {
+    /* if (document.getElementsByClassName('toggle_button')) {
       document.getElementsByClassName('toggle_button')[0].innerHTML=this.checked? "START":"TRAIN";
-    }
+    } */
     this.checked=!this.checked;
   }
 

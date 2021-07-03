@@ -19,11 +19,11 @@
 </ul>
 
 
-<div class="header__menu " (click)="toggleMenu()">
-  <input class="toggle_button_input" type="checkbox" (click)="toggleMode()">
-  <label class="toggle_button toggle_mode" (click)="toggleMode()" (click)="toggleMenu()" id="toggle">
-
-    <!-- <span class="toggle_mode">TRAIN</span> -->
+<div class="header__menu onoffswitch" (click)="toggleMenu()">
+  <input class="toggle_button_input onoffswitch-checkbox" type="checkbox" name="onoffswitch" id="myonoffswitch" >
+  <label class="toggle_button toggle_mode onoffswitch-label" for="myonoffswitch" (click)="toggleMode()" (click)="toggleMenu()" id="toggle">
+    <span class="onoffswitch-inner"></span>
+    <span class="onoffswitch-switch"></span>
   </label>
 </div>
 

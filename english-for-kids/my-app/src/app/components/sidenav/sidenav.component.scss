@@ -96,64 +96,110 @@
 }
 
 
-.toggle_button {
+
+//https://stackoverflow.com/questions/55203317/how-do-i-add-text-to-this-css-switcher-toggle-switch
+.onoffswitch {
   position: relative;
+  width: 90px;
+  margin-left: 50vw;
+  margin-top: 2vh;
+}
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
   cursor: pointer;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-.toggle_button_input {
-  display:none;
-}
-
-.toggle_mode {
-  position: absolute;
-  cursor: pointer;
-  top: 12px;
-  left: 300px;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.toggle_mode:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .toggle_mode {
-  background-color: #2196F3;
-}
-
-input:focus + .toggle_mode {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .toggle_mode:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.toggle_mode:before {
-  border-radius: 50%;
-}
-
-.toggle_mode {
-  background-color: rgb(51, 126, 211);
+  border: 2px solid #999999;
   border-radius: 20px;
-  width: 7em;
-  padding-left: 4px;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 30px;
+  padding: 0;
+  line-height: 30px;
+  font-size: 14px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.onoffswitch-switch {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+}
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 56px;
+  border: 2px solid #999999;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-label:before, .onoffswitch-switch {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin: 3px 0 0;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9;
+  line-height: normal;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.onoffswitch-checkbox {
+  display: none;
+}
+
+.onoffswitch-inner:before {
+  content: "START";
+  padding-left: 10px;
+  background-color: #34A7C1;
+  color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+  content: "TRAIN";
+  padding-right: 10px;
+  background-color: #EEEEEE;
+  color: #999999;
+  text-align: right;
+}
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
 }
 
 .sidenav__button {
@@ -175,4 +221,7 @@ input:checked + .toggle_mode:before {
   margin: 6em auto;
   height: auto;
   min-height: 80vh;
+}
+.toggle_button_input {
+  display:none;
 }
