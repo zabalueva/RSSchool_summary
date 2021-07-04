@@ -41,6 +41,7 @@ export class SidenavComponent {
     } else {
       this.modeService.toggleMode(false);
       if (document.getElementById('button__start')) {
+        (document.getElementById('button__start') as Element).innerHTML = `START`;
         (document.getElementById('button__start') as Element).classList.add('button__start_disabled');
       }
       if (document.getElementsByClassName('card__action')) {
@@ -79,8 +80,9 @@ export class SidenavComponent {
   getRandom() {
     const title=document.getElementsByClassName('category__title')[0];
     const titleText=title.textContent||'';
-    if (typeof (title)==='string') {
-      this.playService.getRandomSound(categories.indexOf(titleText));
-    }
+    console.log(titleText)
+    this.playService.getRandomSound(categories.indexOf(titleText));
+
+    (document.getElementById('button__start') as Element).innerHTML = `&#8635`;
   }
 }

@@ -1,14 +1,23 @@
 import cards from "src/assets/cards";
 
 export class PlayService {
+  checkingWord = '';
 
   getRandomSound(number: number) {
     let audio=new Audio();
     const randomNumber = Math.floor(Math.random()*cards[number].length);
-    console.log(randomNumber);
     audio.src=cards[number][randomNumber].audioSrc;
     audio.load();
     audio.play();
-    const checkingWord = cards[number][randomNumber].word;
+    console.log('sound')
+    this.checkingWord = cards[number][randomNumber].word;
+    console.log(this.checkingWord)
+  }
+
+  repeatRandomSound(number: number) {
+    let audio=new Audio();
+    cards[number].forEach((el) => el.word === this.checkingWord ? audio.src=el.audioSrc : '');
+    audio.load();
+    audio.play();
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Card } from 'src/app/models/card';
 import { ModeService } from 'src/app/services/modeService';
-import { Subscription } from 'rxjs';
 import cards, { categories } from 'src/assets/cards';
 import { Router } from '@angular/router';
 
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
 })
 
 export class CardsViewComponent implements OnInit {
-  @Input() number:number = 6;
+  number:number = 6;
 
   title: string | null = "animal";
   fillerNav = Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
@@ -40,12 +39,15 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modeService.mode$.subscribe((mode) => this.mode = mode);
+    console.log(this.mode);
     this.getTitle();
     if (document.getElementsByClassName('menu__item-active')[0].textContent !== 'Main Page'){
       if(typeof(this.title) === 'string'){
             this.number = categories.indexOf(this.title);
       }
+    }
+    if (document.getElementById('button__start')) {
+      (document.getElementById('button__start') as Element).innerHTML = `START`;
     }
     this.fillerCategory = cards[this.number];
     if (this.mode) {
@@ -57,12 +59,17 @@ export class CardsViewComponent implements OnInit {
   }
 
   soundOn(src: string) {
-    this.mode = !this.mode;
     let audio=new Audio();
     audio.src=src;
     audio.load();
     audio.play();
-    this.mode=!this.mode;
+    console.log(src)
+    if (!this.mode){
+      console.log(src)
+    }
+    if (this.mode){
+      console.log(src)
+    }
   }
 
   turnCardAutomatic(event:any){
