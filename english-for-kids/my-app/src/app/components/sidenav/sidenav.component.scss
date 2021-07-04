@@ -229,12 +229,14 @@ input[type="radio"] {
 
 .play-action {
   display: flex;
-  justify-content: center;
-  min-height: 100px;
-  min-width: 10px;
+  justify-content: flex-end;
+  height: 100px;
+  max-width: 100vh;
+
 }
 
 .button__start {
+  z-index: 2;
   font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   font-size: 20px;

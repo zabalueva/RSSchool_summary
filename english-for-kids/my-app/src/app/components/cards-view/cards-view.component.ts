@@ -16,18 +16,18 @@ export class CardsViewComponent implements OnInit {
   @Input() number:number = 6;
 
   title: string | null = "animal";
-
   fillerNav = Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
   flipped = false;
-  mode = true;
+  mode = false;
   public fillerCategory: Card[]|null|undefined=[];
   numberCategory: number = 0;
-
+  checkingWord:string = '';
 
   constructor(private modeService:ModeService, private router: Router) {
+    modeService.mode$.subscribe((mode) => this.mode = mode);
     //by @fomenkogregory
-    this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1
-  }
+    this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1;
+}
 
   getTitle():void {
     if (document.getElementsByClassName('menu__item-active')[0].textContent) {
@@ -40,12 +40,17 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modeService.mode$.subscribe((mode) => this.mode=mode);
+    this.modeService.mode$.subscribe((mode) => this.mode = mode);
     this.getTitle();
-    console.log(this.mode)
     if (document.getElementsByClassName('menu__item-active')[0].textContent !== 'Main Page'){
       if(typeof(this.title) === 'string'){
             this.number = categories.indexOf(this.title);
+      }
+    }
+    console.log(this.modeService.modeS$)
+    if (document.getElementById('button__start') ){
+      if (!(document.getElementById('button__start') as Element).classList.contains('button__start_disabled')){
+        this.getRandomSound();
       }
     }
     this.fillerCategory = cards[this.number];
@@ -67,6 +72,16 @@ export class CardsViewComponent implements OnInit {
   rotate(event:any){
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped = !this.flipped;
+  }
+
+  getRandomSound() {
+    let audio=new Audio();
+    const randomNumber = Math.floor(Math.random()*cards[this.number].length);
+    console.log('audioRandom');
+    audio.src=cards[this.number][randomNumber].audioSrc;
+    audio.load();
+    audio.play();
+    this.checkingWord = cards[this.number][randomNumber].word;
   }
 
 }

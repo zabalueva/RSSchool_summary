@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import cards, { categories } from 'src/assets/cards';
 import { ModeService } from 'src/app/services/modeService';
 import { Router } from '@angular/router';
-import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: 'app-sidenav',
@@ -25,21 +24,33 @@ export class SidenavComponent {
   toggleMode() {
     if (!this.mode) {
       this.modeService.toggleMode(true);
-      console.log('play');
       if (document.getElementById('button__start')) {
+        if (document.getElementsByClassName('category__title')){
         (document.getElementById('button__start') as Element).classList.remove('button__start_disabled');
       }
+    }
+      if (document.getElementsByClassName('card__action')) {
+        Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none')
+      }
+      if (document.getElementsByClassName('card__title-container')) {
+        Array.from(document.getElementsByClassName('card__title-container')).forEach((el) => (el as HTMLElement).style.backgroundColor='#34a7c1')
+      }
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='308px');
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px')
     } else {
       this.modeService.toggleMode(false);
       if (document.getElementById('button__start')) {
         (document.getElementById('button__start') as Element).classList.add('button__start_disabled');
       }
+      if (document.getElementsByClassName('card__action')) {
+        Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='inline')
+      }
+      if (document.getElementsByClassName('card__title-container')) {
+        Array.from(document.getElementsByClassName('card__title-container')).forEach((el) => (el as HTMLElement).style.backgroundColor='#ffffff')
+      }
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='268px');
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='318px')
     }
-
-    if (document.getElementById('button__start')) {
-      (document.getElementById('button__start') as Element).classList.toggle('button__start_disabled');
-    }
-    console.log(`sidenav${this.mode}`)
   }
 
   toggleMenu() {
@@ -62,5 +73,9 @@ export class SidenavComponent {
 
   getNumberCategory() {
     return this.numberCategory;
+  }
+
+  getRandom(){
+    console.log(this.getNumberCategory() )
   }
 }
