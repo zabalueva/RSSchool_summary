@@ -47,13 +47,13 @@ export class CardsViewComponent implements OnInit {
             this.number = categories.indexOf(this.title);
       }
     }
-    console.log(this.modeService.modeS$)
-    if (document.getElementById('button__start') ){
-      if (!(document.getElementById('button__start') as Element).classList.contains('button__start_disabled')){
-        this.getRandomSound();
+    this.fillerCategory = cards[this.number];
+    if (this.mode) {
+      console.log('dfkj')
+      if (document.getElementsByClassName('card__action')) {
+        Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none')
       }
     }
-    this.fillerCategory = cards[this.number];
   }
 
   soundOn(src: string) {

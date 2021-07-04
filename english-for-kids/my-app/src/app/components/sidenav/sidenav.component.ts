@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import cards, { categories } from 'src/assets/cards';
 import { ModeService } from 'src/app/services/modeService';
 import { Router } from '@angular/router';
+import { PlayService } from 'src/app/services/playService';
 
 @Component({
   selector: 'app-sidenav',
-  providers: [ModeService],
+  providers: [ModeService, PlayService],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
@@ -17,7 +18,7 @@ export class SidenavComponent {
   numberCategory: number=this.getNumberCategory();
   mode=false;
 
-  constructor(private modeService: ModeService, private router: Router) {
+  constructor(private modeService: ModeService, private router: Router, private playService: PlayService) {
     modeService.mode$.subscribe((mode) => this.mode=mode)
   }
 
@@ -25,10 +26,10 @@ export class SidenavComponent {
     if (!this.mode) {
       this.modeService.toggleMode(true);
       if (document.getElementById('button__start')) {
-        if (document.getElementsByClassName('category__title')){
-        (document.getElementById('button__start') as Element).classList.remove('button__start_disabled');
+        if (document.getElementsByClassName('category__title')) {
+          (document.getElementById('button__start') as Element).classList.remove('button__start_disabled');
+        }
       }
-    }
       if (document.getElementsByClassName('card__action')) {
         Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none')
       }
@@ -75,7 +76,11 @@ export class SidenavComponent {
     return this.numberCategory;
   }
 
-  getRandom(){
-    console.log(this.getNumberCategory() )
+  getRandom() {
+    const title=document.getElementsByClassName('category__title')[0];
+    const titleText=title.textContent||'';
+    if (typeof (title)==='string') {
+      this.playService.getRandomSound(categories.indexOf(titleText));
+    }
   }
 }
