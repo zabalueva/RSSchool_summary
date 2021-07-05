@@ -15,13 +15,13 @@ import { GameStateService } from 'src/app/services/gameStateService';
 export class CardsViewComponent implements OnInit {
   number: number=6;
 
+  POINTFORWINS: number=8;
   title: string|null="animal";
   fillerNav=Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
   flipped=false;
   mode=false;
   game=false;
   public fillerCategory: Card[]|null|undefined=[];
-  numberCategory: number=0;
   checkingWord: string='';
 
   constructor(private modeService: ModeService, private router: Router, private playService: PlayService, public gameStateService: GameStateService) {
@@ -79,6 +79,18 @@ export class CardsViewComponent implements OnInit {
             audio.src='/assets/audio/correct.mp3';
             audio.load();
             audio.play();
+            this.playService.incrementPoints();
+            if (this.playService.getPoints() === this.POINTFORWINS) {
+              let audio=new Audio();
+              audio.src='/assets/audio/success.mp3';
+              audio.load();
+              audio.play();
+              document.querySelector('.congratulations')?.classList.remove('hidden');
+              document.querySelector('.cards-container')?.classList.add('hidden');
+              setTimeout(() => this.router.navigate(['/']), 8000);
+              /* this.gameStateService.toggleMode(false); */
+            }
+            console.log(this.playService.getPoints());
             const title=document.getElementsByClassName('category__title')[0];
             const titleText=title.textContent||'';
             setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);

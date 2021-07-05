@@ -83,3 +83,42 @@
 .card_inactive {
   filter: blur(12px);
 }
+
+.congratulations {
+  z-index: 2;
+  position: absolute;
+  max-width: 200px;
+  top: 33vh;
+  height: 430px;
+  text-align: center;
+
+  &__text {
+    text-align: center;
+    font-size: 50px;
+    text-shadow:
+    -1px -1px #FFF,
+    -2px -2px #FFF,
+    -1px 1px #FFF,
+    -2px 2px #FFF,
+    1px 1px #FFF,
+    2px 2px #FFF,
+    1px -1px #FFF,
+    2px -2px #FFF,
+    -3px -3px 2px #BBB,
+    -3px 3px 2px #BBB,
+    3px 3px 2px #BBB,
+    3px -3px 2px #BBB;
+  color: steelblue;
+  transition: all 1s;
+}
+
+
+:hover {
+  color: yellowgreen;
+}
+
+}
+
+.hidden {
+  display: none;
+}
