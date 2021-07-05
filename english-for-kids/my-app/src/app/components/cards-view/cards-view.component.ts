@@ -12,28 +12,28 @@ import { PlayService } from 'src/app/services/playService';
 })
 
 export class CardsViewComponent implements OnInit {
-  number:number = 6;
+  number: number=6;
 
-  title: string | null = "animal";
-  fillerNav = Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
-  flipped = false;
-  mode = false;
+  title: string|null="animal";
+  fillerNav=Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
+  flipped=false;
+  mode=false;
   public fillerCategory: Card[]|null|undefined=[];
-  numberCategory: number = 0;
-  checkingWord:string = '';
+  numberCategory: number=0;
+  checkingWord: string='';
 
-  constructor(private modeService:ModeService, private router: Router, private playService:PlayService,) {
-    modeService.mode$.subscribe((mode) => this.mode = mode);
+  constructor(private modeService: ModeService, private router: Router, private playService: PlayService,) {
+    modeService.mode$.subscribe((mode) => this.mode=mode);
     //by @fomenkogregory
-    this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1;
-}
+    this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??1;
+  }
 
-  getTitle():void {
+  getTitle(): void {
     if (document.getElementsByClassName('menu__item-active')[0].textContent) {
-      if (document.getElementsByClassName('menu__item-active')[0].textContent === 'Main Page') {
-        this.title = categories[this.number];
+      if (document.getElementsByClassName('menu__item-active')[0].textContent==='Main Page') {
+        this.title=categories[this.number];
       } else {
-      this.title = document.getElementsByClassName('menu__item-active')[0].textContent;
+        this.title=document.getElementsByClassName('menu__item-active')[0].textContent;
       }
     }
   }
@@ -41,15 +41,15 @@ export class CardsViewComponent implements OnInit {
   ngOnInit() {
     console.log(this.mode);
     this.getTitle();
-    if (document.getElementsByClassName('menu__item-active')[0].textContent !== 'Main Page'){
-      if(typeof(this.title) === 'string'){
-            this.number = categories.indexOf(this.title);
+    if (document.getElementsByClassName('menu__item-active')[0].textContent!=='Main Page') {
+      if (typeof (this.title)==='string') {
+        this.number=categories.indexOf(this.title);
       }
     }
     if (document.getElementById('button__start')) {
-      (document.getElementById('button__start') as Element).innerHTML = `START`;
+      (document.getElementById('button__start') as Element).innerHTML=`START`;
     }
-    this.fillerCategory = cards[this.number];
+    this.fillerCategory=cards[this.number];
     if (this.mode) {
       console.log('dfkj')
       if (document.getElementsByClassName('card__action')) {
@@ -59,55 +59,57 @@ export class CardsViewComponent implements OnInit {
   }
 
   soundOn(card: Card) {
-    const starSpan = document.createElement('span');
-      starSpan.classList.add('star-win');
-    if (!this.mode){
+    const starSpan=document.createElement('span');
+    starSpan.classList.add('star-win');
+    if (!this.mode) {
       let audio=new Audio();
       audio.src=card.audioSrc;
       audio.load();
       audio.play();
     } else {
-    if (this.playService.checkingWord === card.word){
-      document.querySelector('.category__title')?.appendChild(starSpan);
-      starSpan.innerHTML = `<img src='/assets/img/star-win.svg'>`;
-      let audio=new Audio();
-      audio.src='/assets/audio/correct.mp3';
-      audio.load();
-      audio.play();
-    } else {
-      document.querySelector('.category__title')?.appendChild(starSpan);
-      starSpan.innerHTML = `<img src='/assets/img/star.svg'>`;
-      let audio=new Audio();
-      audio.src='/assets/audio/error.mp3';
-      audio.load();
-      audio.play();
-      console.log('fall')
-    }
+      if (this.playService.checkingWord === card.word) {
+        document.querySelector('.category__title')?.appendChild(starSpan);
+        starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
+        let audio=new Audio();
+        audio.src='/assets/audio/correct.mp3';
+        audio.load();
+        audio.play();
+      } else {
+        document.querySelector('.category__title')?.appendChild(starSpan);
+        starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
+        let audio=new Audio();
+        audio.src='/assets/audio/error.mp3';
+        audio.load();
+        audio.play();
+      }
     }
   }
 
-  inactiveCard(card:Card){
-    console.log(card.image)
-    /* (card.image as Element).classList.add("inactive"); */
+  inactiveCard(img:any, card:Card) {
+    if (this.mode) {
+      if (this.playService.checkingWord === card.word) {
+        (img.srcElement as Element).classList.add('card_inactive')
+      }
+    }
   }
 
-  turnCardAutomatic(event:any){
+  turnCardAutomatic(event: any) {
     ((event.srcElement as Node).parentNode as Element).classList.remove("animate");
   }
 
-  rotate(event:any){
+  rotate(event: any) {
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
-    this.flipped = !this.flipped;
+    this.flipped=!this.flipped;
   }
 
   getRandomSound() {
     let audio=new Audio();
-    const randomNumber = Math.floor(Math.random()*cards[this.number].length);
+    const randomNumber=Math.floor(Math.random()*cards[this.number].length);
     console.log('audioRandom');
     audio.src=cards[this.number][randomNumber].audioSrc;
     audio.load();
     audio.play();
-    this.checkingWord = cards[this.number][randomNumber].word;
+    this.checkingWord=cards[this.number][randomNumber].word;
   }
 
 }

@@ -3,17 +3,21 @@ import { Card } from "../models/card";
 
 export class PlayService {
   checkingWord = '';
-  cardsPlay: Card[][] = cards;
+  cardsPlay: Card[] = cards[0].slice();
 
   getRandomSound(number: number) {
+    this.cardsPlay = cards[number].slice()
+    const remover = this.cardsPlay.slice();
     let audio=new Audio();
-    const randomNumber = Math.floor(Math.random()*this.cardsPlay[number].length);
-    audio.src=this.cardsPlay[number][randomNumber].audioSrc;
+    console.log(this.cardsPlay[number]);
+    const randomNumber = Math.floor(Math.random()*remover.length);
+    audio.src=remover[randomNumber].audioSrc;
     audio.load();
     audio.play();
-    this.checkingWord = this.cardsPlay[number][randomNumber].word;
-    this.cardsPlay.slice()
-    console.log(this.checkingWord);
+    this.checkingWord = remover[randomNumber].word;
+    remover.splice(randomNumber, 1)
+    console.log(randomNumber);
+    console.log(remover);
   }
 
   repeatRandomSound(number: number) {

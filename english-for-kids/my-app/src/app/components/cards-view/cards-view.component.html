@@ -8,7 +8,7 @@
           <span class="card__word">{{card.word}}</span>
           <span class="card__flipper" (click)="rotate($event)">&#8635;</span>
         </div>
-        <img class="card__img" [src]=card.image alt="category" (click)="soundOn(card)">
+        <img class="card__img" [src]=card.image alt="category" (click)="soundOn(card)" (click)="inactiveCard($event, card)">
       </div>
       <div class="category-card card card_back" (mouseleave)="turnCardAutomatic($event)">
         <div class="card__action">

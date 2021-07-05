@@ -80,8 +80,6 @@
   transform: rotateY(180deg);
 }
 
-.star-win {
- width: 200px;
- height: 200px;
- background-color: red;
+.card_inactive {
+  filter: blur(12px);
 }
