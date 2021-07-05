@@ -69,37 +69,39 @@ export class CardsViewComponent implements OnInit {
       audio.play();
     } else {
       if (this.game) {
-      if (this.playService.checkingWord===card.word) {
-        document.querySelector('.category__title')?.appendChild(starSpan);
-        starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
-        let audio=new Audio();
-        audio.src='/assets/audio/correct.mp3';
-        audio.load();
-        audio.play();
-        const title=document.getElementsByClassName('category__title')[0];
-        const titleText=title.textContent||'';
-        setTimeout (() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
-      } else {
-        document.querySelector('.category__title')?.appendChild(starSpan);
-        starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
-        let audio=new Audio();
-        audio.src='/assets/audio/error.mp3';
-        audio.load();
-        audio.play();
+        let inactive: any[]=[];
+        Array.from(document.querySelectorAll('.card__img')).forEach((el) => (el as Element).classList.contains('card_inactive')? inactive.push((el as HTMLImageElement).src):false);
+        if (!inactive.join().includes(card.word)) {
+          if (this.playService.checkingWord===card.word) {
+            document.querySelector('.category__title')?.appendChild(starSpan);
+            starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
+            let audio=new Audio();
+            audio.src='/assets/audio/correct.mp3';
+            audio.load();
+            audio.play();
+            const title=document.getElementsByClassName('category__title')[0];
+            const titleText=title.textContent||'';
+            setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
+          } else {
+            document.querySelector('.category__title')?.appendChild(starSpan);
+            starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
+            let audio=new Audio();
+            audio.src='/assets/audio/error.mp3';
+            audio.load();
+            audio.play();
+          }
+        }
       }
-    }
     }
   }
 
   inactiveCard(img: any, card: Card) {
     if (this.mode) {
-      if (this.playService.checkingWord === card.word) {
+      if (this.playService.checkingWord===card.word) {
         (img.srcElement as Element).classList.add('card_inactive')
       }
     }
   }
-
-
 
   turnCardAutomatic(event: any) {
     ((event.srcElement as Node).parentNode as Element).classList.remove("animate");
