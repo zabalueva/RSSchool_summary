@@ -5,20 +5,20 @@ export class PlayService {
   checkingWord='';
   cardsPlay: Card[]=[];
   points: number=0;
-  remover: Card[]=[];
+  removercardsPlay: Card[]=[];
 
   getRandomSound(number: number) {
     if (this.checkingWord==='') {
       this.cardsPlay=cards[number].slice();
-      this.remover=this.cardsPlay.slice();
+      this.removercardsPlay=this.cardsPlay.slice();
     }
     let audio=new Audio();
-    const randomNumber=Math.floor(Math.random()*this.remover.length);
-    audio.src=this.remover[randomNumber].audioSrc;
+    const randomNumber=Math.floor(Math.random()*this.removercardsPlay.length);
+    audio.src=this.removercardsPlay[randomNumber].audioSrc;
     audio.load();
     audio.play();
-    this.checkingWord=this.remover[randomNumber].word;
-    this.remover.splice(randomNumber, 1);
+    this.checkingWord=this.removercardsPlay[randomNumber].word;
+    this.removercardsPlay.splice(randomNumber, 1);
   }
 
   repeatRandomSound(number: number) {
