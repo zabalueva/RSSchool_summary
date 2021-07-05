@@ -59,6 +59,8 @@ export class CardsViewComponent implements OnInit {
   }
 
   soundOn(card: Card) {
+    const starSpan = document.createElement('span');
+      starSpan.classList.add('star-win');
     if (!this.mode){
       let audio=new Audio();
       audio.src=card.audioSrc;
@@ -66,16 +68,15 @@ export class CardsViewComponent implements OnInit {
       audio.play();
     } else {
     if (this.playService.checkingWord === card.word){
-      let viewStar = `<img src='/assets/img/star-win.svg'>`;
-      const starSpan = document.createElement('span');
-      starSpan.classList.add('star-win');
       document.querySelector('.category__title')?.appendChild(starSpan);
-      starSpan.innerHTML = viewStar;
+      starSpan.innerHTML = `<img src='/assets/img/star-win.svg'>`;
       let audio=new Audio();
       audio.src='/assets/audio/correct.mp3';
       audio.load();
       audio.play();
     } else {
+      document.querySelector('.category__title')?.appendChild(starSpan);
+      starSpan.innerHTML = `<img src='/assets/img/star.svg'>`;
       let audio=new Audio();
       audio.src='/assets/audio/error.mp3';
       audio.load();
@@ -83,6 +84,11 @@ export class CardsViewComponent implements OnInit {
       console.log('fall')
     }
     }
+  }
+
+  inactiveCard(card:Card){
+    console.log(card.image)
+    /* (card.image as Element).classList.add("inactive"); */
   }
 
   turnCardAutomatic(event:any){

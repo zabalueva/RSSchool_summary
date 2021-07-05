@@ -1,16 +1,18 @@
 import cards from "src/assets/cards";
+import { Card } from "../models/card";
 
 export class PlayService {
   checkingWord = '';
+  cardsPlay: Card[][] = cards;
 
   getRandomSound(number: number) {
     let audio=new Audio();
-    const randomNumber = Math.floor(Math.random()*cards[number].length);
-    audio.src=cards[number][randomNumber].audioSrc;
+    const randomNumber = Math.floor(Math.random()*this.cardsPlay[number].length);
+    audio.src=this.cardsPlay[number][randomNumber].audioSrc;
     audio.load();
     audio.play();
-    console.log('sound')
-    this.checkingWord = cards[number][randomNumber].word;
+    this.checkingWord = this.cardsPlay[number][randomNumber].word;
+    this.cardsPlay.slice()
     console.log(this.checkingWord);
   }
 
