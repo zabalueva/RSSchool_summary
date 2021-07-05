@@ -11,12 +11,13 @@ export class PlayService {
     audio.play();
     console.log('sound')
     this.checkingWord = cards[number][randomNumber].word;
-    console.log(this.checkingWord)
+    console.log(this.checkingWord);
   }
 
   repeatRandomSound(number: number) {
     let audio=new Audio();
     cards[number].forEach((el) => el.word === this.checkingWord ? audio.src=el.audioSrc : '');
+    console.log(audio.src)
     audio.load();
     audio.play();
   }

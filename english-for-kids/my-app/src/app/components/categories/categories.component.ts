@@ -19,6 +19,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.mode)
     if (this.mode) {
       if (document.getElementsByClassName('card__title-container')) {
         Array.from(document.getElementsByClassName('card__title-container')).forEach((el) => (el as HTMLElement).style.backgroundColor='#34a7c1')

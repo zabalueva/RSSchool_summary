@@ -3,10 +3,10 @@ import { Card } from 'src/app/models/card';
 import { ModeService } from 'src/app/services/modeService';
 import cards, { categories } from 'src/assets/cards';
 import { Router } from '@angular/router';
+import { PlayService } from 'src/app/services/playService';
 
 @Component({
   selector: 'app-cards-view',
-  providers: [ModeService],
   templateUrl: './cards-view.component.html',
   styleUrls: ['./cards-view.component.scss']
 })
@@ -22,7 +22,7 @@ export class CardsViewComponent implements OnInit {
   numberCategory: number = 0;
   checkingWord:string = '';
 
-  constructor(private modeService:ModeService, private router: Router) {
+  constructor(private modeService:ModeService, private router: Router, private playService:PlayService,) {
     modeService.mode$.subscribe((mode) => this.mode = mode);
     //by @fomenkogregory
     this.number = this.router.getCurrentNavigation()?.extras.state?.categoryIndex ?? 1;
@@ -58,17 +58,30 @@ export class CardsViewComponent implements OnInit {
     }
   }
 
-  soundOn(src: string) {
-    let audio=new Audio();
-    audio.src=src;
-    audio.load();
-    audio.play();
-    console.log(src)
+  soundOn(card: Card) {
     if (!this.mode){
-      console.log(src)
+      let audio=new Audio();
+      audio.src=card.audioSrc;
+      audio.load();
+      audio.play();
+    } else {
+    if (this.playService.checkingWord === card.word){
+      let viewStar = `<img src='/assets/img/star-win.svg'>`;
+      const starSpan = document.createElement('span');
+      starSpan.classList.add('star-win');
+      document.querySelector('.category__title')?.appendChild(starSpan);
+      starSpan.innerHTML = viewStar;
+      let audio=new Audio();
+      audio.src='/assets/audio/correct.mp3';
+      audio.load();
+      audio.play();
+    } else {
+      let audio=new Audio();
+      audio.src='/assets/audio/error.mp3';
+      audio.load();
+      audio.play();
+      console.log('fall')
     }
-    if (this.mode){
-      console.log(src)
     }
   }
 

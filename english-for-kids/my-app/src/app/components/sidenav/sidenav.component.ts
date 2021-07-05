@@ -80,9 +80,14 @@ export class SidenavComponent {
   getRandom() {
     const title=document.getElementsByClassName('category__title')[0];
     const titleText=title.textContent||'';
-    console.log(titleText)
-    this.playService.getRandomSound(categories.indexOf(titleText));
-
+    console.log((document.getElementById('button__start') as Element).innerHTML);
+    if ((document.getElementById('button__start') as Element).innerHTML !== `&#8635`){
+      console.log('dkfj')
+      this.playService.getRandomSound(categories.indexOf(titleText));
+    }
     (document.getElementById('button__start') as Element).innerHTML = `&#8635`;
+    if ((document.getElementById('button__start') as Element).innerHTML === `&#8635`){
+      this.playService.repeatRandomSound(categories.indexOf(titleText));
+    }
   }
 }
