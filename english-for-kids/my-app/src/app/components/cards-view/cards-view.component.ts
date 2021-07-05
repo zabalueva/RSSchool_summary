@@ -4,6 +4,7 @@ import { ModeService } from 'src/app/services/modeService';
 import cards, { categories } from 'src/assets/cards';
 import { Router } from '@angular/router';
 import { PlayService } from 'src/app/services/playService';
+import { GameStateService } from 'src/app/services/gameStateService';
 
 @Component({
   selector: 'app-cards-view',
@@ -18,12 +19,14 @@ export class CardsViewComponent implements OnInit {
   fillerNav=Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
   flipped=false;
   mode=false;
+  game=false;
   public fillerCategory: Card[]|null|undefined=[];
   numberCategory: number=0;
   checkingWord: string='';
 
-  constructor(private modeService: ModeService, private router: Router, private playService: PlayService,) {
+  constructor(private modeService: ModeService, private router: Router, private playService: PlayService, public gameStateService: GameStateService) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
+    gameStateService.game$.subscribe((game) => this.game=game);
     //by @fomenkogregory
     this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??1;
   }
@@ -39,7 +42,6 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.mode);
     this.getTitle();
     if (document.getElementsByClassName('menu__item-active')[0].textContent!=='Main Page') {
       if (typeof (this.title)==='string') {
@@ -51,7 +53,6 @@ export class CardsViewComponent implements OnInit {
     }
     this.fillerCategory=cards[this.number];
     if (this.mode) {
-      console.log('dfkj')
       if (document.getElementsByClassName('card__action')) {
         Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none')
       }
@@ -67,13 +68,17 @@ export class CardsViewComponent implements OnInit {
       audio.load();
       audio.play();
     } else {
-      if (this.playService.checkingWord === card.word) {
+      if (this.game) {
+      if (this.playService.checkingWord===card.word) {
         document.querySelector('.category__title')?.appendChild(starSpan);
         starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
         let audio=new Audio();
         audio.src='/assets/audio/correct.mp3';
         audio.load();
         audio.play();
+        const title=document.getElementsByClassName('category__title')[0];
+        const titleText=title.textContent||'';
+        setTimeout (() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
       } else {
         document.querySelector('.category__title')?.appendChild(starSpan);
         starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
@@ -83,15 +88,18 @@ export class CardsViewComponent implements OnInit {
         audio.play();
       }
     }
+    }
   }
 
-  inactiveCard(img:any, card:Card) {
+  inactiveCard(img: any, card: Card) {
     if (this.mode) {
       if (this.playService.checkingWord === card.word) {
         (img.srcElement as Element).classList.add('card_inactive')
       }
     }
   }
+
+
 
   turnCardAutomatic(event: any) {
     ((event.srcElement as Node).parentNode as Element).classList.remove("animate");
@@ -100,16 +108,6 @@ export class CardsViewComponent implements OnInit {
   rotate(event: any) {
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped=!this.flipped;
-  }
-
-  getRandomSound() {
-    let audio=new Audio();
-    const randomNumber=Math.floor(Math.random()*cards[this.number].length);
-    console.log('audioRandom');
-    audio.src=cards[this.number][randomNumber].audioSrc;
-    audio.load();
-    audio.play();
-    this.checkingWord=cards[this.number][randomNumber].word;
   }
 
 }

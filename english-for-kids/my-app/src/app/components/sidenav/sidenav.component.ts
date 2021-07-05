@@ -3,10 +3,11 @@ import cards, { categories } from 'src/assets/cards';
 import { ModeService } from 'src/app/services/modeService';
 import { Router } from '@angular/router';
 import { PlayService } from 'src/app/services/playService';
+import { GameStateService } from 'src/app/services/gameStateService';
 
 @Component({
   selector: 'app-sidenav',
-  providers: [ModeService, PlayService],
+  providers: [ModeService, PlayService, GameStateService],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
@@ -17,9 +18,11 @@ export class SidenavComponent {
   fillerNav=Array.from({ length: 8 }, (_, i) => `${this.listNav[i]}`);
   numberCategory: number=this.getNumberCategory();
   mode=false;
+  game = false;
 
-  constructor(private modeService: ModeService, private router: Router, private playService: PlayService) {
-    modeService.mode$.subscribe((mode) => this.mode=mode)
+  constructor(private modeService: ModeService, private router: Router, private playService: PlayService, public gameStateService: GameStateService) {
+    modeService.mode$.subscribe((mode) => this.mode=mode);
+    gameStateService.game$.subscribe((game) => this.game=game);
   }
 
   toggleMode() {
@@ -78,6 +81,7 @@ export class SidenavComponent {
   }
 
   getRandom() {
+    this.gameStateService.toggleMode(true);
     const title=document.getElementsByClassName('category__title')[0];
     const titleText=title.textContent||'';
     if (this.playService.checkingWord === ''){

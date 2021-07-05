@@ -2,10 +2,10 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject} from "rxjs";
 
 @Injectable()
-export class ModeService {
+export class GameStateService {
   public game$ = new BehaviorSubject<boolean>(false);
 
-  get modeS$(){
+  get gameS$(){
     return this.game$.asObservable();
   }
 

@@ -3,21 +3,27 @@ import { Card } from "../models/card";
 
 export class PlayService {
   checkingWord = '';
-  cardsPlay: Card[] = cards[0].slice();
+  cardsPlay: Card[] = [];
+  points: number = 0;
+  remover: Card[] = [];
 
   getRandomSound(number: number) {
-    this.cardsPlay = cards[number].slice()
-    const remover = this.cardsPlay.slice();
+    if (this.checkingWord === '') {
+console.log('dfkjdf');
+this.cardsPlay = cards[number].slice();
+this.remover = this.cardsPlay.slice();
+    }
+
+
     let audio=new Audio();
-    console.log(this.cardsPlay[number]);
-    const randomNumber = Math.floor(Math.random()*remover.length);
-    audio.src=remover[randomNumber].audioSrc;
+    const randomNumber = Math.floor(Math.random()*this.remover.length);
+    audio.src=this.remover[randomNumber].audioSrc;
     audio.load();
     audio.play();
-    this.checkingWord = remover[randomNumber].word;
-    remover.splice(randomNumber, 1)
+    this.checkingWord = this.remover[randomNumber].word;
+    this.remover.splice(randomNumber, 1);
     console.log(randomNumber);
-    console.log(remover);
+    console.log(this.cardsPlay);
   }
 
   repeatRandomSound(number: number) {
@@ -26,5 +32,12 @@ export class PlayService {
     console.log(audio.src)
     audio.load();
     audio.play();
+  }
+
+  incrementPoints(){
+    this.points = this.points + 1;
+  }
+  getPoints(){
+    return this.points;
   }
 }
