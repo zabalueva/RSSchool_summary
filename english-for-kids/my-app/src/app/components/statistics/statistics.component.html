@@ -11,14 +11,18 @@
           <th>Train click</th>
           <th>Correct</th>
           <th>Wrong</th>
-          <th>% 0f errors</th>
+          <th>% of errors</th>
       </tr>
   </thead>
   <tbody *ngFor="let category of categoriesList; index as i;">
-      <tr class="active-row" *ngFor="let word of getWords(i); index as index">
+      <tr class="active-row" *ngFor="let card of getWords(i); index as index">
         <td>{{category}}</td>
-        <td>{{word.word}}</td>
-        <td>{{word.translation}}</td>
+        <td>{{card.word}}</td>
+        <td>{{card.translation}}</td>
+        <td>{{card.trainClicks}}</td>
+        <td>{{card.correctAnswers}}</td>
+        <td>{{card.incorrectAnswers}}</td>
+        <td>{{card.percentCorrect}}</td>
     </tr>
   </tbody>
 </table>

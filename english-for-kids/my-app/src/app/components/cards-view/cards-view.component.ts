@@ -5,6 +5,8 @@ import cards, { categories } from 'src/assets/cards';
 import { Router } from '@angular/router';
 import { PlayService } from 'src/app/services/playService';
 import { GameStateService } from 'src/app/services/gameStateService';
+import { StatisticsService } from 'src/app/services/statisticsService';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-cards-view',
@@ -25,7 +27,12 @@ export class CardsViewComponent implements OnInit {
   checkingWord: string='';
   starSpan: Element=document.createElement('span');
 
-  constructor(private modeService: ModeService, private router: Router, public playService: PlayService, public gameStateService: GameStateService) {
+  constructor(
+    private modeService: ModeService,
+    private router: Router,
+    public playService: PlayService,
+    public gameStateService: GameStateService,
+    ) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
     gameStateService.game$.subscribe((game) => this.game=game);
     //by @fomenkogregory
@@ -44,7 +51,6 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.mode);
     if (this.mode) {
       if (document.getElementsByClassName('card__action')) {
         setTimeout(() => Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none'), 1000);
@@ -75,6 +81,7 @@ export class CardsViewComponent implements OnInit {
     this.starSpan=document.createElement('span');
     if (!this.mode) {
       this.playAudio(card.audioSrc);
+      /* this.statisticsService.incrementTrainClicks(card.word); */
     } else {
       if (this.game) {
         let inactive: any[]=[];
@@ -116,7 +123,7 @@ export class CardsViewComponent implements OnInit {
       document.querySelector('.category__title')?.appendChild(this.starSpan);
       this.starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
       //sound from @marta-r
-      this.playAudio('/assets/audio/no.mp3')
+      this.playAudio('/assets/audio/error.mp3')
     }
   }
 

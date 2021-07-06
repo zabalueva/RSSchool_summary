@@ -8,16 +8,20 @@ export class StatisticsService {
     correctAnswers: 0,
     incorrectAnswers: 0,
     totalClicks: 0,}
-  trainClicks: number=0;
+    trainClicks: number=0;
 
 
-  getTrainClick() {
-    return this.trainClicks;
+  getTrainClick(word:string) {
+    return {word: this.trainClicks};
   }
 
-  incrementTrainClicks() {
+  getStatistics(wordMeans:WordStatistics){
+    this.word = wordMeans;
+  }
+
+  incrementTrainClicks(word:string) {
     this.trainClicks = this.trainClicks+1;
-    return this.trainClicks;
+    return {word: this.trainClicks};
   }
 
 }
