@@ -13,11 +13,10 @@ export class StatisticsComponent implements OnInit {
   categoriesList = categories;
   cardsList = cards;
   category = categories[0];
+  words: { word: string; translation: string; }[] = [];
 
   constructor(private router: Router) {
-
   }
-
 
   ngOnInit() {
 console.log('dkfj')
@@ -31,8 +30,10 @@ console.log('dkfj')
     return false;
   }
 
-  getCategory(){
-    return categories;
+  getWords(numberCategory: number){
+    this.words = [];
+    cards[numberCategory].forEach((el) => this.words.push({word: el.word, translation: el.translation}));
+    return this.words;
   }
 
 }

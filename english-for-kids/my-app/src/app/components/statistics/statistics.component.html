@@ -11,9 +11,10 @@
       </tr>
   </thead>
   <tbody *ngFor="let category of categoriesList; index as i;">
-      <tr class="active-row" *ngFor="let card of cardsList; index as i;">
+      <tr class="active-row" *ngFor="let word of getWords(i); index as index">
         <td>{{category}}</td>
-        <td>{{card[i].word}}</td>
+        <td>{{word.word}}</td>
+        <td>{{word.translation}}</td>
     </tr>
   </tbody>
 </table>
