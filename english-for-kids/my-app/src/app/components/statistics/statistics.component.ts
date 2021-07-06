@@ -28,8 +28,12 @@ console.log('dkfj')
   }
 
   resetStatistics(){
-    console.log('dfkj')
-    this.words = [];
+    let statisticsData = document.getElementById("statisticsData");
+
+    if (statisticsData) {
+      console.log(statisticsData)
+      statisticsData.innerHTML = '';
+    }
   }
 
   getWords(numberCategory: number){

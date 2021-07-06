@@ -37,7 +37,6 @@ export class CardsViewComponent implements OnInit {
     gameStateService.game$.subscribe((game) => this.game=game);
     //by @fomenkogregory
     this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??1;
-    this.starSpan.classList.add('star-win');
   }
 
   getTitle(): void {
@@ -79,6 +78,7 @@ export class CardsViewComponent implements OnInit {
 
   soundOn(card: Card) {
     this.starSpan=document.createElement('span');
+    this.starSpan.classList.add('star-win');
     if (!this.mode) {
       this.playAudio(card.audioSrc);
       /* this.statisticsService.incrementTrainClicks(card.word); */
@@ -114,7 +114,7 @@ export class CardsViewComponent implements OnInit {
         setTimeout(() => this.router.navigate(['/']), 8000);
         /* this.gameStateService.toggleMode(false); */
       } else {
-        const title=document.getElementsByClassName('category__title')[0];
+        const title=document.getElementsByClassName('category-title')[0];
         const titleText=title.textContent||'';
         setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
       }

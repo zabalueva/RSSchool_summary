@@ -29,7 +29,7 @@ export class SidenavComponent {
     if (!this.mode) {
       this.modeService.toggleMode(true);
       if (document.getElementById('button__start')) {
-        if (document.getElementsByClassName('category__title')) {
+        if (document.getElementsByClassName('category-title')) {
           (document.getElementById('button__start') as Element).classList.remove('button__start_disabled');
         }
       }
@@ -82,7 +82,7 @@ export class SidenavComponent {
 
   getRandom() {
     this.gameStateService.toggleMode(true);
-    const title=document.getElementsByClassName('category__title')[0];
+    const title=document.getElementsByClassName('category-title')[0];
     const titleText=title.textContent||'';
     if (this.playService.checkingWord === ''){
       this.playService.getRandomSound(categories.indexOf(titleText));
