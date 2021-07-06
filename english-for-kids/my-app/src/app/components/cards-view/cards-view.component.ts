@@ -100,7 +100,8 @@ export class CardsViewComponent implements OnInit {
             this.playService.incrementErrors();
             document.querySelector('.category__title')?.appendChild(starSpan);
             starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
-            this.playAudio('/assets/audio/error.mp3')
+            //sound from @marta-r
+            this.playAudio('/assets/audio/no.mp3')
           }
         }
       }
