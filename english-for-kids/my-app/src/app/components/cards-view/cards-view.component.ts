@@ -23,12 +23,14 @@ export class CardsViewComponent implements OnInit {
   game=false;
   public fillerCategory: Card[]|null|undefined=[];
   checkingWord: string='';
+  starSpan: Element=document.createElement('span');
 
   constructor(private modeService: ModeService, private router: Router, public playService: PlayService, public gameStateService: GameStateService) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
     gameStateService.game$.subscribe((game) => this.game=game);
     //by @fomenkogregory
     this.number=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??1;
+    this.starSpan.classList.add('star-win');
   }
 
   getTitle(): void {
@@ -45,9 +47,9 @@ export class CardsViewComponent implements OnInit {
     console.log(this.mode);
     if (this.mode) {
       if (document.getElementsByClassName('card__action')) {
-        setTimeout(()=> Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none'), 1000);
-        setTimeout(()=> Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='308px'), 1000);
-        setTimeout(()=> Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px'), 1000);
+        setTimeout(() => Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none'), 1000);
+        setTimeout(() => Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='308px'), 1000);
+        setTimeout(() => Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px'), 1000);
       }
     }
     this.getTitle();
@@ -62,9 +64,15 @@ export class CardsViewComponent implements OnInit {
     this.fillerCategory=cards[this.number];
   }
 
+  playAudio(src: string) {
+    let audio=new Audio();
+    audio.src=src;
+    audio.load();
+    audio.play();
+  }
+
   soundOn(card: Card) {
-    const starSpan=document.createElement('span');
-    starSpan.classList.add('star-win');
+    this.starSpan=document.createElement('span');
     if (!this.mode) {
       this.playAudio(card.audioSrc);
     } else {
@@ -74,50 +82,44 @@ export class CardsViewComponent implements OnInit {
           (el) => (el as Element).classList.contains('card_inactive')? inactive.push(
             (el as HTMLImageElement).src):false);
         if (!inactive.join().includes(card.word)) {
-          if (this.playService.checkingWord === card.word) {
-            document.querySelector('.category__title')?.appendChild(starSpan);
-            starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
-            this.playAudio('/assets/audio/correct.mp3');
-            this.playService.incrementPoints();
-            if (this.playService.getPoints()===this.POINTFORWINS) {
-              if (this.playService.getErrors()) {
-                this.playAudio('/assets/audio/failure.mp3');
-                document.querySelector('.non-congratulations')?.classList.remove('hidden');
-                document.querySelector('.cards-container')?.classList.add('hidden');
-              } else {
-              this.playAudio('/assets/audio/success.mp3');
-              document.querySelector('.congratulations')?.classList.remove('hidden');
-              document.querySelector('.cards-container')?.classList.add('hidden');
-              }
-              setTimeout(() => this.router.navigate(['/']), 8000);
-              /* this.gameStateService.toggleMode(false); */
-            } else {
-            const title=document.getElementsByClassName('category__title')[0];
-            const titleText=title.textContent||'';
-            setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
-            }
-          } else {
-            this.playService.incrementErrors();
-            document.querySelector('.category__title')?.appendChild(starSpan);
-            starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
-            //sound from @marta-r
-            this.playAudio('/assets/audio/no.mp3')
-          }
+          this.getResult(card.word)
         }
       }
     }
   }
 
-  getResult(card: Card){
-
+  getResult(word: string) {
+    if (this.playService.checkingWord===word) {
+      document.querySelector('.category__title')?.appendChild(this.starSpan);
+      this.starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
+      this.playAudio('/assets/audio/correct.mp3');
+      this.playService.incrementPoints();
+      if (this.playService.getPoints()===this.POINTFORWINS) {
+        if (this.playService.getErrors()) {
+          this.playAudio('/assets/audio/failure.mp3');
+          document.querySelector('.non-congratulations')?.classList.remove('hidden');
+          document.querySelector('.cards-container')?.classList.add('hidden');
+        } else {
+          this.playAudio('/assets/audio/success.mp3');
+          document.querySelector('.congratulations')?.classList.remove('hidden');
+          document.querySelector('.cards-container')?.classList.add('hidden');
+        }
+        setTimeout(() => this.router.navigate(['/']), 8000);
+        /* this.gameStateService.toggleMode(false); */
+      } else {
+        const title=document.getElementsByClassName('category__title')[0];
+        const titleText=title.textContent||'';
+        setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
+      }
+    } else {
+      this.playService.incrementErrors();
+      document.querySelector('.category__title')?.appendChild(this.starSpan);
+      this.starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
+      //sound from @marta-r
+      this.playAudio('/assets/audio/no.mp3')
+    }
   }
 
-  playAudio(src: string) {
-    let audio=new Audio();
-    audio.src=src;
-    audio.load();
-    audio.play();
-  }
 
   inactiveCard(img: any, card: Card) {
     if (this.mode) {
