@@ -24,7 +24,7 @@ export class CardsViewComponent implements OnInit {
   public fillerCategory: Card[]|null|undefined=[];
   checkingWord: string='';
 
-  constructor(private modeService: ModeService, private router: Router, private playService: PlayService, public gameStateService: GameStateService) {
+  constructor(private modeService: ModeService, private router: Router, public playService: PlayService, public gameStateService: GameStateService) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
     gameStateService.game$.subscribe((game) => this.game=game);
     //by @fomenkogregory
@@ -42,6 +42,9 @@ export class CardsViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.mode);
+    this.modeService.toggleMode(false);
+    this.gameStateService.toggleMode(false);
     this.getTitle();
     if (document.getElementsByClassName('menu__item-active')[0].textContent!=='Main Page') {
       if (typeof (this.title)==='string') {
@@ -63,48 +66,51 @@ export class CardsViewComponent implements OnInit {
     const starSpan=document.createElement('span');
     starSpan.classList.add('star-win');
     if (!this.mode) {
-      let audio=new Audio();
-      audio.src=card.audioSrc;
-      audio.load();
-      audio.play();
+      this.playAudio(card.audioSrc);
     } else {
       if (this.game) {
         let inactive: any[]=[];
-        Array.from(document.querySelectorAll('.card__img')).forEach((el) => (el as Element).classList.contains('card_inactive')? inactive.push((el as HTMLImageElement).src):false);
+        Array.from(document.querySelectorAll('.card__img')).forEach(
+          (el) => (el as Element).classList.contains('card_inactive')? inactive.push(
+            (el as HTMLImageElement).src):false);
         if (!inactive.join().includes(card.word)) {
-          if (this.playService.checkingWord===card.word) {
+          if (this.playService.checkingWord === card.word) {
             document.querySelector('.category__title')?.appendChild(starSpan);
             starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
-            let audio=new Audio();
-            audio.src='/assets/audio/correct.mp3';
-            audio.load();
-            audio.play();
+            this.playAudio('/assets/audio/correct.mp3');
             this.playService.incrementPoints();
-            if (this.playService.getPoints() === this.POINTFORWINS) {
-              let audio=new Audio();
-              audio.src='/assets/audio/success.mp3';
-              audio.load();
-              audio.play();
+            if (this.playService.getPoints()===this.POINTFORWINS) {
+              if (this.playService.getErrors()) {
+                this.playAudio('/assets/audio/failure.mp3');
+                document.querySelector('.non-congratulations')?.classList.remove('hidden');
+                document.querySelector('.cards-container')?.classList.add('hidden');
+              } else {
+              this.playAudio('/assets/audio/success.mp3');
               document.querySelector('.congratulations')?.classList.remove('hidden');
               document.querySelector('.cards-container')?.classList.add('hidden');
+              }
               setTimeout(() => this.router.navigate(['/']), 8000);
               /* this.gameStateService.toggleMode(false); */
             }
-            console.log(this.playService.getPoints());
             const title=document.getElementsByClassName('category__title')[0];
             const titleText=title.textContent||'';
             setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
           } else {
+            this.playService.incrementErrors();
             document.querySelector('.category__title')?.appendChild(starSpan);
             starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
-            let audio=new Audio();
-            audio.src='/assets/audio/error.mp3';
-            audio.load();
-            audio.play();
+            this.playAudio('/assets/audio/error.mp3')
           }
         }
       }
     }
+  }
+
+  playAudio(src: string) {
+    let audio=new Audio();
+    audio.src=src;
+    audio.load();
+    audio.play();
   }
 
   inactiveCard(img: any, card: Card) {

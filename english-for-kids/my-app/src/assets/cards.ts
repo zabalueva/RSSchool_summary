@@ -165,18 +165,18 @@ const cards: Card[][]=[
     {
       word: 'fish',
       translation: 'рыба',
-      image: '/assets/img/fish.jpg',
+      image: '/assets/img/fish1.jpg',
       audioSrc: '/assets/audio/fish.mp3'
     },
     {
       word: 'frog',
-      translation: 'жаба',
+      translation: 'лягушка',
       image: '/assets/img/frog.jpg',
       audioSrc: '/assets/audio/frog.mp3'
     },
     {
       word: 'giraffe',
-      translation: 'жирафа',
+      translation: 'жираф',
       image: '/assets/img/giraffe.jpg',
       audioSrc: '/assets/audio/giraffe.mp3'
     },
