@@ -13,7 +13,7 @@ import { GameStateService } from 'src/app/services/gameStateService';
 })
 
 export class CardsViewComponent implements OnInit {
-  number: number=6;
+  number: number=0;
 
   POINTFORWINS: number=8;
   title: string|null="animal";
@@ -43,8 +43,13 @@ export class CardsViewComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.mode);
-    this.modeService.toggleMode(false);
-    this.gameStateService.toggleMode(false);
+    if (this.mode) {
+      if (document.getElementsByClassName('card__action')) {
+        setTimeout(()=> Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none'), 1000);
+        setTimeout(()=> Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='308px'), 1000);
+        setTimeout(()=> Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px'), 1000);
+      }
+    }
     this.getTitle();
     if (document.getElementsByClassName('menu__item-active')[0].textContent!=='Main Page') {
       if (typeof (this.title)==='string') {
@@ -55,11 +60,6 @@ export class CardsViewComponent implements OnInit {
       (document.getElementById('button__start') as Element).innerHTML=`START`;
     }
     this.fillerCategory=cards[this.number];
-    if (this.mode) {
-      if (document.getElementsByClassName('card__action')) {
-        Array.from(document.getElementsByClassName('card__action')).forEach((el) => (el as HTMLElement).style.display='none')
-      }
-    }
   }
 
   soundOn(card: Card) {
@@ -91,10 +91,11 @@ export class CardsViewComponent implements OnInit {
               }
               setTimeout(() => this.router.navigate(['/']), 8000);
               /* this.gameStateService.toggleMode(false); */
-            }
+            } else {
             const title=document.getElementsByClassName('category__title')[0];
             const titleText=title.textContent||'';
             setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
+            }
           } else {
             this.playService.incrementErrors();
             document.querySelector('.category__title')?.appendChild(starSpan);
@@ -104,6 +105,10 @@ export class CardsViewComponent implements OnInit {
         }
       }
     }
+  }
+
+  getResult(card: Card){
+
   }
 
   playAudio(src: string) {

@@ -40,7 +40,7 @@ export class SidenavComponent {
         Array.from(document.getElementsByClassName('card__title-container')).forEach((el) => (el as HTMLElement).style.backgroundColor='#34a7c1')
       }
       Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='308px');
-      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px')
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px');
     } else {
       this.modeService.toggleMode(false);
       if (document.getElementById('button__start')) {

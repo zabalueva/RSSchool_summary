@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayViewComponent } from './play-view.component';
+import { PlayViewComponent } from './statistics.component';
 
 describe('PlayViewComponent', () => {
   let component: PlayViewComponent;

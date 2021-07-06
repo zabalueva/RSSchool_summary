@@ -9,6 +9,9 @@
   <a class="menu__item menu__item-active " (click)="highlight($event)" routerLink=".">
     <li class="menu__item menu__item_main">Main Page</li>
   </a>
+  <a class="menu__item" (click)="highlight($event)" routerLink="/statistics">
+    <li class="menu__item">Statistics</li>
+  </a>
   <a class="menu__item" routerLink="." (click)="navigate($event)" (click)="highlight($event)"
     *ngFor="let navItem of fillerNav; let index = index" [state]="{categoryIndex: getNumberCategory()}">{{navItem}}<li
       class="menu__item"></li>
