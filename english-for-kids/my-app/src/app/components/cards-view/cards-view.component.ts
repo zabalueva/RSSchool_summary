@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Card } from 'src/app/models/card';
 import { ModeService } from 'src/app/services/modeService';
 import cards, { categories } from 'src/assets/cards';
@@ -111,8 +111,9 @@ export class CardsViewComponent implements OnInit {
           document.querySelector('.congratulations')?.classList.remove('hidden');
           document.querySelector('.cards-container')?.classList.add('hidden');
         }
-        setTimeout(() => this.router.navigate(['/']), 8000);
-        /* this.gameStateService.toggleMode(false); */
+        setTimeout(() => this.router.navigate(['/']), 4000);
+        this.playService.checkingWord = '';
+        this.gameStateService.toggleMode(false);
       } else {
         const title=document.getElementsByClassName('category-title')[0];
         const titleText=title.textContent||'';
@@ -143,6 +144,11 @@ export class CardsViewComponent implements OnInit {
   rotate(event: any) {
     ((event.srcElement as Node).parentNode?.parentNode?.parentNode as Element).classList.add("animate");
     this.flipped=!this.flipped;
+  }
+
+  ngOnDestroy() {
+    this.playService.checkingWord = '';
+    this.gameStateService.toggleMode(false);
   }
 
 }
