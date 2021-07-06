@@ -10,6 +10,9 @@ import cards, { categories } from 'src/assets/cards';
 })
 
 export class StatisticsComponent implements OnInit {
+  categoriesList = categories;
+  cardsList = cards;
+  category = categories[0];
 
   constructor(private router: Router) {
 
@@ -17,9 +20,19 @@ export class StatisticsComponent implements OnInit {
 
 
   ngOnInit() {
-
+console.log('dkfj')
   }
 
-  
+  repeatDifficult(){
+    return false;
+  }
+
+  resetStatistics(){
+    return false;
+  }
+
+  getCategory(){
+    return categories;
+  }
 
 }

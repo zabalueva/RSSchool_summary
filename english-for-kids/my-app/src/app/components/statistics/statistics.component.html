@@ -1,1 +1,23 @@
-<p class="page__statistics">work</p>
+<table class="styled-table">
+  <thead>
+      <tr>
+          <th>Category name</th>
+          <th>Words</th>
+          <th>Translation</th>
+          <th>Train click</th>
+          <th>Correct</th>
+          <th>Wrong</th>
+          <th>% 0f errors</th>
+      </tr>
+  </thead>
+  <tbody *ngFor="let category of categoriesList; index as i;">
+      <tr class="active-row" *ngFor="let card of cardsList; index as i;">
+        <td>{{category}}</td>
+        <td>{{card[i].word}}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="button__reset" (click)="this.resetStatistics()">Reset
+</button>
+<button class="button__redirect" (click)="this.repeatDifficult()">Repeat difficult words
+</button>
