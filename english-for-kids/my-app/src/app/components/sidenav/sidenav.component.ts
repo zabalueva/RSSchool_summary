@@ -43,6 +43,11 @@ export class SidenavComponent {
       Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px');
     } else {
       this.modeService.toggleMode(false);
+      this.playService.resetPoints();
+      Array.from(document.querySelectorAll('.card__img')).forEach(
+        (el) => (el as Element).classList.remove('card_inactive'));
+      Array.from(document.getElementsByClassName('star-win')).forEach(
+        (el) => (el as Element).innerHTML = '');
       if (document.getElementById('button__start')) {
         (document.getElementById('button__start') as Element).innerHTML = `START`;
         (document.getElementById('button__start') as Element).classList.add('button__start_disabled');
@@ -54,7 +59,7 @@ export class SidenavComponent {
         Array.from(document.getElementsByClassName('card__title-container')).forEach((el) => (el as HTMLElement).style.backgroundColor='#ffffff')
       }
       Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.height='268px');
-      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='318px')
+      Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='328px')
     }
   }
 
