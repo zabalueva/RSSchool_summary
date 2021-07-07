@@ -57,6 +57,10 @@ export class CardsViewComponent implements OnInit {
         setTimeout(() => Array.from(document.getElementsByClassName('card__img')).forEach((el) => (el as HTMLElement).style.width='325px'), 1000);
       }
     }
+    if (!this.mode){
+    Array.from(document.querySelectorAll('.card__img')).forEach(
+      (el) => (el as Element).classList.remove('card_inactive'))
+    }
     this.getTitle();
     if (document.getElementsByClassName('menu__item-active')[0].textContent!=='Main Page') {
       if (typeof (this.title)==='string') {
