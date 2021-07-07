@@ -14,7 +14,7 @@ export class StatisticsComponent implements OnInit {
   categoriesList = categories;
   cardsList = cards;
   category = categories[0];
-  words: { word: string, translation: string, trainClicks: string | null, correctAnswers: string | null, incorrectAnswers: string | null, percentCorrect: number}[] = [];
+  words: { word: string, translation: string, trainClicks: string | null, correctAnswers: string | null, incorrectAnswers: string | null, percentCorrect: string}[] = [];
 
   constructor(public statisticsService: StatisticsService) {
   }
@@ -28,10 +28,7 @@ console.log('dkfj')
   }
 
   resetStatistics(){
-    let statisticsData = document.getElementById("statisticsData");
-    if (statisticsData) {
-      statisticsData.innerHTML = '';
-    }
+    localStorage.clear();
   }
 
   getTrainClick(word:string) {
@@ -43,13 +40,21 @@ console.log('dkfj')
   }
 
   getInCorrectClick(word:string){
-    return localStorage.getItem(word + '-');
+    return localStorage.getItem(`${word}f`);
+  }
+
+  getPercentCorrect(word:string){
+    if(!localStorage.getItem(`${word}s`) || !localStorage.getItem(`${word}f`)){
+      return '0';
+    }
+    let totalClicks = Number(localStorage.getItem(`${word}s`)) + Number(localStorage.getItem(`${word}f`));
+    return (Number(localStorage.getItem(`${word}s`))/totalClicks*100).toFixed(2);
   }
 
   getWords(numberCategory: number){
     this.words = [];
     cards[numberCategory].forEach((el) => this.words.push(
-      {word: el.word, translation: el.translation, trainClicks: this.getTrainClick(el.word), correctAnswers: this.getCorrectClick(el.word), incorrectAnswers: this.getInCorrectClick(el.word), percentCorrect: 8}));
+      {word: el.word, translation: el.translation, trainClicks: this.getTrainClick(el.word), correctAnswers: this.getCorrectClick(el.word), incorrectAnswers: this.getInCorrectClick(el.word), percentCorrect: this.getPercentCorrect(el.word)}));
     return this.words;
   }
 }

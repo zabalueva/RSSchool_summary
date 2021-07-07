@@ -25,30 +25,35 @@ export class StatisticsService {
   }
 
   incrementTrainClicks(word: string) {
-    if (localStorage.getItem(word) !== null){
-    let trainClicks = Number(localStorage.getItem(word));
-      trainClicks = trainClicks + 1;
-    localStorage.setItem(word, trainClicks.toString());
-  } else {
-    localStorage.setItem(word, '0');
+    if (localStorage.getItem(word)!==null) {
+      let trainClicks=Number(localStorage.getItem(word));
+      trainClicks=trainClicks+1;
+      localStorage.setItem(word, trainClicks.toString());
+    } else {
+      localStorage.setItem(word, '1');
+    }
   }
-}
-/*
-incrementCorrectClicks(word: string) {
-  let key = `${word}s`
-  if (localStorage.getItem(key) !== null){
-  let correctClicks = Number(localStorage.getItem(key));
-  correctClicks = correctClicks + 1;
-  localStorage.setItem(word, correctClicks.toString());
-}
-}
 
-incrementInCorrectClicks(word: string) {
-  if (localStorage.getItem(word + '+') !== null){
-  let incorrectClicks = Number(localStorage.getItem(word + '+'));
-  incorrectClicks = incorrectClicks + 1;
-  localStorage.setItem(word, incorrectClicks.toString());
-}
-} */
+  incrementCorrectClicks(word: string) {
+    let key=`${word}s`
+    if (localStorage.getItem(key)!==null) {
+      let correctClicks=Number(localStorage.getItem(key));
+      correctClicks=correctClicks+1;
+      localStorage.setItem(key, correctClicks.toString());
+    } else {
+      localStorage.setItem(key, '1');
+    }
+  }
+
+  incrementInCorrectClicks(word: string) {
+    let key=`${word}f`
+    if (localStorage.getItem(key)!==null) {
+      let incorrectClicks=Number(localStorage.getItem(key));
+      incorrectClicks=incorrectClicks+1;
+      localStorage.setItem(key, incorrectClicks.toString());
+    } else {
+      localStorage.setItem(key, '1');
+    }
+  }
 
 }

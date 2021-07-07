@@ -101,7 +101,7 @@ export class CardsViewComponent implements OnInit {
 
   getResult(word: string) {
     if (this.playService.checkingWord === word) {
-      /* this.statisticsService.incrementCorrectClicks(word); */
+      this.statisticsService.incrementCorrectClicks(word);
       document.querySelector('.category__title')?.appendChild(this.starSpan);
       this.starSpan.innerHTML=`<img src='/assets/img/star-win.svg'>`;
       this.playAudio('/assets/audio/correct.mp3');
@@ -126,7 +126,7 @@ export class CardsViewComponent implements OnInit {
         setTimeout(() => this.playService.getRandomSound(categories.indexOf(titleText)), 1000);
       }
     } else {
-      /* this.statisticsService.incrementInCorrectClicks(word); */
+      this.statisticsService.incrementInCorrectClicks(word);
       this.playService.incrementErrors();
       document.querySelector('.category__title')?.appendChild(this.starSpan);
       this.starSpan.innerHTML=`<img src='/assets/img/star.svg'>`;
