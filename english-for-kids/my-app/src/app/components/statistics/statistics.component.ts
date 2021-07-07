@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card } from 'src/app/models/card';
 import { StatisticsService } from 'src/app/services/statisticsService';
 import cards, { categories } from 'src/assets/cards';
 
@@ -10,21 +9,17 @@ import cards, { categories } from 'src/assets/cards';
   styleUrls: ['./statistics.component.scss']
 })
 
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent {
   categoriesList = categories;
   cardsList = cards;
   category = categories[0];
   words: { word: string, translation: string, trainClicks: string | null, correctAnswers: string | null, incorrectAnswers: string | null, percentCorrect: string}[] = [];
 
-  constructor(public statisticsService: StatisticsService) {
-  }
-
-  ngOnInit() {
-console.log('dkfj')
+  constructor(public statisticsService: StatisticsService, private router: Router) {
   }
 
   repeatDifficult(){
-    return false;
+    return this.words;
   }
 
   resetStatistics(){

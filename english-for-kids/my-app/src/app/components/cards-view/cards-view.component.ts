@@ -15,7 +15,6 @@ import { StatisticsService } from 'src/app/services/statisticsService';
 
 export class CardsViewComponent implements OnInit {
   number: number=0;
-
   POINTFORWINS: number=8;
   title: string|null="animal";
   fillerNav=Array.from({ length: 8 }, (_, i) => `${categories[i]}`);
