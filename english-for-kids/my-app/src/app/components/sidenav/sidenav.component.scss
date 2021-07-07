@@ -9,21 +9,21 @@
   display: block;
   position: fixed;
   list-style: none;
-  padding: 10px;
+  padding: 2em;
   margin: 0;
   box-sizing: border-box;
-  width: 200px;
+  width: 300px;
   background: linear-gradient(40deg, #00bf82, #0099ae);
   height: auto;
   top: 0;
-  left: -200px;
+  left: -300px;
   transition: left 0.2s;
   z-index: 2;
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
 
   &__item {
-    color: inherit;
+    color: #ffffff;
     padding-top: 23px;
     font-family: "Roboto", sans-serif;
     font-size: 22px;
