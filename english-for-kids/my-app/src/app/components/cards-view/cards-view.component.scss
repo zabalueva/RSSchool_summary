@@ -57,6 +57,10 @@
   perspective: 1000;
 }
 
+.card:hover {
+    box-shadow: 0 0 18px rgba(14, 13, 13, 0.2);
+}
+
 .animate {
   transform: rotateY(180deg);
 }
