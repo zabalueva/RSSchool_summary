@@ -40,6 +40,10 @@ export class PlayService {
     return this.points;
   }
 
+  resetPoints(){
+    this.points = 0;
+  }
+
   incrementErrors() {
     this.errors=this.errors+1;
   }

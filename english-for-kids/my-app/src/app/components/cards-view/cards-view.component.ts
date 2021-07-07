@@ -115,6 +115,7 @@ export class CardsViewComponent implements OnInit {
           document.querySelector('.congratulations')?.classList.remove('hidden');
           document.querySelector('.cards-container')?.classList.add('hidden');
         }
+        this.playService.resetPoints();
         setTimeout(() => this.router.navigate(['/']), 4000);
         this.playService.checkingWord = '';
         this.gameStateService.toggleMode(false);
