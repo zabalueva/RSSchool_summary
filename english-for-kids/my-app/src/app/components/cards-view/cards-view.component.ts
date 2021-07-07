@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { PlayService } from 'src/app/services/playService';
 import { GameStateService } from 'src/app/services/gameStateService';
 import { StatisticsService } from 'src/app/services/statisticsService';
-import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-cards-view',
@@ -32,6 +31,7 @@ export class CardsViewComponent implements OnInit {
     private router: Router,
     public playService: PlayService,
     public gameStateService: GameStateService,
+    public statisticsService: StatisticsService
     ) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
     gameStateService.game$.subscribe((game) => this.game=game);
@@ -85,7 +85,7 @@ export class CardsViewComponent implements OnInit {
     this.starSpan.classList.add('star-win');
     if (!this.mode) {
       this.playAudio(card.audioSrc);
-      /* this.statisticsService.incrementTrainClicks(card.word); */
+      this.statisticsService.incrementTrainClicks(card.word);
     } else {
       if (this.game) {
         let inactive: any[]=[];

@@ -14,9 +14,9 @@ export class StatisticsComponent implements OnInit {
   categoriesList = categories;
   cardsList = cards;
   category = categories[0];
-  words: { word: string, translation: string, trainClicks: number, correctAnswers: number, incorrectAnswers: number, percentCorrect: number}[] = [];
+  words: { word: string, translation: string, trainClicks: string | null, correctAnswers: number, incorrectAnswers: number, percentCorrect: number}[] = [];
 
-  constructor() {
+  constructor(public statisticsService: StatisticsService) {
   }
 
   ngOnInit() {
@@ -29,17 +29,19 @@ console.log('dkfj')
 
   resetStatistics(){
     let statisticsData = document.getElementById("statisticsData");
-
     if (statisticsData) {
-      console.log(statisticsData)
       statisticsData.innerHTML = '';
     }
+  }
+
+  getTrainClick(word:string) {
+    return localStorage.getItem(word);
   }
 
   getWords(numberCategory: number){
     this.words = [];
     cards[numberCategory].forEach((el) => this.words.push(
-      {word: el.word, translation: el.translation, trainClicks: 4, correctAnswers: 5, incorrectAnswers: 8, percentCorrect: 8}));
+      {word: el.word, translation: el.translation, trainClicks: this.getTrainClick(el.word), correctAnswers: 5, incorrectAnswers: 8, percentCorrect: 8}));
     return this.words;
   }
 

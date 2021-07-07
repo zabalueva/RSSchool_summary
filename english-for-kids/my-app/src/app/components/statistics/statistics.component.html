@@ -18,7 +18,7 @@
       <tr class="active-row" *ngFor="let card of getWords(i); index as index">
         <td>{{category}}</td>
         <td>{{card.word}}</td>
-        <td>{{card.translation}}</td>
+        <td (click) = "getTrainClick(card.word)">{{card.translation}}</td>
         <td id="statisticsData">{{card.trainClicks}}</td>
         <td id="statisticsDataAnswers">{{card.correctAnswers}}</td>
         <td id="statisticsDataIncorrect">{{card.incorrectAnswers}}</td>
