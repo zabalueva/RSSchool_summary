@@ -14,7 +14,7 @@ export class StatisticsComponent implements OnInit {
   categoriesList = categories;
   cardsList = cards;
   category = categories[0];
-  words: { word: string, translation: string, trainClicks: string | null, correctAnswers: number, incorrectAnswers: number, percentCorrect: number}[] = [];
+  words: { word: string, translation: string, trainClicks: string | null, correctAnswers: string | null, incorrectAnswers: string | null, percentCorrect: number}[] = [];
 
   constructor(public statisticsService: StatisticsService) {
   }
@@ -38,12 +38,18 @@ console.log('dkfj')
     return localStorage.getItem(word);
   }
 
+  getCorrectClick(word:string) {
+    return localStorage.getItem(`${word}s`);
+  }
+
+  getInCorrectClick(word:string){
+    return localStorage.getItem(word + '-');
+  }
+
   getWords(numberCategory: number){
     this.words = [];
     cards[numberCategory].forEach((el) => this.words.push(
-      {word: el.word, translation: el.translation, trainClicks: this.getTrainClick(el.word), correctAnswers: 5, incorrectAnswers: 8, percentCorrect: 8}));
+      {word: el.word, translation: el.translation, trainClicks: this.getTrainClick(el.word), correctAnswers: this.getCorrectClick(el.word), incorrectAnswers: this.getInCorrectClick(el.word), percentCorrect: 8}));
     return this.words;
   }
-
-
 }
