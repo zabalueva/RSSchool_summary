@@ -5,6 +5,8 @@
   <span class="burger__item burger__item_third"></span>
 </label>
 
+
+
 <ul id="menu" class="nav__menu menu" (click)="toggleMenu()">
   <a class="menu__item menu__item-active " (click)="highlight($event)" routerLink=".">
     <li class="menu__item menu__item_main">Main Page</li>
@@ -18,6 +20,8 @@
   </a>
 </ul>
 
+
+<button class="login"><a  routerLink="/login"> Login </a></button>
 <div class="header__menu onoffswitch" (click)="toggleMenu()">
   <input class="toggle_button_input onoffswitch-checkbox" type="checkbox" name="onoffswitch" id="myonoffswitch">
   <label class="toggle_button toggle_mode onoffswitch-label" for="myonoffswitch" (click)="toggleMode()"

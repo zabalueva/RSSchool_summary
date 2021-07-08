@@ -5,6 +5,8 @@ import { CardsViewComponent } from './cards-view/cards-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -13,7 +15,9 @@ import { StatisticsComponent } from './statistics/statistics.component';
     CategoriesComponent,
     CardsViewComponent,
     SidenavComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
