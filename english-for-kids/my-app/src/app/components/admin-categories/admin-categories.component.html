@@ -1,1 +1,14 @@
-<p>admin-categories works!</p>
+<div class="cards-container">
+  <div class="card-container" *ngFor="let category of categories, let i = index">
+    <div class="category__card">
+      <span class="card__word">{{category}}</span>
+      <span class="" >WORDS: {{cards[i].length}}</span>
+      <span class="" (click)="deleteCategory()">
+        &#10060;</span>
+      <div class="button-action__container">
+        <button class="admin__route admin__button"> Update </button>
+        <button class="admin__route admin__button"> Add word </button>
+      </div>
+    </div>
+  </div>
+</div>
