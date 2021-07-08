@@ -7,6 +7,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
+import { AdminWordsComponent } from './admin-words/admin-words.component';
 
 
 
@@ -17,7 +19,9 @@ import { LoginComponent } from './login/login.component';
     SidenavComponent,
     StatisticsComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    AdminCategoriesComponent,
+    AdminWordsComponent
   ],
   imports: [
     CommonModule,

@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    const loginInput=document.querySelector('.form__input_login') as HTMLInputElement;
-    const passwordInput=document.querySelector('.form__input_password') as HTMLInputElement;
-    if (loginInput.value==='admin'&&passwordInput.value==='admin') {
+    const loginInput = document.querySelector('.form__input_login') as HTMLInputElement;
+    const passwordInput = document.querySelector('.form__input_password') as HTMLInputElement;
+    if (loginInput.value==='' && passwordInput.value==='') {
       this.router.navigate(['/admin']);
     } else {
       passwordInput.insertAdjacentHTML('afterend', `<p class="error-message">Введены неверные данные</p>`);
