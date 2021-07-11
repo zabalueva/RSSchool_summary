@@ -8,16 +8,39 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { LoginComponent } from './components/login/login.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 
-const adminRoutes: Routes = [
-  { path: 'categories', component: AdminCategoriesComponent },
+const categoriesRoutes: Routes=[
   { path: 'words', component: AdminWordsComponent },
 ];
-const routes: Routes = [
+
+const adminRoutes: Routes=[
+  {
+    path: 'categories', component: AdminCategoriesComponent, children: [
+      { path: 'words', component: AdminWordsComponent },
+    ]
+  },
+];
+
+const routes: Routes=[
   { path: '', component: CategoriesComponent },
   { path: 'card', component: CardsViewComponent },
   { path: 'statistics', component: StatisticsComponent },
-  { path: 'admin', component: AdminComponent, children: adminRoutes},
-  { path: 'login', component: LoginComponent},
+  {
+    path: 'admin', component: AdminComponent, children: [
+      {
+        path: 'categories/words',
+        component: AdminWordsComponent,
+      },
+      {
+        path: 'categories',
+        component: AdminCategoriesComponent,
+      },
+      {
+        path: 'words',
+        component: AdminCategoriesComponent,
+      },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

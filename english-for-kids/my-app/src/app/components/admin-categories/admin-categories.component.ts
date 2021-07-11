@@ -9,13 +9,36 @@ import cards, { categories } from 'dist/my-app/assets/cards';
 export class AdminCategoriesComponent implements OnInit {
 public categories = categories;
 public cards = cards;
+editMode = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   deleteCategory(){
-    console.log('csr')
+    console.log('delete')
   }
+
+  createCategory(){
+    console.log('create')
+  }
+
+  enableEditMode(){
+    this.editMode = true;
+    console.log('create')
+  }
+
+  cancelEditMode(){
+    this.editMode = false;
+    console.log('closeEdit');
+  }
+
+  updateCategory(){
+    this.editMode = true;
+    console.log('update')
+  }
+
+
+
 
 }
