@@ -1,1 +1,30 @@
-<p>admin-words works!</p>
+<p>Category: </p>
+<div class="cards-container">
+  <div class="card-container" *ngFor="let card of cards[0], let i = index">
+    <div class="category__card" *ngIf="!this.editMode">
+      <span class="category__delete" (click)="deleteWord()">
+        &#10060;</span>
+      <span class="card__word">Word: {{card.word}}</span>
+      <span class="">Translation: {{card.translation}}</span>
+      <span class="">Sound file: {{card.audioSrc}}</span>
+      <span class="">Image:</span>
+      <img class="card__img" [src]=card.image alt="category">
+      <span class="category__delete" ></span>
+      <div class="button-action__container">
+        <button class="admin__route admin__button" (click)="deleteWord()"> Change </button>
+      </div>
+    </div>
+    <div class="category__card" *ngIf="this.editMode">
+      <input class="form__input form__input_login" type="text" placeholder="new namecategory">
+      <div class="button-action__container">
+        <button class="admin__route admin__button"> Update </button>
+        <button class="admin__route admin__button" (click)="cancelEditMode()"> Cancel </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="category__card card_create" (click)="createWord()">
+    <span class="card__word"></span>
+    <span class="">Add new word</span>
+  </div>
+</div>

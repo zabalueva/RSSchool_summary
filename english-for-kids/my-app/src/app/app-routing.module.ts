@@ -8,18 +8,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { LoginComponent } from './components/login/login.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 
-const categoriesRoutes: Routes=[
-  { path: 'words', component: AdminWordsComponent },
-];
-
-const adminRoutes: Routes=[
-  {
-    path: 'categories', component: AdminCategoriesComponent, children: [
-      { path: 'words', component: AdminWordsComponent },
-    ]
-  },
-];
-
 const routes: Routes=[
   { path: '', component: CategoriesComponent },
   { path: 'card', component: CardsViewComponent },
