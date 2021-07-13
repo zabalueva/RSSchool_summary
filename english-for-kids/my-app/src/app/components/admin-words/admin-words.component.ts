@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import cards, { categories } from 'src/assets/cards';
 
 @Component({
@@ -8,9 +9,14 @@ import cards, { categories } from 'src/assets/cards';
 })
 export class AdminWordsComponent implements OnInit {
   public categories = categories;
-  public cards = cards;
   public editMode = false;
-  constructor() { }
+  public numberOfCategory: number;
+  public cards = cards[0];
+
+  constructor(private router: Router) {
+    this.numberOfCategory=this.router.getCurrentNavigation()?.extras.state?.categoryIndex??1;
+    this.cards = cards[this.numberOfCategory];
+  }
 
   ngOnInit(): void {
   }

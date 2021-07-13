@@ -7,7 +7,7 @@
         &#10060;</span>
       <div class="button-action__container">
         <button class="admin__route admin__button" (click)="enableEditMode()"> Update </button>
-        <button class="admin__route admin__button"> Add word </button>
+        <a routerLink="/admin/categories/words" [state]="{categoryIndex: i}" class="category-link">Add word </a>
       </div>
     </div>
     <div class="category__card" *ngIf="this.editMode">

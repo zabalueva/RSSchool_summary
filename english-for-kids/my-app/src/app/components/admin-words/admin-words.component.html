@@ -1,6 +1,6 @@
 <p>Category: </p>
 <div class="cards-container">
-  <div class="card-container" *ngFor="let card of cards[0], let i = index">
+  <div class="card-container" *ngFor="let card of cards, let i = index">
     <div class="category__card" *ngIf="!this.editMode">
       <span class="category__delete" (click)="deleteWord()">
         &#10060;</span>

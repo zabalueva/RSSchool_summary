@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import cards, { categories } from 'dist/my-app/assets/cards';
 
 @Component({
@@ -9,7 +10,7 @@ import cards, { categories } from 'dist/my-app/assets/cards';
 export class AdminCategoriesComponent implements OnInit {
 public categories = categories;
 public cards = cards;
-editMode = false;
+public editMode = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -37,8 +38,5 @@ editMode = false;
     this.editMode = true;
     console.log('update')
   }
-
-
-
 
 }
