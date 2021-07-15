@@ -28,16 +28,6 @@ public cat: any;
     console.log('create')
   }
 
-  sendCategory() {
-    const newCardContainer = document.createElement('div');
-    newCardContainer.classList.add('card-container');
-    document.querySelector('.cards-container')?.appendChild(newCardContainer);
-    const newCard = document.createElement('div');
-    newCard.classList.add('category__card');
-    newCardContainer.appendChild(newCard);
-    console.log('send')
-  }
-
   enableEditMode(){
     this.editMode = true;
     console.log('create')
