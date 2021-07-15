@@ -7,13 +7,15 @@ import { CardsViewComponent } from './components/cards-view/cards-view.component
 import { CategoriesComponent } from './components/categories/categories.component';
 import { LoginComponent } from './components/login/login.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 const routes: Routes=[
   { path: '', component: CategoriesComponent },
   { path: 'card', component: CardsViewComponent },
   { path: 'statistics', component: StatisticsComponent },
   {
-    path: 'admin', component: AdminComponent, children: [
+    path: 'admin', component: AdminComponent,  canActivate: [AuthGuard], /* redirectTo: '',
+    pathMatch: 'full', */  children: [
       {
         path: 'categories/words',
         component: AdminWordsComponent,
