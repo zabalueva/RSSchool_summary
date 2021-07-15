@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import cards, { categories } from 'dist/my-app/assets/cards';
+import cards, { categories } from 'src/assets/cards';
 import { ConfigService } from 'src/app/controllers/categoryControllers';
 
 @Component({
