@@ -13,11 +13,8 @@ export class LoginComponent {
   }
 
   login() {
-console.log('log')
     this.authService.login().subscribe(() => {
-      console.log('rr')
       if (this.authService.isLoggedIn) {
-        console.log('jj');
         const redirectUrl = 'admin';
         this.router.navigate([redirectUrl]);
       }
@@ -41,7 +38,6 @@ console.log('log')
     const loginInput = document.querySelector('.form__input_login') as HTMLInputElement;
     const passwordInput = document.querySelector('.form__input_password') as HTMLInputElement;
     if (loginInput.value==='admin' && passwordInput.value==='admin') {
-      console.log('kdfj')
       this.login();
     } else {
       passwordInput.insertAdjacentHTML('afterend', `<p class="error-message">Введены неверные данные</p>`);
