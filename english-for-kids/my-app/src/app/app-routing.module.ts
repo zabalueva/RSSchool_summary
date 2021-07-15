@@ -14,8 +14,7 @@ const routes: Routes=[
   { path: 'card', component: CardsViewComponent },
   { path: 'statistics', component: StatisticsComponent },
   {
-    path: 'admin', component: AdminComponent,  canActivate: [AuthGuard], /* redirectTo: '',
-    pathMatch: 'full', */  children: [
+    path: 'admin', component: AdminComponent,  canActivate: [AuthGuard],  children: [
       {
         path: 'categories/words',
         component: AdminWordsComponent,

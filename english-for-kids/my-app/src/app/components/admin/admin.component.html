@@ -3,6 +3,6 @@
 
   <button class="admin__route admin__button"><a  routerLink="/admin/categories/words">Words </a></button>
 
-  <button class="logout admin__button"><a  routerLink="/"> Log out </a></button>
+  <button class="logout admin__button" (click)="logout()"><a  routerLink="/" (click)="logout()"> Log out </a></button>
 </div>
 <router-outlet></router-outlet>

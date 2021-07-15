@@ -4,6 +4,7 @@ import { ModeService } from 'src/app/services/modeService';
 import { Router } from '@angular/router';
 import { PlayService } from 'src/app/services/playService';
 import { GameStateService } from 'src/app/services/gameStateService';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,7 +21,12 @@ export class SidenavComponent {
   mode=false;
   game = false;
 
-  constructor(private modeService: ModeService, private router: Router, private playService: PlayService, public gameStateService: GameStateService) {
+  constructor(
+    private modeService: ModeService,
+    private router: Router,
+    private playService: PlayService,
+    public gameStateService: GameStateService,
+    public authService: AuthService) {
     modeService.mode$.subscribe((mode) => this.mode=mode);
     gameStateService.game$.subscribe((game) => this.game=game);
   }

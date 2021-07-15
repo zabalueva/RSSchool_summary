@@ -40,7 +40,7 @@ export class LoginComponent {
     if (loginInput.value==='admin' && passwordInput.value==='admin') {
       this.login();
     } else {
-      passwordInput.insertAdjacentHTML('afterend', `<p class="error-message">Введены неверные данные</p>`);
+      passwordInput.insertAdjacentHTML('afterend', `<p class="error-message">Incorrect credentials</p>`);
     }
   }
 }

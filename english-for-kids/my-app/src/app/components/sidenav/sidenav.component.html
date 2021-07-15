@@ -19,7 +19,8 @@
 </ul>
 
 
-<button class="login"><a  routerLink="/login"> Login </a></button>
+<button class="login" *ngIf="!authService.isLoggedIn"><a  routerLink="/login"> Login </a></button>
+<button class="login" *ngIf="authService.isLoggedIn"><a  routerLink="/admin"> Admin </a></button>
 <div class="header__menu onoffswitch" (click)="toggleMenu()">
   <input class="toggle_button_input onoffswitch-checkbox" type="checkbox" name="onoffswitch" id="myonoffswitch">
   <label class="toggle_button toggle_mode onoffswitch-label" for="myonoffswitch" (click)="toggleMode()"
