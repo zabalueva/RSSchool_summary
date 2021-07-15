@@ -13,8 +13,13 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): true|UrlTree {
     const url: string = state.url;
-
     return this.checkLogin(url);
+  }
+
+  canActivateChild(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): true|UrlTree {
+    return this.canActivate(route, state);
   }
 
   checkLogin(url: string): true|UrlTree {

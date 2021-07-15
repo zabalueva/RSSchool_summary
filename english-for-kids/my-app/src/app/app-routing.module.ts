@@ -13,7 +13,7 @@ const routes: Routes=[
   { path: '', component: CategoriesComponent },
   { path: 'card', component: CardsViewComponent },
   { path: 'statistics', component: StatisticsComponent },
-  { path: 'admin/words', component: AdminComponent },
+  { path: 'admin/words', redirectTo: 'admin/categories'},
   {
     path: 'admin', component: AdminComponent,  canActivate: [AuthGuard],  children: [
       {
@@ -23,6 +23,10 @@ const routes: Routes=[
       {
         path: 'categories',
         component: AdminCategoriesComponent,
+      },
+      {
+        path: 'words',
+        redirectTo: 'admin/categories',
       },
     ],
   },

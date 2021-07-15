@@ -16,7 +16,6 @@ public cat: any;
 
   constructor(public serviceRequest: ConfigService) {
     this.categories = categories;
-
   }
 
   createCategory(){

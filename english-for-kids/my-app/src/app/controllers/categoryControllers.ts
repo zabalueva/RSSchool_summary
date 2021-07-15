@@ -13,7 +13,8 @@ public SERVER = 'http://localhost:3000';
 
 
 public getAllCategories = async () => {
-  const allCategoriesServer = this.http.get(`${this.SERVER}/categories`);
+  const allCategoriesServer = await this.http.get(`${this.SERVER}/categories`);
+  console.log(allCategoriesServer.subscribe((data) => console.log('dkfj', data)));
   return allCategoriesServer;
 };
 
