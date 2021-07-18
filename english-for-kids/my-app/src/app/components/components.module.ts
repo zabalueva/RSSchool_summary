@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { AdminWordsComponent } from './admin-words/admin-words.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -26,6 +27,7 @@ import { AdminWordsComponent } from './admin-words/admin-words.component';
   imports: [
     CommonModule,
     RouterModule,
+    InfiniteScrollModule
   ],
   exports: [
     CategoriesComponent,

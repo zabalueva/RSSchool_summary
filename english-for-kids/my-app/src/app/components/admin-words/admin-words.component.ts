@@ -25,6 +25,14 @@ export class AdminWordsComponent implements OnInit {
     console.log('delete')
   }
 
+  getSound(src: string) {
+    console.log('dkfj');
+    let audio=new Audio();
+    audio.src=src;
+    audio.load();
+    audio.play();
+  }
+
   createWord(){
     console.log('create')
   }

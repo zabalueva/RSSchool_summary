@@ -1,4 +1,7 @@
-<div class="cards-container">
+<div class="cards-container"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50">
   <div class="card-container" *ngFor="let category of categories, let i = index">
     <div class="category__card" *ngIf="!this.editMode">
       <span class="card__word">{{category}}</span>
@@ -17,9 +20,5 @@
         <button class="admin__route admin__button" (click)="cancelEditMode()"> Cancel </button>
       </div>
     </div>
-  </div>
-  <div class="category__card card_create" (click)="createCategory()">
-    <span class="card__word"></span>
-    <span class="">CREATE NEW CATEGORY</span>
   </div>
 </div>

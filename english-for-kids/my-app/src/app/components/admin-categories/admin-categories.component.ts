@@ -17,6 +17,7 @@ public cat: any;
   constructor(public serviceRequest: ConfigService) {
     this.serviceRequest.getAllCategories()
     .subscribe((data:any) => this.categories = data);
+    this.categories = categories;
     console.log(this.categories)
   }
 
@@ -46,10 +47,12 @@ public cat: any;
   }
 
   deleteCategory(){
-
-
     console.log(this.cat);
     console.log('del')
+  }
+
+  getSound() {
+    
   }
 
 }

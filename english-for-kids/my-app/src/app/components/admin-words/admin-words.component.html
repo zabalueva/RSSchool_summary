@@ -6,7 +6,8 @@
         &#10060;</span>
       <span class="card__word">Word: {{card.word}}</span>
       <span class="">Translation: {{card.translation}}</span>
-      <span class="">Sound file: {{card.audioSrc}}</span>
+      <span class="" (click)="getSound(card.audioSrc)">Sound file: {{card.audioSrc}}</span>
+      <button class="admin__button" (click)="getSound(card.audioSrc)" >Play sound</button>
       <span class="">Image:</span>
       <img class="card__img" [src]=card.image alt="category">
       <span class="category__delete" ></span>

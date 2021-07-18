@@ -14,7 +14,6 @@ public SERVER = 'http://localhost:3000';
 
 public getAllCategories = () => {
   const allCategoriesServer = this.http.get(`${this.SERVER}/categories`);
-
   return allCategoriesServer;
 };
 
