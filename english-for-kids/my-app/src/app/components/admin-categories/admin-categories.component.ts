@@ -15,7 +15,9 @@ public editMode = false;
 public cat: any;
 
   constructor(public serviceRequest: ConfigService) {
-    this.categories = categories;
+    this.serviceRequest.getAllCategories()
+    .subscribe((data:any) => this.categories = data);
+    console.log(this.categories)
   }
 
   createCategory(){
@@ -44,7 +46,7 @@ public cat: any;
   }
 
   deleteCategory(){
-    this.cat =  this.serviceRequest.getAllCategories();
+
 
     console.log(this.cat);
     console.log('del')

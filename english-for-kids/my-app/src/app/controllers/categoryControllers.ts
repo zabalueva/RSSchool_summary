@@ -12,9 +12,9 @@ export class ConfigService {
 public SERVER = 'http://localhost:3000';
 
 
-public getAllCategories = async () => {
-  const allCategoriesServer = await this.http.get(`${this.SERVER}/categories`);
-  console.log(allCategoriesServer.subscribe((data) => console.log('dkfj', data)));
+public getAllCategories = () => {
+  const allCategoriesServer = this.http.get(`${this.SERVER}/categories`);
+
   return allCategoriesServer;
 };
 
